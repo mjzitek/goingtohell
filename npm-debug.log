@@ -1,0 +1,651 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'meanio' ]
+2 info using npm@1.2.25
+3 info using node@v0.11.3
+4 verbose read json /usr/local/lib/package.json
+5 verbose read json /usr/local/lib/package.json
+6 verbose cache add [ 'meanio', null ]
+7 verbose cache add name=undefined spec="meanio" args=["meanio",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'meanio',
+8 verbose parsed url   path: 'meanio',
+8 verbose parsed url   href: 'meanio' }
+9 silly lockFile 87da261c-meanio meanio
+10 verbose lock meanio /home/mjzitek/.npm/87da261c-meanio.lock
+11 silly lockFile 87da261c-meanio meanio
+12 silly lockFile 87da261c-meanio meanio
+13 verbose addNamed [ 'meanio', '' ]
+14 verbose addNamed [ null, '' ]
+15 silly lockFile c47b6573-meanio meanio@
+16 verbose lock meanio@ /home/mjzitek/.npm/c47b6573-meanio.lock
+17 silly addNameRange { name: 'meanio', range: '', hasData: false }
+18 verbose url raw meanio
+19 verbose url resolving [ 'https://registry.npmjs.org/', './meanio' ]
+20 verbose url resolved https://registry.npmjs.org/meanio
+21 info trying registry request attempt 1 at 13:09:55
+22 verbose etag "4IBNAEOW5X5HX2HO5FFYALYMF"
+23 http GET https://registry.npmjs.org/meanio
+24 http 304 https://registry.npmjs.org/meanio
+25 silly registry.get cb [ 304,
+25 silly registry.get   { date: 'Mon, 23 Jun 2014 20:10:00 GMT',
+25 silly registry.get     server: 'Apache',
+25 silly registry.get     via: '1.1 varnish',
+25 silly registry.get     'last-modified': 'Mon, 23 Jun 2014 20:10:00 GMT',
+25 silly registry.get     'cache-control': 'max-age=30',
+25 silly registry.get     etag: '"4IBNAEOW5X5HX2HO5FFYALYMF"',
+25 silly registry.get     'x-served-by': 'cache-d46-DAL',
+25 silly registry.get     'x-cache': 'MISS',
+25 silly registry.get     'x-cache-hits': '0',
+25 silly registry.get     'x-timer': 'S1403554200.460216,VS0,VE159',
+25 silly registry.get     vary: 'Accept',
+25 silly registry.get     'content-length': '0',
+25 silly registry.get     'keep-alive': 'timeout=10, max=50',
+25 silly registry.get     connection: 'Keep-Alive' } ]
+26 verbose etag meanio from cache
+27 silly addNameRange number 2 { name: 'meanio', range: '', hasData: true }
+28 silly addNameRange versions [ 'meanio',
+28 silly addNameRange   [ '0.0.1',
+28 silly addNameRange     '0.0.2',
+28 silly addNameRange     '0.0.3',
+28 silly addNameRange     '0.0.4',
+28 silly addNameRange     '0.0.5',
+28 silly addNameRange     '0.0.6',
+28 silly addNameRange     '0.0.7',
+28 silly addNameRange     '0.0.8',
+28 silly addNameRange     '0.0.9',
+28 silly addNameRange     '0.1.0',
+28 silly addNameRange     '0.1.1',
+28 silly addNameRange     '0.1.2',
+28 silly addNameRange     '0.1.3',
+28 silly addNameRange     '0.1.4',
+28 silly addNameRange     '0.1.5',
+28 silly addNameRange     '0.1.6',
+28 silly addNameRange     '0.1.7',
+28 silly addNameRange     '0.1.8',
+28 silly addNameRange     '0.1.9',
+28 silly addNameRange     '0.2.0',
+28 silly addNameRange     '0.2.1',
+28 silly addNameRange     '0.2.2',
+28 silly addNameRange     '0.2.3',
+28 silly addNameRange     '0.2.4',
+28 silly addNameRange     '0.2.5',
+28 silly addNameRange     '0.2.6',
+28 silly addNameRange     '0.2.7',
+28 silly addNameRange     '0.2.8',
+28 silly addNameRange     '0.2.9',
+28 silly addNameRange     '0.3.0',
+28 silly addNameRange     '0.3.1',
+28 silly addNameRange     '0.3.2',
+28 silly addNameRange     '0.3.21',
+28 silly addNameRange     '0.3.3',
+28 silly addNameRange     '0.3.4',
+28 silly addNameRange     '0.3.5',
+28 silly addNameRange     '0.3.6',
+28 silly addNameRange     '0.3.7',
+28 silly addNameRange     '0.3.8',
+28 silly addNameRange     '0.3.9',
+28 silly addNameRange     '0.3.11',
+28 silly addNameRange     '0.3.13',
+28 silly addNameRange     '0.3.14',
+28 silly addNameRange     '0.3.15',
+28 silly addNameRange     '0.3.16',
+28 silly addNameRange     '0.3.17',
+28 silly addNameRange     '0.3.18',
+28 silly addNameRange     '0.3.19',
+28 silly addNameRange     '0.3.20',
+28 silly addNameRange     '0.4.0',
+28 silly addNameRange     '0.4.1',
+28 silly addNameRange     '0.4.2',
+28 silly addNameRange     '0.4.3',
+28 silly addNameRange     '0.4.4',
+28 silly addNameRange     '0.4.5',
+28 silly addNameRange     '0.4.6',
+28 silly addNameRange     '0.4.7',
+28 silly addNameRange     '0.4.8',
+28 silly addNameRange     '0.4.9',
+28 silly addNameRange     '0.4.10',
+28 silly addNameRange     '0.4.12',
+28 silly addNameRange     '0.4.13',
+28 silly addNameRange     '0.4.14',
+28 silly addNameRange     '0.4.15',
+28 silly addNameRange     '0.4.16',
+28 silly addNameRange     '0.4.17',
+28 silly addNameRange     '0.4.18',
+28 silly addNameRange     '0.4.19',
+28 silly addNameRange     '0.4.20',
+28 silly addNameRange     '0.4.21',
+28 silly addNameRange     '0.4.22',
+28 silly addNameRange     '0.4.23',
+28 silly addNameRange     '0.4.24',
+28 silly addNameRange     '0.4.25',
+28 silly addNameRange     '0.4.26',
+28 silly addNameRange     '0.4.27',
+28 silly addNameRange     '0.4.28',
+28 silly addNameRange     '0.4.29',
+28 silly addNameRange     '0.4.30' ] ]
+29 verbose addNamed [ 'meanio', '0.4.30' ]
+30 verbose addNamed [ '0.4.30', '0.4.30' ]
+31 silly lockFile e652313a-meanio-0-4-30 meanio@0.4.30
+32 verbose lock meanio@0.4.30 /home/mjzitek/.npm/e652313a-meanio-0-4-30.lock
+33 verbose read json /home/mjzitek/.npm/meanio/0.4.30/package/package.json
+34 silly lockFile e652313a-meanio-0-4-30 meanio@0.4.30
+35 silly lockFile e652313a-meanio-0-4-30 meanio@0.4.30
+36 silly lockFile c47b6573-meanio meanio@
+37 silly lockFile c47b6573-meanio meanio@
+38 silly resolved [ { name: 'meanio',
+38 silly resolved     version: '0.4.30',
+38 silly resolved     preferGlobal: true,
+38 silly resolved     description: 'Simple command line interface for installing and managing MEAN apps',
+38 silly resolved     author: { name: 'linnovate' },
+38 silly resolved     contributors: [ [Object], [Object], [Object] ],
+38 silly resolved     license: 'MIT',
+38 silly resolved     main: 'index',
+38 silly resolved     bin:
+38 silly resolved      { mean: './bin/mean',
+38 silly resolved        'mean-init': './bin/mean-init',
+38 silly resolved        'mean-install': './bin/mean-install',
+38 silly resolved        'mean-uninstall': './bin/mean-uninstall',
+38 silly resolved        'mean-docs': './bin/mean-docs',
+38 silly resolved        'mean-package': './bin/mean-package',
+38 silly resolved        'mean-list': './bin/mean-list',
+38 silly resolved        'mean-status': './bin/mean-status',
+38 silly resolved        'mean-user': './bin/mean-user' },
+38 silly resolved     repository:
+38 silly resolved      { type: 'git',
+38 silly resolved        url: 'https://github.com/linnovate/mean-cli.git' },
+38 silly resolved     keywords: [ 'mean', 'meanio', 'mean.io' ],
+38 silly resolved     engines: { node: '0.10.x', npm: '1.4.x' },
+38 silly resolved     dependencies:
+38 silly resolved      { chalk: '^0.4.0',
+38 silly resolved        commander: '^2.2.0',
+38 silly resolved        lodash: '^2.4.1',
+38 silly resolved        mongodb: '^1.4.0',
+38 silly resolved        npm: '^1.4.7',
+38 silly resolved        opener: '^1.3.0',
+38 silly resolved        shelljs: '^0.3.0',
+38 silly resolved        swig: '^1.3.2' },
+38 silly resolved     devDependencies:
+38 silly resolved      { grunt: '^0.4.4',
+38 silly resolved        'grunt-contrib-jshint': '^0.10.0',
+38 silly resolved        'grunt-mocha-test': '^0.10.0',
+38 silly resolved        mocha: '^1.18.2',
+38 silly resolved        should: '^3.2.0' },
+38 silly resolved     readme: '# [![MEAN Logo](http://www.mean.io/img/logos/meanlogo.png)](http://mean.io/) MEAN Command Line\n\n[![NPM version](https://badge.fury.io/js/meanio.svg)](http://badge.fury.io/js/meanio)\n[![Dependency Status](https://david-dm.org/linnovate/mean-cli.svg)](https://david-dm.org/linnovate/mean-cli)\n\nSource for npm package meanio. mean-cli is a core package of the mean.io project and is used primarily to manage packages for extending functionality, for example adding a package to enable inline editable tokens. \n\nThe cli provides a lot of useful functionality, such as scaffolding options to ceate new packages, assign roles to users, check the mongo status, add/remove packages and list currently installed packages.\n\nSee http://mean.io/#!/docs for more in-depth information about mean.\n\n## The repository contains\n* The bin file used for cli operations.\n* Core functionality for managing mean packages.\n\n## Basic Usage\n\n  Install Package:\n\n    $ sudo npm install -g meanio\n\n  Explore CLI functionality:\n\n    $ mean --help\n\n  Create a new mean app:\n\n    $ mean init <NameOfYourApp>\n\n  Install Dependencies:\n\n    $ cd <NameOfYourApp> && npm install\n\n  Create a sample mean package:\n\n    $ mean package <NameOfYourPackage>\n\n  Run your app:\n\n    $ grunt\n',
+38 silly resolved     readmeFilename: 'README.md',
+38 silly resolved     bugs: { url: 'https://github.com/linnovate/mean-cli/issues' },
+38 silly resolved     _id: 'meanio@0.4.30',
+38 silly resolved     _from: 'meanio@' } ]
+39 info install meanio@0.4.30 into /usr/local/lib
+40 info installOne meanio@0.4.30
+41 warn engine meanio@0.4.30: wanted: {"node":"0.10.x","npm":"1.4.x"} (current: {"node":"v0.11.3","npm":"1.2.25"})
+42 verbose from cache /home/mjzitek/.npm/meanio/0.4.30/package/package.json
+43 info /usr/local/lib/node_modules/meanio unbuild
+44 verbose read json /usr/local/lib/node_modules/meanio/package.json
+45 verbose tar unpack /home/mjzitek/.npm/meanio/0.4.30/package.tgz
+46 silly lockFile 39ebf538-sr-local-lib-node-modules-meanio /usr/local/lib/node_modules/meanio
+47 verbose lock /usr/local/lib/node_modules/meanio /home/mjzitek/.npm/39ebf538-sr-local-lib-node-modules-meanio.lock
+48 silly lockFile 71827b31-ek-npm-meanio-0-4-30-package-tgz /home/mjzitek/.npm/meanio/0.4.30/package.tgz
+49 verbose lock /home/mjzitek/.npm/meanio/0.4.30/package.tgz /home/mjzitek/.npm/71827b31-ek-npm-meanio-0-4-30-package-tgz.lock
+50 silly gunzTarPerm modes [ '755', '644' ]
+51 silly gunzTarPerm extractEntry package.json
+52 silly gunzTarPerm extractEntry .npmignore
+53 silly gunzTarPerm extractEntry README.md
+54 silly gunzTarPerm extractEntry LICENSE
+55 silly gunzTarPerm extractEntry Gruntfile.js
+56 silly gunzTarPerm extractEntry index.js
+57 silly gunzTarPerm extractEntry img/logo.txt
+58 silly gunzTarPerm extractEntry img/meanlogo.png
+59 silly gunzTarPerm extractEntry bin/mean
+60 silly gunzTarPerm extractEntry bin/mean-docs
+61 silly gunzTarPerm extractEntry bin/mean-init
+62 silly gunzTarPerm extractEntry bin/mean-install
+63 silly gunzTarPerm extractEntry bin/mean-list
+64 silly gunzTarPerm extractEntry bin/mean-package
+65 silly gunzTarPerm extractEntry bin/mean-status
+66 silly gunzTarPerm extractEntry bin/mean-uninstall
+67 silly gunzTarPerm extractEntry bin/mean-user
+68 silly gunzTarPerm extractEntry lib/cli.js
+69 silly gunzTarPerm extractEntry lib/mean.js
+70 silly gunzTarPerm extractEntry lib/mean0.3.0.js
+71 silly gunzTarPerm extractEntry lib/mean0.3.1.js
+72 silly gunzTarPerm extractEntry lib/scaffold.js
+73 silly gunzTarPerm extractEntry lib/util.js
+74 silly gunzTarPerm extractEntry lib/templates/package.json
+75 silly gunzTarPerm extractEntry lib/templates/app.js
+76 silly gunzTarPerm extractEntry lib/templates/assets.css
+77 silly gunzTarPerm extractEntry lib/templates/client/controller.js
+78 silly gunzTarPerm extractEntry lib/templates/client/routes.js
+79 silly gunzTarPerm extractEntry lib/templates/client/service.js
+80 silly gunzTarPerm extractEntry lib/templates/client/view.html
+81 silly gunzTarPerm extractEntry lib/templates/server/routes.js
+82 silly gunzTarPerm extractEntry lib/templates/server/view.html
+83 silly gunzTarPerm extractEntry modules/package.js
+84 silly gunzTarPerm extractEntry .jshintrc
+85 silly gunzTarPerm extractEntry test/bin/mean_test.js
+86 verbose read json /usr/local/lib/node_modules/meanio/package.json
+87 silly lockFile 39ebf538-sr-local-lib-node-modules-meanio /usr/local/lib/node_modules/meanio
+88 silly lockFile 39ebf538-sr-local-lib-node-modules-meanio /usr/local/lib/node_modules/meanio
+89 silly lockFile 71827b31-ek-npm-meanio-0-4-30-package-tgz /home/mjzitek/.npm/meanio/0.4.30/package.tgz
+90 silly lockFile 71827b31-ek-npm-meanio-0-4-30-package-tgz /home/mjzitek/.npm/meanio/0.4.30/package.tgz
+91 info preinstall meanio@0.4.30
+92 verbose from cache /usr/local/lib/node_modules/meanio/package.json
+93 verbose readDependencies using package.json deps
+94 verbose from cache /usr/local/lib/node_modules/meanio/package.json
+95 verbose readDependencies using package.json deps
+96 verbose cache add [ 'lodash@^2.4.1', null ]
+97 verbose cache add name=undefined spec="lodash@^2.4.1" args=["lodash@^2.4.1",null]
+98 verbose parsed url { protocol: null,
+98 verbose parsed url   slashes: null,
+98 verbose parsed url   auth: null,
+98 verbose parsed url   host: null,
+98 verbose parsed url   port: null,
+98 verbose parsed url   hostname: null,
+98 verbose parsed url   hash: null,
+98 verbose parsed url   search: null,
+98 verbose parsed url   query: null,
+98 verbose parsed url   pathname: 'lodash@%5E2.4.1',
+98 verbose parsed url   path: 'lodash@%5E2.4.1',
+98 verbose parsed url   href: 'lodash@%5E2.4.1' }
+99 verbose cache add name="lodash" spec="^2.4.1" args=["lodash","^2.4.1"]
+100 verbose parsed url { protocol: null,
+100 verbose parsed url   slashes: null,
+100 verbose parsed url   auth: null,
+100 verbose parsed url   host: null,
+100 verbose parsed url   port: null,
+100 verbose parsed url   hostname: null,
+100 verbose parsed url   hash: null,
+100 verbose parsed url   search: null,
+100 verbose parsed url   query: null,
+100 verbose parsed url   pathname: '%5E2.4.1',
+100 verbose parsed url   path: '%5E2.4.1',
+100 verbose parsed url   href: '%5E2.4.1' }
+101 verbose addNamed [ 'lodash', '^2.4.1' ]
+102 verbose addNamed [ null, null ]
+103 silly lockFile 59759450-lodash-2-4-1 lodash@^2.4.1
+104 verbose lock lodash@^2.4.1 /home/mjzitek/.npm/59759450-lodash-2-4-1.lock
+105 verbose cache add [ 'mongodb@^1.4.0', null ]
+106 verbose cache add name=undefined spec="mongodb@^1.4.0" args=["mongodb@^1.4.0",null]
+107 verbose parsed url { protocol: null,
+107 verbose parsed url   slashes: null,
+107 verbose parsed url   auth: null,
+107 verbose parsed url   host: null,
+107 verbose parsed url   port: null,
+107 verbose parsed url   hostname: null,
+107 verbose parsed url   hash: null,
+107 verbose parsed url   search: null,
+107 verbose parsed url   query: null,
+107 verbose parsed url   pathname: 'mongodb@%5E1.4.0',
+107 verbose parsed url   path: 'mongodb@%5E1.4.0',
+107 verbose parsed url   href: 'mongodb@%5E1.4.0' }
+108 verbose cache add name="mongodb" spec="^1.4.0" args=["mongodb","^1.4.0"]
+109 verbose parsed url { protocol: null,
+109 verbose parsed url   slashes: null,
+109 verbose parsed url   auth: null,
+109 verbose parsed url   host: null,
+109 verbose parsed url   port: null,
+109 verbose parsed url   hostname: null,
+109 verbose parsed url   hash: null,
+109 verbose parsed url   search: null,
+109 verbose parsed url   query: null,
+109 verbose parsed url   pathname: '%5E1.4.0',
+109 verbose parsed url   path: '%5E1.4.0',
+109 verbose parsed url   href: '%5E1.4.0' }
+110 verbose addNamed [ 'mongodb', '^1.4.0' ]
+111 verbose addNamed [ null, null ]
+112 silly lockFile 7619eab2-mongodb-1-4-0 mongodb@^1.4.0
+113 verbose lock mongodb@^1.4.0 /home/mjzitek/.npm/7619eab2-mongodb-1-4-0.lock
+114 verbose cache add [ 'npm@^1.4.7', null ]
+115 verbose cache add name=undefined spec="npm@^1.4.7" args=["npm@^1.4.7",null]
+116 verbose parsed url { protocol: null,
+116 verbose parsed url   slashes: null,
+116 verbose parsed url   auth: null,
+116 verbose parsed url   host: null,
+116 verbose parsed url   port: null,
+116 verbose parsed url   hostname: null,
+116 verbose parsed url   hash: null,
+116 verbose parsed url   search: null,
+116 verbose parsed url   query: null,
+116 verbose parsed url   pathname: 'npm@%5E1.4.7',
+116 verbose parsed url   path: 'npm@%5E1.4.7',
+116 verbose parsed url   href: 'npm@%5E1.4.7' }
+117 verbose cache add name="npm" spec="^1.4.7" args=["npm","^1.4.7"]
+118 verbose parsed url { protocol: null,
+118 verbose parsed url   slashes: null,
+118 verbose parsed url   auth: null,
+118 verbose parsed url   host: null,
+118 verbose parsed url   port: null,
+118 verbose parsed url   hostname: null,
+118 verbose parsed url   hash: null,
+118 verbose parsed url   search: null,
+118 verbose parsed url   query: null,
+118 verbose parsed url   pathname: '%5E1.4.7',
+118 verbose parsed url   path: '%5E1.4.7',
+118 verbose parsed url   href: '%5E1.4.7' }
+119 verbose addNamed [ 'npm', '^1.4.7' ]
+120 verbose addNamed [ null, null ]
+121 silly lockFile 4bd85e6b-npm-1-4-7 npm@^1.4.7
+122 verbose lock npm@^1.4.7 /home/mjzitek/.npm/4bd85e6b-npm-1-4-7.lock
+123 verbose cache add [ 'opener@^1.3.0', null ]
+124 verbose cache add name=undefined spec="opener@^1.3.0" args=["opener@^1.3.0",null]
+125 verbose parsed url { protocol: null,
+125 verbose parsed url   slashes: null,
+125 verbose parsed url   auth: null,
+125 verbose parsed url   host: null,
+125 verbose parsed url   port: null,
+125 verbose parsed url   hostname: null,
+125 verbose parsed url   hash: null,
+125 verbose parsed url   search: null,
+125 verbose parsed url   query: null,
+125 verbose parsed url   pathname: 'opener@%5E1.3.0',
+125 verbose parsed url   path: 'opener@%5E1.3.0',
+125 verbose parsed url   href: 'opener@%5E1.3.0' }
+126 verbose cache add name="opener" spec="^1.3.0" args=["opener","^1.3.0"]
+127 verbose parsed url { protocol: null,
+127 verbose parsed url   slashes: null,
+127 verbose parsed url   auth: null,
+127 verbose parsed url   host: null,
+127 verbose parsed url   port: null,
+127 verbose parsed url   hostname: null,
+127 verbose parsed url   hash: null,
+127 verbose parsed url   search: null,
+127 verbose parsed url   query: null,
+127 verbose parsed url   pathname: '%5E1.3.0',
+127 verbose parsed url   path: '%5E1.3.0',
+127 verbose parsed url   href: '%5E1.3.0' }
+128 verbose addNamed [ 'opener', '^1.3.0' ]
+129 verbose addNamed [ null, null ]
+130 silly lockFile d9b95368-opener-1-3-0 opener@^1.3.0
+131 verbose lock opener@^1.3.0 /home/mjzitek/.npm/d9b95368-opener-1-3-0.lock
+132 info addNameTag [ 'lodash', '^2.4.1' ]
+133 info addNameTag [ 'mongodb', '^1.4.0' ]
+134 info addNameTag [ 'npm', '^1.4.7' ]
+135 verbose cache add [ 'shelljs@^0.3.0', null ]
+136 verbose cache add name=undefined spec="shelljs@^0.3.0" args=["shelljs@^0.3.0",null]
+137 verbose parsed url { protocol: null,
+137 verbose parsed url   slashes: null,
+137 verbose parsed url   auth: null,
+137 verbose parsed url   host: null,
+137 verbose parsed url   port: null,
+137 verbose parsed url   hostname: null,
+137 verbose parsed url   hash: null,
+137 verbose parsed url   search: null,
+137 verbose parsed url   query: null,
+137 verbose parsed url   pathname: 'shelljs@%5E0.3.0',
+137 verbose parsed url   path: 'shelljs@%5E0.3.0',
+137 verbose parsed url   href: 'shelljs@%5E0.3.0' }
+138 verbose cache add name="shelljs" spec="^0.3.0" args=["shelljs","^0.3.0"]
+139 verbose parsed url { protocol: null,
+139 verbose parsed url   slashes: null,
+139 verbose parsed url   auth: null,
+139 verbose parsed url   host: null,
+139 verbose parsed url   port: null,
+139 verbose parsed url   hostname: null,
+139 verbose parsed url   hash: null,
+139 verbose parsed url   search: null,
+139 verbose parsed url   query: null,
+139 verbose parsed url   pathname: '%5E0.3.0',
+139 verbose parsed url   path: '%5E0.3.0',
+139 verbose parsed url   href: '%5E0.3.0' }
+140 verbose addNamed [ 'shelljs', '^0.3.0' ]
+141 verbose addNamed [ null, null ]
+142 silly lockFile 1ddaa962-shelljs-0-3-0 shelljs@^0.3.0
+143 verbose lock shelljs@^0.3.0 /home/mjzitek/.npm/1ddaa962-shelljs-0-3-0.lock
+144 verbose cache add [ 'swig@^1.3.2', null ]
+145 verbose cache add name=undefined spec="swig@^1.3.2" args=["swig@^1.3.2",null]
+146 verbose parsed url { protocol: null,
+146 verbose parsed url   slashes: null,
+146 verbose parsed url   auth: null,
+146 verbose parsed url   host: null,
+146 verbose parsed url   port: null,
+146 verbose parsed url   hostname: null,
+146 verbose parsed url   hash: null,
+146 verbose parsed url   search: null,
+146 verbose parsed url   query: null,
+146 verbose parsed url   pathname: 'swig@%5E1.3.2',
+146 verbose parsed url   path: 'swig@%5E1.3.2',
+146 verbose parsed url   href: 'swig@%5E1.3.2' }
+147 verbose cache add name="swig" spec="^1.3.2" args=["swig","^1.3.2"]
+148 verbose parsed url { protocol: null,
+148 verbose parsed url   slashes: null,
+148 verbose parsed url   auth: null,
+148 verbose parsed url   host: null,
+148 verbose parsed url   port: null,
+148 verbose parsed url   hostname: null,
+148 verbose parsed url   hash: null,
+148 verbose parsed url   search: null,
+148 verbose parsed url   query: null,
+148 verbose parsed url   pathname: '%5E1.3.2',
+148 verbose parsed url   path: '%5E1.3.2',
+148 verbose parsed url   href: '%5E1.3.2' }
+149 verbose addNamed [ 'swig', '^1.3.2' ]
+150 verbose addNamed [ null, null ]
+151 silly lockFile de2fbae8-swig-1-3-2 swig@^1.3.2
+152 verbose lock swig@^1.3.2 /home/mjzitek/.npm/de2fbae8-swig-1-3-2.lock
+153 verbose cache add [ 'chalk@^0.4.0', null ]
+154 verbose cache add name=undefined spec="chalk@^0.4.0" args=["chalk@^0.4.0",null]
+155 verbose parsed url { protocol: null,
+155 verbose parsed url   slashes: null,
+155 verbose parsed url   auth: null,
+155 verbose parsed url   host: null,
+155 verbose parsed url   port: null,
+155 verbose parsed url   hostname: null,
+155 verbose parsed url   hash: null,
+155 verbose parsed url   search: null,
+155 verbose parsed url   query: null,
+155 verbose parsed url   pathname: 'chalk@%5E0.4.0',
+155 verbose parsed url   path: 'chalk@%5E0.4.0',
+155 verbose parsed url   href: 'chalk@%5E0.4.0' }
+156 verbose cache add name="chalk" spec="^0.4.0" args=["chalk","^0.4.0"]
+157 verbose parsed url { protocol: null,
+157 verbose parsed url   slashes: null,
+157 verbose parsed url   auth: null,
+157 verbose parsed url   host: null,
+157 verbose parsed url   port: null,
+157 verbose parsed url   hostname: null,
+157 verbose parsed url   hash: null,
+157 verbose parsed url   search: null,
+157 verbose parsed url   query: null,
+157 verbose parsed url   pathname: '%5E0.4.0',
+157 verbose parsed url   path: '%5E0.4.0',
+157 verbose parsed url   href: '%5E0.4.0' }
+158 verbose addNamed [ 'chalk', '^0.4.0' ]
+159 verbose addNamed [ null, null ]
+160 silly lockFile b2f4396d-chalk-0-4-0 chalk@^0.4.0
+161 verbose lock chalk@^0.4.0 /home/mjzitek/.npm/b2f4396d-chalk-0-4-0.lock
+162 verbose cache add [ 'commander@^2.2.0', null ]
+163 verbose cache add name=undefined spec="commander@^2.2.0" args=["commander@^2.2.0",null]
+164 verbose parsed url { protocol: null,
+164 verbose parsed url   slashes: null,
+164 verbose parsed url   auth: null,
+164 verbose parsed url   host: null,
+164 verbose parsed url   port: null,
+164 verbose parsed url   hostname: null,
+164 verbose parsed url   hash: null,
+164 verbose parsed url   search: null,
+164 verbose parsed url   query: null,
+164 verbose parsed url   pathname: 'commander@%5E2.2.0',
+164 verbose parsed url   path: 'commander@%5E2.2.0',
+164 verbose parsed url   href: 'commander@%5E2.2.0' }
+165 verbose cache add name="commander" spec="^2.2.0" args=["commander","^2.2.0"]
+166 verbose parsed url { protocol: null,
+166 verbose parsed url   slashes: null,
+166 verbose parsed url   auth: null,
+166 verbose parsed url   host: null,
+166 verbose parsed url   port: null,
+166 verbose parsed url   hostname: null,
+166 verbose parsed url   hash: null,
+166 verbose parsed url   search: null,
+166 verbose parsed url   query: null,
+166 verbose parsed url   pathname: '%5E2.2.0',
+166 verbose parsed url   path: '%5E2.2.0',
+166 verbose parsed url   href: '%5E2.2.0' }
+167 verbose addNamed [ 'commander', '^2.2.0' ]
+168 verbose addNamed [ null, null ]
+169 silly lockFile 2507b88a-commander-2-2-0 commander@^2.2.0
+170 verbose lock commander@^2.2.0 /home/mjzitek/.npm/2507b88a-commander-2-2-0.lock
+171 info addNameTag [ 'opener', '^1.3.0' ]
+172 info addNameTag [ 'shelljs', '^0.3.0' ]
+173 info addNameTag [ 'swig', '^1.3.2' ]
+174 info addNameTag [ 'chalk', '^0.4.0' ]
+175 info addNameTag [ 'commander', '^2.2.0' ]
+176 verbose url raw lodash
+177 verbose url resolving [ 'https://registry.npmjs.org/', './lodash' ]
+178 verbose url resolved https://registry.npmjs.org/lodash
+179 info trying registry request attempt 1 at 13:09:56
+180 verbose etag "1ZN6LYPW258L5MPEQTP69J7L0"
+181 http GET https://registry.npmjs.org/lodash
+182 verbose url raw swig
+183 verbose url resolving [ 'https://registry.npmjs.org/', './swig' ]
+184 verbose url resolved https://registry.npmjs.org/swig
+185 info trying registry request attempt 1 at 13:09:56
+186 verbose etag "B0R6IYSBDQBW750WXF5G07XDR"
+187 http GET https://registry.npmjs.org/swig
+188 verbose url raw opener
+189 verbose url resolving [ 'https://registry.npmjs.org/', './opener' ]
+190 verbose url resolved https://registry.npmjs.org/opener
+191 info trying registry request attempt 1 at 13:09:56
+192 verbose etag "AH54TRT1R59C1A41825XC8C71"
+193 http GET https://registry.npmjs.org/opener
+194 verbose url raw shelljs
+195 verbose url resolving [ 'https://registry.npmjs.org/', './shelljs' ]
+196 verbose url resolved https://registry.npmjs.org/shelljs
+197 info trying registry request attempt 1 at 13:09:56
+198 verbose etag "7UDATTDWN0M1R354NMY5P88AF"
+199 http GET https://registry.npmjs.org/shelljs
+200 verbose url raw mongodb
+201 verbose url resolving [ 'https://registry.npmjs.org/', './mongodb' ]
+202 verbose url resolved https://registry.npmjs.org/mongodb
+203 info trying registry request attempt 1 at 13:09:56
+204 verbose etag "3C27OEENN0CGJ2T79M04Y50V6"
+205 http GET https://registry.npmjs.org/mongodb
+206 verbose url raw chalk
+207 verbose url resolving [ 'https://registry.npmjs.org/', './chalk' ]
+208 verbose url resolved https://registry.npmjs.org/chalk
+209 info trying registry request attempt 1 at 13:09:56
+210 verbose etag "9Q8BQPJ0UTH3JF5RDUAJW0NJK"
+211 http GET https://registry.npmjs.org/chalk
+212 verbose url raw commander
+213 verbose url resolving [ 'https://registry.npmjs.org/', './commander' ]
+214 verbose url resolved https://registry.npmjs.org/commander
+215 info trying registry request attempt 1 at 13:09:56
+216 verbose etag "1KX4JSBFT9BYPXWKS6TQLDUDD"
+217 http GET https://registry.npmjs.org/commander
+218 verbose url raw npm
+219 verbose url resolving [ 'https://registry.npmjs.org/', './npm' ]
+220 verbose url resolved https://registry.npmjs.org/npm
+221 info trying registry request attempt 1 at 13:09:56
+222 verbose etag "8OG8B0ZQR1FDAZNT0NV247YSR"
+223 http GET https://registry.npmjs.org/npm
+224 http 304 https://registry.npmjs.org/swig
+225 silly registry.get cb [ 304,
+225 silly registry.get   { date: 'Mon, 23 Jun 2014 20:10:01 GMT',
+225 silly registry.get     server: 'Apache',
+225 silly registry.get     via: '1.1 varnish',
+225 silly registry.get     'last-modified': 'Mon, 23 Jun 2014 20:10:01 GMT',
+225 silly registry.get     'cache-control': 'max-age=30',
+225 silly registry.get     etag: '"B0R6IYSBDQBW750WXF5G07XDR"',
+225 silly registry.get     'x-served-by': 'cache-lax1427-LAX',
+225 silly registry.get     'x-cache': 'HIT',
+225 silly registry.get     'x-cache-hits': '1',
+225 silly registry.get     'x-timer': 'S1403554201.014091,VS0,VE0',
+225 silly registry.get     vary: 'Accept',
+225 silly registry.get     'content-length': '0',
+225 silly registry.get     'keep-alive': 'timeout=10, max=50',
+225 silly registry.get     connection: 'Keep-Alive' } ]
+226 verbose etag swig from cache
+227 http 304 https://registry.npmjs.org/mongodb
+228 silly registry.get cb [ 304,
+228 silly registry.get   { date: 'Mon, 23 Jun 2014 20:10:01 GMT',
+228 silly registry.get     server: 'Apache',
+228 silly registry.get     via: '1.1 varnish',
+228 silly registry.get     'last-modified': 'Mon, 23 Jun 2014 20:10:01 GMT',
+228 silly registry.get     'cache-control': 'max-age=30',
+228 silly registry.get     etag: '"3C27OEENN0CGJ2T79M04Y50V6"',
+228 silly registry.get     'x-served-by': 'cache-lax1420-LAX',
+228 silly registry.get     'x-cache': 'HIT',
+228 silly registry.get     'x-cache-hits': '1',
+228 silly registry.get     'x-timer': 'S1403554201.020173,VS0,VE1',
+228 silly registry.get     vary: 'Accept',
+228 silly registry.get     'content-length': '0',
+228 silly registry.get     'keep-alive': 'timeout=10, max=50',
+228 silly registry.get     connection: 'Keep-Alive' } ]
+229 verbose etag mongodb from cache
+230 silly lockFile de2fbae8-swig-1-3-2 swig@^1.3.2
+231 silly lockFile de2fbae8-swig-1-3-2 swig@^1.3.2
+232 http 304 https://registry.npmjs.org/chalk
+233 silly registry.get cb [ 304,
+233 silly registry.get   { date: 'Mon, 23 Jun 2014 20:10:01 GMT',
+233 silly registry.get     server: 'Apache',
+233 silly registry.get     via: '1.1 varnish',
+233 silly registry.get     'last-modified': 'Mon, 23 Jun 2014 20:10:01 GMT',
+233 silly registry.get     'cache-control': 'max-age=30',
+233 silly registry.get     etag: '"9Q8BQPJ0UTH3JF5RDUAJW0NJK"',
+233 silly registry.get     'x-served-by': 'cache-lax1427-LAX',
+233 silly registry.get     'x-cache': 'HIT',
+233 silly registry.get     'x-cache-hits': '1',
+233 silly registry.get     'x-timer': 'S1403554201.033291,VS0,VE0',
+233 silly registry.get     vary: 'Accept',
+233 silly registry.get     'content-length': '0',
+233 silly registry.get     'keep-alive': 'timeout=10, max=49',
+233 silly registry.get     connection: 'Keep-Alive' } ]
+234 verbose etag chalk from cache
+235 verbose about to build /usr/local/lib/node_modules/meanio
+236 info /usr/local/lib/node_modules/meanio unbuild
+237 verbose from cache /usr/local/lib/node_modules/meanio/package.json
+238 info preuninstall meanio@0.4.30
+239 silly lockFile 7619eab2-mongodb-1-4-0 mongodb@^1.4.0
+240 silly lockFile 7619eab2-mongodb-1-4-0 mongodb@^1.4.0
+241 info uninstall meanio@0.4.30
+242 http 304 https://registry.npmjs.org/commander
+243 silly registry.get cb [ 304,
+243 silly registry.get   { date: 'Mon, 23 Jun 2014 20:10:01 GMT',
+243 silly registry.get     server: 'Apache',
+243 silly registry.get     via: '1.1 varnish',
+243 silly registry.get     'last-modified': 'Mon, 23 Jun 2014 20:08:05 GMT',
+243 silly registry.get     'cache-control': 'max-age=30',
+243 silly registry.get     etag: '"1KX4JSBFT9BYPXWKS6TQLDUDD"',
+243 silly registry.get     'x-served-by': 'cache-lax1420-LAX',
+243 silly registry.get     'x-cache': 'HIT',
+243 silly registry.get     'x-cache-hits': '31',
+243 silly registry.get     'x-timer': 'S1403554201.039399,VS0,VE0',
+243 silly registry.get     vary: 'Accept',
+243 silly registry.get     'content-length': '0',
+243 silly registry.get     'keep-alive': 'timeout=10, max=49',
+243 silly registry.get     connection: 'Keep-Alive' } ]
+244 verbose etag commander from cache
+245 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild meanio@0.4.30
+246 verbose /usr/local/bin,[object Object] binRoot
+247 silly lockFile b2f4396d-chalk-0-4-0 chalk@^0.4.0
+248 silly lockFile b2f4396d-chalk-0-4-0 chalk@^0.4.0
+249 info postuninstall meanio@0.4.30
+250 silly lockFile 2507b88a-commander-2-2-0 commander@^2.2.0
+251 silly lockFile 2507b88a-commander-2-2-0 commander@^2.2.0
+252 error Error: No compatible version found: swig@'^1.3.2'
+252 error Valid install targets:
+252 error ["0.1.1","0.1.2","0.1.3","0.1.5","0.1.6","0.1.7","0.1.8","0.1.9","0.2.0","0.2.1","0.2.2","0.2.3","0.3.0","0.4.0","0.5.0","0.6.0","0.6.1","0.7.0","0.8.0","0.9.0","0.9.1","0.9.2","0.9.3","0.9.4","0.10.0","0.11.0","0.11.1","0.11.2","0.12.0","0.12.1","0.13.0","0.13.1","0.13.2","0.13.3","0.13.4","0.13.5","0.14.0","1.0.0-pre1","1.0.0-pre2","1.0.0-pre3","1.0.0-rc1","1.0.0-rc2","1.0.0-rc3","1.0.0","1.1.0","1.2.0","1.2.1","1.2.2","1.3.0","1.3.2"]
+252 error     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache.js:709:10)
+252 error     at /usr/local/lib/node_modules/npm/lib/cache.js:631:10
+252 error     at saved (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:138:7)
+252 error     at Object.oncomplete (fs.js:94:15)
+253 error If you need help, you may report this log at:
+253 error     <http://github.com/isaacs/npm/issues>
+253 error or email it to:
+253 error     <npm-@googlegroups.com>
+254 error System Linux 3.13.0-29-generic
+255 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "meanio"
+256 error cwd /usr/share/code/goingtohell
+257 error node -v v0.11.3
+258 error npm -v 1.2.25
+259 verbose exit [ 1, true ]
