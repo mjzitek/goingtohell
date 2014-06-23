@@ -1,0 +1,116 @@
+body {
+	color: #4c4c4c;
+	background-color: $backgroundColor1;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+
+header {
+    font-family: 'Oxygen',Arial, sans-serif;
+    font-size: 2em;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 45px;
+	background-color: #EBEBEB;
+	
+	padding: 2px;
+	border-bottom: 3px solid #bbb;
+	margin-bottom: 10px;
+
+}
+
+footer {
+	color: #ddd;
+	width:100%;
+	height:60px;
+	position:absolute;
+	padding: 5px;
+	text-align: center;
+	top: 800px;
+	bottom:0;
+	left:0;
+	@include background-gradient-black1();
+
+
+
+}
+
+ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	margin-left: 20px;
+}
+
+#main {
+	margin-top: 10px;
+	width: 1400px;
+	margin-right: auto;
+	margin-left: 10px;
+}
+
+#signup {
+	padding: 10px;
+}
+
+#game-header {
+	font-family: 'Oxygen',Arial, sans-serif;
+	font-size: 3em;
+	height: 35px;
+	margin-bottom: 10px;
+}
+
+#area-left {
+	float: left;
+	background-color: #fff;
+	width: 800px;
+	height: 620px;
+	padding: 5px;
+	@include box1(5px);
+}
+
+#area-right {
+	width: 550px;
+	/*border-left: 1px solid #999; */
+	float: left;
+	padding: 5px;
+}
+
+#message-area, #button-area {
+	margin: 4px;
+	padding: 3px;
+
+	height: 100px;
+}
+
+#message-area {
+	border: 1px solid #eee;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	font-size: .8em;
+
+}
+
+#button-area {
+
+}
+
+#area-debug {
+	clear: both;
+	border: 2px solid #faa;
+	background-color: #fdd;
+	padding: 4px;
+	margin: 4px;
+	width: 400px;
+	height: 200px;
+}
+
+
+#profile-box {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #C2BBB4;
+	width: 400px;
+	background-color: #fff
+}

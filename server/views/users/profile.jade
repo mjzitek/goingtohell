@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  div(id="profile-box")
+    div.
+        Username: #{user.username}
+    div. 
+        Name: #{user.name}
+    div.
+        Email: #{user.email}
+    div
+       != "<script>"
+       != "console.log(" + JSON.stringify(user.groups) + ");"
+       != "</script>"
+    div
+       span Groups:
+       ul
+          each group in user.groups
+            li #{group}           

@@ -1,0 +1,38 @@
+.login-box {
+	@include box1(3px);
+	background-color: #fff;
+}
+
+.button-area-section
+{
+	margin: 3px;
+	padding: 10px;
+	width: 240px;
+	text-align: center;
+	@include box1(5px);
+}
+
+
+
+.inventory-box {
+	width: 200px;
+	height: 300px;
+	margin-bottom: 10px;
+	background-color: #fff;
+	@include box1(5px);
+}
+
+.inventory-box-title {
+  margin: 0px;
+  padding: 4px;
+  background-color: #D1F0EF;
+  font-weight: bold;
+  font-size: 1.1em;
+  width: 100%;
+  display: block;
+  box-sizing:border-box;
+}
+
+.inventory-box-items {
+  padding: 6px;
+}

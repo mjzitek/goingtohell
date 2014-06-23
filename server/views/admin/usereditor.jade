@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  div(id="profile-box")
+    div.
+        Username: #{user.username}
+    div. 
+        Name: #{user.name}
+    div.
+        Email: #{user.email}
+    div
+       span Groups:
+       ul
+          each group in user.groups
+            li <input type="checkbox"> #{group}   
