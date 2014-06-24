@@ -94,3 +94,147 @@
 {"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-23T23:23:58.373Z"}
 {"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-23T23:24:39.306Z"}
 {"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-23T23:44:08.778Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-23T23:57:03.092Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-23T23:58:27.124Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-23T23:59:35.821Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-23T23:59:41.823Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:00:24.821Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:02:09.750Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:02:20.903Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:02:37.005Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:03:14.818Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:03:22.493Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:05:05.243Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:05:45.169Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:08:13.590Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:09:19.289Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:13:57.739Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:25:55.312Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:26:15.408Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:26:58.721Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:27:02.231Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:28:31.052Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:28:34.831Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:30:08.966Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:30:13.266Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:31:32.590Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:31:36.689Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:31:53.729Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:35:31.144Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:35:35.280Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:45:21.115Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T00:46:13.434Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:49:10.391Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:49:51.145Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T00:50:09.768Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:07:56.193Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:11:10.799Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:11:42.445Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:11:52.472Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:12:38.487Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:14:50.507Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:15:12.342Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:15:26.783Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:15:36.470Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:15:51.997Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:16:19.289Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:16:29.070Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:16:51.867Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:17:20.343Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:26:39.076Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:31:07.181Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:31:59.697Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:32:02.742Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:32:11.081Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:34:09.195Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:34:29.351Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:34:47.526Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:38:02.797Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:41:16.449Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:43:39.917Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:44:19.750Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:44:53.456Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:47:01.761Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:47:27.961Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:49:43.421Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:50:53.821Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:51:17.297Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:51:59.243Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:52:26.608Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:53:05.308Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:54:19.651Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:55:08.723Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:55:23.178Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T01:56:30.395Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:01:33.004Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:02:36.381Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:03:10.609Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:03:32.719Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:04:19.754Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:05:24.956Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:06:10.882Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:10:50.016Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:13:15.988Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:13:52.121Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:15:00.348Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:20:13.948Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:20:28.717Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:32:38.223Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:33:42.156Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:33:43.487Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:34:26.394Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:34:48.993Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:35:25.058Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:35:28.627Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:36:16.841Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:37:07.316Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:37:33.077Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:38:14.119Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:39:03.140Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T02:41:16.212Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:39:50.043Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:41:05.408Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:43:07.824Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:45:39.067Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:46:10.515Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:46:55.348Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:53:11.740Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:53:44.521Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:55:34.942Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:58:50.219Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T03:59:04.496Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T04:00:17.274Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T04:00:54.961Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T04:02:29.985Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T04:09:17.526Z"}
+{"level":"debug","message":"Debug Logging set up OK!","timestamp":"2014-06-24T04:09:57.330Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:19:23.958Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:19:41.055Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:21:01.058Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:21:45.596Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:22:25.221Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:28:08.752Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:29:22.366Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:32:32.739Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T04:32:53.140Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:43:43.585Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:44:04.638Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:45:01.926Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:45:58.693Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:46:37.420Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:47:28.614Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:48:13.811Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:49:15.490Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:49:37.335Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:49:51.820Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:50:14.226Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:53:18.191Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:53:37.590Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:53:52.083Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:54:11.005Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:55:51.346Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:56:11.901Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:57:25.671Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:57:31.914Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:57:52.097Z"}
+{"level":"debug","message":"served static content /socket.io.js","timestamp":"2014-06-24T15:58:27.719Z"}

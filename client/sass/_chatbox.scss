@@ -1,0 +1,92 @@
+#userlist {
+	background-color: #fff;
+	width: 20%;
+	height: 300px;
+	overflow-y: scroll;
+	border-right: 1px solid #555;
+	float: left;
+}
+
+
+#userlist .user {
+	height: 40px;
+	padding: 3px;
+	clear: both;
+}
+
+#userlist .user:hover {
+	background-color: $highlightBlue;
+}
+
+#userlist .user .userphoto {
+	float: left;
+	height: 32px;
+	width: 32px;
+}
+#userlist .user .usertext {
+	font-size: .9em;
+	float: left;
+	padding-left: 4px;
+}
+
+#userlist .user .usertext .user-points {
+	padding-left: 6px;
+	color: #18B52D;
+}
+
+#userlist .user .usertext .username {
+
+	padding-left: 3px;
+}
+
+#chatbox  {
+	background-color: #fff;
+	float: right;
+	height: 300px;
+	width: 80%;
+}
+
+#chatbox #messages {
+	padding: 3px;	
+	height: 271px;
+	overflow-y: scroll;
+}
+
+#chatbox .message {
+	padding: 3px;
+}
+
+#chatbox .message .username {
+	padding-right: 6px;
+	font-weight: bold;
+	color: $darkBlue1;
+}
+#chatbox .message .text {
+
+}
+
+#chatbox #chatbox-entry {
+	height: 25px;
+	border-top: 1px solid #aaa;
+	padding: 3px;
+}
+
+#chatbox #chatbox-input, #chatbox #chatbox-submit {
+	height: 23px;
+}
+
+#chatbox #chatbox-input {
+	border: 1px solid #ccc;
+	width: 95%;
+	float: left;
+	padding: 2px;
+}
+
+
+
+#chatbox #chatbox-submit {
+	margin: 0;
+	width: 5%;
+	float: left;
+	font-size: .9em;
+}

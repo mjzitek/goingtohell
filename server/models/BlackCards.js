@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var BlackCardSchema = new mongoose.Schema({
 	text:         String,
-	deck:     { type: Schema.Types.ObjectId, ref: 'carddeck' },
+	deck:     { type: Schema.Types.ObjectId, ref: 'carddecks' },
 	createdate :  Date,
 	createdby  : { type: Schema.Types.ObjectId, ref: 'users' },
 	active: 	  Boolean

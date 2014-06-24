@@ -26,22 +26,6 @@ module.exports = function(app, models) {
 
 	app.get('/', isLoggedIn, index.getIndex);
 
-	// app.get('/', isLoggedIn, function(req, res){
-
-
-
-	// 	if(req.user) {
-	// 		username = req.user.username;
-	// 	} else {
-	// 		username = "Guest";
-	// 	}
-
-	// 	res.render('index', {
-	// 		title: 'The Village',
-	// 		username: username
-	// 	});
-	// });
-
 
 }
 
@@ -54,3 +38,8 @@ module.exports = function(app, models) {
 // 	});
 // }
 
+
+
+// ObjectId("53a8a62fc9128868687ec0ac")
+
+// ObjectId("53a8c93f1f55d70e969cda40")

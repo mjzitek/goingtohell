@@ -1,5 +1,5 @@
 .login-box {
-	@include box1(3px);
+	
 	background-color: #fff;
 }
 
@@ -14,25 +14,28 @@
 
 
 
-.inventory-box {
-	width: 200px;
-	height: 300px;
-	margin-bottom: 10px;
+
+#blackcard {
+	@include box1(6px);
+	width: 230px;
+	height: 240px;
+	background-color: #000;
+	color: #fff;
+	padding: 10px;
+	font-size: 1.2em;
+	margin: 10px;
+}
+
+
+.whitecard {
+	@include box1(6px);
+	width: 150px;
+	height: 160px;
 	background-color: #fff;
-	@include box1(5px);
-}
-
-.inventory-box-title {
-  margin: 0px;
-  padding: 4px;
-  background-color: #D1F0EF;
-  font-weight: bold;
-  font-size: 1.1em;
-  width: 100%;
-  display: block;
-  box-sizing:border-box;
-}
-
-.inventory-box-items {
-  padding: 6px;
+	color: #000;
+	padding: 10px;
+	font-size: 1em;
+	margin: 5px;
+	display: inline;
+	float: left;
 }
