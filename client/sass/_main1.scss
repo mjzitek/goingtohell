@@ -20,6 +20,28 @@ header {
 
 }
 
+header #title {
+	float: left;
+}
+
+header #title .header-icon {
+	padding-left: 5px;
+}
+
+header #title .header-text {
+	padding-left: 5px;
+}
+
+header #player-info {
+	padding-top: 20px;
+	padding-right: 5px;
+	float: right;
+}
+
+header #player-info #name {
+	font-size: .5em;
+}
+
 footer {
 	color: #ddd;
 	width:100%;

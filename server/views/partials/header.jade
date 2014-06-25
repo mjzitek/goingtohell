@@ -1,2 +1,8 @@
 header
-    p Going To Hell
+	div#title
+		span(class='fa fa-road header-icon') 
+		span.header-text Road To Hell
+	div#player-info
+		span(id='name', data-id='#{userid}') 
+			a(href='/profile') 
+				span#username #{username}

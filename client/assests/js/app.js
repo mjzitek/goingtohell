@@ -6,6 +6,36 @@ $(function() {
 	})
 
 
+    $("#whitecards").on("click", "li.whitecard", function() {
+        $('#whitecards li').each(function (index) {
+            $(this).removeClass("selected");
+        });
+
+        if($( "#played-cards ul li" ).size() < 18)
+        {
+            $(this).addClass('selected');
+            $("#played-cards ul").append(this);
+        }
+
+        console.log($( "#played-cards ul li" ).length);
+        if($( "#played-cards ul li" ).size() > 5) {
+        $('#played-cards ul li').each(function (index) {
+            $(this).addClass("whitecard-sm");
+        });            
+        }
+    });
+
+    $("#chatbox-submit").click(function() {
+        var data = {};
+        data.type = "playerMessage";
+        data.userid = $("#player-info #name").data("id");
+        data.username = $("#player-info #name #username").html();
+        data.message = $('#chatbox-input').val();
+
+        if(data.message != "")
+            sendChat(data);
+    });
+
 
 });
 
@@ -47,7 +77,7 @@ function getNewWhiteCards() {
         success: function (res) {
             console.log(res);
             res.cards.forEach(function(c) {
-                output += "<span class='whitecard'><span class='whitecard-text'>" + c.text + "</span></span>"
+                output += "<li class='whitecard'><span class='whitecard-text'>" + c.text + "</span></li>"
             });
 
             $("#whitecards").html(output);

@@ -26,9 +26,6 @@ exports.getBlackCards = function(req, res) {
 };
 
 exports.getWhiteCards = function(req, res) {
-
-	console.log("Getting white cards");
-	console.log("R1: " + req.params.amt);
 	
 	getRandomWhiteCards(req.params.amt,"", function(cards) {
 		return res.jsonp(cards);
@@ -56,7 +53,6 @@ function getRandomBlackCard(deck, callback) {
 
 exports.getRandomWhiteCards = getRandomWhiteCards;
 function getRandomWhiteCards(amount, deck, callback) {
-	console.log("A1: " + amount);
 
 	async.series({
 		cards: function(callback) {
@@ -79,7 +75,6 @@ function getRandomWhiteCards(amount, deck, callback) {
 
 						if(amount == 0)
 			{
-							console.log("A2: " + amount);
 							callback(null, cards);
 						}
 					});

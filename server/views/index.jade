@@ -6,27 +6,31 @@ block content
 
 	div#main
 		div#cardarea
-			div#blackcard 
-				span#blackcard-text
-			div
-				input(type='submit', id='newblackcard')
+			div#playing-area
+				div#blackcard 
+					span#blackcard-text
+				div#played-cards
+					ul
+				div#buttons
+					input(type='submit', id='newblackcard')
 			div#whitecards
-				span.whitecard
-					span.whitecard-text Boobs!
-				span.whitecard
-					span.whitecard-text Where's the beef?
-				span.whitecard
-					span.whitecard-text Alan is a loser
-				span.whitecard 
-					span.whitecard-text Go Kings Go!
-				span.whitecard
-					span.whitecard-text Let It Snow
-				span.whitecard
-					span.whitecard-text What the fuck is your fucking problem?
-				span.whitecard
-					span.whitecard-text Cheerio
-				span.whitecard 
-					span.whitecard-text Fez's are cool
+				ul
+					li.whitecard
+						span.whitecard-text Boobs!
+					li(class='whitecard selected')
+						span.whitecard-text Where's the beef?
+					li.whitecard
+						span.whitecard-text Alan is a loser
+					li.whitecard 
+						span.whitecard-text Go Kings Go!
+					li.whitecard
+						span.whitecard-text Let It Snow
+					li.whitecard
+						span.whitecard-text What the fuck is your fucking problem?
+					li.whitecard
+						span.whitecard-text Cheerio
+					li.whitecard 
+						span.whitecard-text Fez's are cool
 		div#userarea
 			div#userlist
 				div.user
@@ -38,15 +42,21 @@ block content
 				div.user
 					span.userphoto 
 						<img src="img/photo2.jpg" alt="" />
-					span.username zblu64	
+					div.usertext
+						div.username zblu64
+						div.user-points 3 points	
 				div.user
 					span.userphoto 
 						<img src="img/photo3.jpg" alt="" />
-					span.username Meg	
+					div.usertext
+						div.username Meg
+						div.user-points 97 points
 				div.user
 					span.userphoto 
 						<img src="img/photo4.jpg" alt="" />
-					span.username Daniel											
+					div.usertext
+						div.username Daniel
+						div.user-points 54 points									
 			div#chatbox
 				div#messages
 					div.message

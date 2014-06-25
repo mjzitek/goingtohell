@@ -71,11 +71,6 @@ walk(models_path);
 // Passport
 require('./config/passport')(passport);
 
-/////////////////////////
-// Engine
-
-//var engine = require("./engine/engine");
-
 
 
 /////////////////////////
@@ -103,115 +98,9 @@ fs.readdirSync('./server/routes').forEach(function(file) {
   require('./server/routes/' + routeName)(app, passport);
 });
 
-/////////////////////////
-// Socket.IO
 
-var io = require('socket.io').listen(app.server, {
-	logger: {
-		debug: debuglogger.debug,
-		info: datalogger.info
-	}
-});
-
-io.configure('development', function() {
-	io.set('log level', 3);
-});
-
-io.set('authorization', function (data, accept) {
-	console.log(data.headers);
-
-	   if (data.headers.cookie) {
-		   data.cookie = cookie.parse(data.headers.cookie)
-		   data.cookie = connect.utils.parseSignedCookies(data.cookie, 'secret')
-		   data.cookie = connect.utils.parseJSONCookies(data.cookie)
-		   data.sessionID = data.cookie['express.sid']
-		   sessionStore.load(data.sessionID, function (err, session) {
-			   if (err || !session) {
-				   // invalid session identifier. tl;dr gtfo.
-				   accept('session error', false)
-			   } else {
-				   data.session = session
-				   accept(null, true)
-			   }
-		   })
- 
-	   } else {
-			// no auth cookie...
-		   //accept('session error', false)
-		   console.log('**** IO session error'.red);
-	   }
-
-}); 
-
-
-io.sockets.on('connection', function(socket) {
-
-	var sessionId = socket.handshake.sessionID,
-		session = new connect.middleware.session.Session({ sessionStore: sessionStore }, socket.handshake.session);
- 
-	console.log('socket: ' + sessionId)
-	console.log('user: ' + session.passport.user);
-
-	
-
-	//sendChat('Welcome to Stooge Chat', 'The Stooges are on the line');
-	// socket.on('chat', function(data){
-	// 	sendChat('You', data.text);
-	// });
-	socket.on("set_village", function(data) {
-		//console.log("IO: Village Set: " + data.id);
-		socket.set('village', data.id, function() {
-
-		});
-		var sendInventory = function( title, data ) {
-			socket.emit('inventory', {
-				title: title,
-				contents: data
-			});
-		};
-
-		var sendInfo = function(title, data) {
-			socket.emit('info', {
-				title: title,
-				contents: data
-			});
-		}
-
-		var inventory = require('./core/server/controllers/inventory');
-		var villages = require('./core/server/controllers/villages');
-
-		socket.get('village', function(err, village) {
-			setInterval(function() {
-				//var randomIndex = Math.floor(Math.random()*catchPhrases.length)
-				//sendChat('Stooge', catchPhrases[randomIndex]);
-				//console.log("xxxx: " + village);
-				inventory.getInventoryByVillage(village, function (items) {
-					sendInventory('Inventory', items);
-				});
-
-
-				villages.getVillageInfo(village, function(info) {
-					sendInfo('Info', info);
-				});
-			}, 5000);
-
-			inventory.getInventoryByVillage(village, function (items) {
-				//console.log("xxxx: " + village);
-				sendInventory('Inventory', items);
-			});
-
-			villages.getVillageInfo(village, function(info) {
-				sendInfo('Info', info);
-			});
-		});
-
-
-	});
-
-
-});
-
-
+var io = require('./server/sockets');
+io.initialize(app.server);
 
 /////////////////////////
 var port = process.env.PORT || config.port;
