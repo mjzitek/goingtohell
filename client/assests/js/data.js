@@ -6,8 +6,16 @@ var socket = io.connect('http://192.168.0.10:3000');
 var chatInfa = io.connect('/chat_infa'),
     chatCom = io.connect('/chat_com');
 
+
+
 chatInfa.on('connect', function() {
+
+  var data = {};
+  data.userid = $("#player-info #name").data("id");
+  data.username = $("#player-info #name #username").html();
+
   chatInfa.emit("get_players", {});
+  chatInfa.emit("join_room", data);
   chatInfa.on("players_list", function(players) {
     console.log(players);
     updatePlayersList(players);
@@ -50,13 +58,23 @@ function sendChat(data) {
 
 function updatePlayersList(players) {
     console.log("Updating players list");
-    $("#userlist").html("");
+    // $("#userlist").html("");
 
-    var output = "";
+    $("#userlist ul").empty();
 
     players.forEach(function(player) {
-        output += "<div>" + player.username + "</div>";
+       $("#userlist ul").append(
+          "<li class='user'><span class='userphoto'><img class=fa fa-user' src='img/default_user.png' alt='' /></span><div class='usertext'><div class='username'>" + player.username +
+          "</div><div class='user-points'><span class='user-points-value'>0</span> points</div>"
+        )
     });
 
-    $("#userlist").html(output);
 }
+
+
+        // div.user
+        //   span.userphoto 
+        //     <img src="img/photo2.jpg" alt="" />
+        //   div.usertext
+        //     div.username zblu64
+        //     div.user-points 3 points  

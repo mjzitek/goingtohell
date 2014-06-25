@@ -203,6 +203,9 @@ ul {
   border-right: 1px solid #555;
   float: left; }
 
+#userlist ul {
+  margin: 0; }
+
 #userlist .user {
   height: 40px;
   padding: 3px;
