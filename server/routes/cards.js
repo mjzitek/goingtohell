@@ -15,5 +15,8 @@ module.exports = function(app, models) {
 
 	app.get('/blackcard', cards.getBlackCards);
 	app.get('/whitecards/:amt', cards.getWhiteCards);
+	app.get('/cards/addcard', cards.addCard);
 
+	app.post('/cards/addcard', cards.create);
+	app.post('/playcard', cards.play);
 }

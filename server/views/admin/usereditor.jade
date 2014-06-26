@@ -13,3 +13,9 @@ block content
        ul
           each group in user.groups
             li <input type="checkbox"> #{group}   
+    div.
+        Active: #{user.active}
+    div    
+        -if(user.active==false) 
+            div 
+               a(href='/admin/user/activate/#{user.id}') Activate

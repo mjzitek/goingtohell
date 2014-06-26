@@ -15,68 +15,17 @@ block content
 					input(type='submit', id='newblackcard')
 			div#whitecards
 				ul
-					li.whitecard
-						span.whitecard-text Boobs!
-					li(class='whitecard selected')
-						span.whitecard-text Where's the beef?
-					li.whitecard
-						span.whitecard-text Alan is a loser
-					li.whitecard 
-						span.whitecard-text Go Kings Go!
-					li.whitecard
-						span.whitecard-text Let It Snow
-					li.whitecard
-						span.whitecard-text What the fuck is your fucking problem?
-					li.whitecard
-						span.whitecard-text Cheerio
-					li.whitecard 
-						span.whitecard-text Fez's are cool
 		div#userarea
 			div#userlist
-				ul
-					li.user
-						div.userphoto 
-							<img src="img/photo1.jpg" alt="" />
-						div.usertext
-							div.username Danny
-							div.user-points 100 points
-					li.user
-						span.userphoto 
-							<img src="img/photo2.jpg" alt="" />
-						div.usertext
-							div.username zblu64
-							div.user-points 3 points	
-					li.user
-						span.userphoto 
-							<img src="img/photo3.jpg" alt="" />
-						div.usertext
-							div.username Meg
-							div.user-points 97 points
-					li.user
-						span.userphoto 
-							<img src="img/photo4.jpg" alt="" />
-						div.usertext
-							div.username Daniel
-							div.user-points 54 points									
+				ul							
 			div#chatbox
 				div#messages
-					div.message
-						span.username Danny
-						span.text I think I'm so smart           
-					div.message
-						span.username Daniel
-						span.text Meat is murder! 
-					div.message
-						span.username Meg
-						span.text Boobs!
-					div.message
-						span.username zblu64
-						span.text Squirell!	
 				div#chatbox-entry
 					span 
 						input(id='chatbox-input',type='text',value='Blah Blah Blah',name='entry') 	
 						input(type='submit', value='Submit', id='chatbox-submit')
 
+	input(type='hidden', id='gamesession', value='53ac2ec01f55d70e969cda54')					
 block append scripts
 	script(src="js/config.js")
 	script(src="js/data.js")                             

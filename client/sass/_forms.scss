@@ -1,30 +1,60 @@
 /* Form styles */
 
-#signup #message {
-	width: 400px;
+#signup #message, #addcard {
+	width: 500px;
 }
 
-label, input {
+
+
+
+#signup label, #signup input, #addcard label, #addcard input {
     /* in order to define widths */
     display: inline-block;
 }
 
-label {
+#signup label, #addcard label {
     width: 100px;
     /* positions the label text beside the input */
     text-align: right;
 }
 
-label + input {
+#signup label + input, #addcard label + input, #addcard .inputs, 
+#addcard label + select, #addcard label + textarea  {
     width: 200px;
     /* large margin-right to force the next element to the new-line
        and margin-left to create a gutter between the label and input */
-    margin: 0 10px 0 10px;
+    margin: 4px 10px 4px 10px;
+}
+
+#addcard label + input, #addcard .inputs, 
+#addcard label + select, #addcard label + textarea
+{
+    width: 300px;
+
 }
 
 /* only the submit button is matched by this selector,
    but to be sure you could use an id or class for that button */
 
-input#submit {
+#signup input#submit, #addcard input#submit {
 	margin: 20px 0 0 160px;
 }
+
+.radio-label { 
+    padding-left: 15px;
+    padding-right: 4px;
+}
+
+.card_text-blackcard {
+    background-color: #000;
+    color: #fff;
+}
+
+.card_text-whitecard {
+    background-color: #fff;
+    color: #000;
+}
+
+#addcard #message {
+    margin: 10px;
+} 

@@ -13,19 +13,7 @@ var _ = require("underscore");
 // });
 // _("fabio").capitalize();
 
-_.mixin({
-	indexOfUsername: function(arr, username) {
-		console.log("##### " + username);
-	    for (var i = 0; i < arr.length; i++) {
-	    	console.log(arr[i].username + " => " + username);
-	        if (arr[i].username == username) {
-	            return i;
-	        }
-	    }
-	    
-	    return -1;		
-	}
-});
+
 
 var players = [];
 
@@ -34,7 +22,7 @@ exports.initialize = function(server) {
 
 	var chatInfa = io.of("/chat_infa")
 		.on("connection", function(socket) {
-			console.log(socket);
+			//console.log(socket);
 			socket.send(JSON.stringify(
 				{
 					type: 'serverMessage',

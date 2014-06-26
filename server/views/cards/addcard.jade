@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+
+    div#addcard
+
+
+        form(action='/cards/addcard', method='post', id='addcard-form')
+            div
+                label(for='cardtype') Card Type:
+                span.inputs
+                   span.radio-label Black
+                   input(type="radio", id='radio-black', name="card_type", value="black", checked)
+                   span.radio-label White
+                   input(type="radio", id='radio-white', name="card_type", value="white")
+
+                  
+            div
+                label(for='cardtext') Text:
+                textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard' )
+            div
+                label(for='username') Category: 
+                select(id='card_category', name='card_category')
+
+                                  
+            div
+                input(type='submit', value='Add Card', id='submit')
+            div
+                input(type='hidden', value="#{last_card_type}" id='last-card-type')
+        div(id='message' class="#{msg_class}") #{message}
+
+block append scripts
+    script(src="/js/addcards.js")  
+    script(src="/js/app.js")

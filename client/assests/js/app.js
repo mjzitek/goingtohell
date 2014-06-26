@@ -15,14 +15,22 @@ $(function() {
         {
             $(this).addClass('selected');
             $("#played-cards ul").append(this);
+            
+            console.log("Player " + $("#player-info #name").data("id") + 
+                        " played card " + $(this).data("id") + " on game " + $("#gamesession").val() )
+
+                        // userid, cardid, sessionid 
+            playCard($("#player-info #name").data("id"), $(this).data("id"), $("#gamesession").val())
         }
 
-        console.log($( "#played-cards ul li" ).length);
+
         if($( "#played-cards ul li" ).size() > 5) {
-        $('#played-cards ul li').each(function (index) {
-            $(this).addClass("whitecard-sm");
-        });            
+            $('#played-cards ul li').each(function (index) {
+                $(this).addClass("whitecard-sm");
+            });            
         }
+
+
     });
 
     $("#chatbox-submit").click(function() {
@@ -77,7 +85,7 @@ function getNewWhiteCards() {
         success: function (res) {
             console.log(res);
             res.cards.forEach(function(c) {
-                output += "<li class='whitecard'><span class='whitecard-text'>" + c.text + "</span></li>"
+                output += "<li class='whitecard' data-id='" + c._id + "'><span class='whitecard-text'>" + c.text + "</span></li>"
             });
 
             $("#whitecards").html(output);
@@ -90,4 +98,28 @@ function getNewWhiteCards() {
         } 
 
     });
+}
+
+function playCard(playerId, cardId, sessionId) {
+    $.post( "'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId", function( data ) {
+      console.log(data);
+    });
+
+    // $.ajax({
+    //     dataType: 'jsonp',
+    //     //data: data,
+    //     type: "POST",
+    //     //jsonp: 'jsonp_callback',
+    //     url: 'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId,
+    //     success: function (res) {
+    //         console.log(res);
+    //     },
+    //     error: function( xhr, status, errorThrown ) {
+    //         alert( "Sorry, there was a problem!" );
+    //         console.log( "Error: " + errorThrown );
+    //         console.log( "Status: " + status );
+    //         console.dir( xhr );
+    //     } 
+
+    // });
 }

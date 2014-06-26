@@ -32,6 +32,86 @@ exports.getWhiteCards = function(req, res) {
 	});
 }
 
+exports.addCard = function(req, res) {
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+		userid = "";
+	}
+
+	res.render("cards/addcard", {
+		username: username,
+		userid: userid
+	});
+}
+
+exports.create = function(req, res) {
+
+	var card = req.body;
+	
+	console.log(card);
+
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+		userid = "";
+	}
+
+	var newCard = null;
+	if(card.card_type === "black")
+	{
+		newCard = new BlackCards({
+			text: 		card.card_text,
+			deck: 		card.card_category,
+			createdate: new Date(),
+			createdby: 	card.userid,
+			active: 	true,
+		});
+	}
+	else if(card.card_type === "white")
+	{
+		newCard = new WhiteCards({
+			text: 		card.card_text,
+			deck: 		card.card_category,
+			createdate: new Date(),
+			createdby: 	card.userid,
+			active: 	true,
+		});
+	}
+
+	if(newCard) {
+		newCard.save(function(err) {
+			var message;
+			var msg_class;
+			if(err) {
+				if (11001 === err.code || 11000 === err.code) {
+					message = "A card with this text has already been added."
+				} else {
+					message = "A error has occured";
+					console.log(err);
+				}
+
+				msg_class = "alert alert-warning";
+			} else {
+				message = "Card Saved";
+				msg_class = "alert alert-success";
+			}
+			res.render("cards/addcard", {
+				message: message,
+				msg_class: msg_class,
+				username: username,
+				userid: userid,
+				last_card_type: card.card_type
+			});
+
+		});
+	}
+}
+
 
 function getRandomBlackCard(deck, callback) {
 

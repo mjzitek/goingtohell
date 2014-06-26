@@ -27,5 +27,5 @@ module.exports = function(app, models) {
 // app.get('/profile', isLoggedIn, users.profile);
 
   app.get('/admin/usereditor/:username', isLoggedIn, needsGroup("admins"), admin.useredit);
-
+  app.get('/admin/user/activate/:userid', isLoggedIn, needsGroup("admins"), admin.activateuser);
 }
