@@ -4,26 +4,29 @@ var mongoose = require('mongoose'),
 
 
 var GameSessionSchema = new mongoose.Schema({
-		sessionName:    String,
-		players:        [
-							playerInfo:   { type: Schema.Types.ObjectId, ref: 'users' },
-							points:       Number,
-							whitecards:   [{ type: Schema.Types.ObjectId, ref: 'whitecards' }]
-						],
-		decks:          [{ type: Schema.Types.ObjectId, ref: 'carddecks' }],
-		cardsplayed:    {
-							blackcards : [{ type: Schema.Types.ObjectId, ref: 'blackcards' }],
-							whitecards:   [{ type: Schema.Types.ObjectId, ref: 'whitecards' }]
-						},
-		cardsactive:    {
-							blackcard: { type: Schema.Types.ObjectId, ref: 'blackcards' },
-							whitecards: [
-											{
-												playerInfo:   { type: Schema.Types.ObjectId, ref: 'users' },
-												whitecard:    { type: Schema.Types.ObjectId, ref: 'whitecards' }
-											}
-										]
-						}
+		sessionName :      String,
+		players :          [
+								{
+									playerInfo:   { type: Schema.Types.ObjectId, ref: 'users' },
+									points:       Number,
+									whitecards:   [{ type: Schema.Types.ObjectId, ref: 'whitecards' }],
+									afk: 		  { type: Boolean, default: false},
+									lastPing:     Date 
+								}
+						   ],
+		currentCardCzar : { type: Schema.Types.ObjectId, ref: 'users' },
+		previousCardCzar: { type: Schema.Types.ObjectId, ref: 'users' },
+		decks :            [ { type: Schema.Types.ObjectId, ref: 'carddecks' }],
+		blackCardsPlayed : [ { type: Schema.Types.ObjectId, ref: 'blackcards' }],
+		whiteCardsPlayed : [ { type: Schema.Types.ObjectId, ref: 'whitecards' }],
+		blackCardActive  : { type: Schema.Types.ObjectId, ref: 'blackcards' },
+		whiteCardsActive : [
+								{
+									playerInfo:   { type: Schema.Types.ObjectId, ref: 'users' },
+									whitecard:    { type: Schema.Types.ObjectId, ref: 'whitecards' }
+								}
+						   ]
+						
 });
 
 mongoose.model('gamesession', GameSessionSchema);

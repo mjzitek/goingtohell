@@ -13,9 +13,11 @@ var _ = require("underscore");
 // });
 // _("fabio").capitalize();
 
-
+var gamesession = require('./controllers/gamesession');
 
 var players = [];
+
+var timerStarted = false;
 
 exports.initialize = function(server) {
 	io = io.listen(server);
@@ -29,6 +31,29 @@ exports.initialize = function(server) {
 					message: 'Welcome'
 				}
 			));
+
+		if(!timerStarted)
+		{
+			timerStarted = true;
+			console.log("Starting timer...");
+			setInterval(function() {
+				sendPlayerList();
+			}, 3000);		
+		}
+	
+
+		var sendPlayerList = function() {
+			console.log("Sending player List");
+			gamesession.getPlayerList('53ac67251f55d70e969cda55',function(players) {
+				//console.log(players);
+				socket.emit("players_list", players);
+				socket.broadcast.emit("players_list", players);
+			// 	players.forEach(function(player) {
+			// 		console.log(player.playerInfo);
+			// 	});
+
+			});
+		}			
 
 		socket.on("join_room", function(data) {
 
@@ -44,9 +69,13 @@ exports.initialize = function(server) {
 				players.push(data);
 				socket.username = data.username;
 			}
-			socket.emit("players_list", players);
-			socket.broadcast.emit("players_list", players);
 
+
+
+			//socket.emit("players_list", players);
+			//socket.broadcast.emit("players_list", players);
+
+			gamesession.addPlayer('53ac67251f55d70e969cda55', data.username, function() {});
 		});
 
 		socket.on('disconnect', function(){
@@ -78,15 +107,29 @@ exports.initialize = function(server) {
 		.on("connection", function(socket) {
 			socket.on('message', function (data) {
 				data = JSON.parse(data);
+				if(data.message.trim() === "/AFK") {
+					console.log("marking " + data.username + " AFK");
+					var afk = true;
+					gamesession.updatePlayerAFK('53ac67251f55d70e969cda55',data.username, afk,function(doc) {
+
+					});
+					data.type = "playerStatus";
+					data.message = "is now AFK.";
+				} else {
+					gamesession.updatePlayerPingTime('53ac67251f55d70e969cda55',data.username, function(doc){});
+				}
 				var dataMessageOrg = data.message;
 				data.message = sanitize(data.message);
 
 				if(dataMessageOrg != data.message) {
 					data.message = "<span class='message-error'>** SANITIZED **</span>"
 				}
-				if(data.type == "playerMessage") {
+				if(data.type === "playerMessage" || data.type === "playerStatus") {
+
 					socket.broadcast.send(JSON.stringify(data));
 					socket.send(JSON.stringify(data));
+					//chatInfa.sendPlayerList()
+
 				}
 			});
 		});

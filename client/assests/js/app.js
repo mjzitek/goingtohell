@@ -44,6 +44,19 @@ $(function() {
             sendChat(data);
     });
 
+    $("#chatbox-input").on("keypress", function(e) {
+            if (e.keyCode == 13) {
+            var data = {};
+            data.type = "playerMessage";
+            data.userid = $("#player-info #name").data("id");
+            data.username = $("#player-info #name #username").html();
+            data.message = $('#chatbox-input').val();
+
+            if(data.message != "")
+                sendChat(data);
+        }
+});
+
 
 });
 
@@ -101,7 +114,7 @@ function getNewWhiteCards() {
 }
 
 function playCard(playerId, cardId, sessionId) {
-    $.post( "'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId", function( data ) {
+    $.post( 'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId, function( data ) {
       console.log(data);
     });
 

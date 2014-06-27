@@ -3,7 +3,8 @@ var async = require("async");
 
 var mongoose = require('mongoose'),
 	BlackCards = mongoose.model('blackcards'),
-	WhiteCards = mongoose.model('whitecards');
+	WhiteCards = mongoose.model('whitecards'),
+	GameSession = mongoose.model('gamesession');
 
 
 
@@ -112,6 +113,40 @@ exports.create = function(req, res) {
 	}
 }
 
+exports.play = function(req, res) {
+	console.log("Player " + req.params.playerId + 
+                        " played card " + req.params.cardId + " on game " + req.params.sessionId );
+
+	var cardId = [req.params.cardId];
+	var whiteCardsActive = [{ whitecard: req.params.cardId, playerInfo: req.params.playerId }];
+
+	GameSession.update({ _id: req.params.sessionId}, 
+		{
+			 $pushAll : { 
+			 				whiteCardsPlayed :  cardId,
+			 				whiteCardsActive :  whiteCardsActive 
+			 }
+
+	  	
+
+		},{upsert:true }, function(err, doc) { 
+			if(err) { console.log(err);}
+			else { res.send("updated");}
+	});
+
+	//GameSession.find({ _id: req.params.sessionId },function(err,doc) {console.log(doc)});
+}
+
+exports.newHand = function(req, res) {
+	GameSession.update({ _id: req.params.sessionId}, 
+		{
+			whiteCardsActive : []	  	
+
+		},{upsert:true }, function(err, doc) { 
+			if(err) { console.log(err);}
+			else { res.send("updated");}
+	});
+}
 
 function getRandomBlackCard(deck, callback) {
 

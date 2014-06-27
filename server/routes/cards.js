@@ -18,5 +18,5 @@ module.exports = function(app, models) {
 	app.get('/cards/addcard', cards.addCard);
 
 	app.post('/cards/addcard', cards.create);
-	app.post('/playcard', cards.play);
+	app.post('/playcard/:playerId/:cardId/:sessionId', cards.play);
 }

@@ -17,7 +17,7 @@ chatInfa.on('connect', function() {
   chatInfa.emit("get_players", {});
   chatInfa.emit("join_room", data);
   chatInfa.on("players_list", function(players) {
-    console.log(players);
+    //console.log(players);
     updatePlayersList(players);
   });
 });
@@ -25,7 +25,7 @@ chatInfa.on('connect', function() {
 
 chatInfa.on('message', function(data) {
   data = JSON.parse(data);
-  console.log(data);
+  //console.log(data);
 
   if(data.type === "serverMessage") {
     $("#messages").html("");
@@ -38,10 +38,19 @@ chatInfa.on('message', function(data) {
 
 chatCom.on('message', function(data) {
   data = JSON.parse(data);
-  console.log(data);
+  //console.log(data);
 
- if(data.type === "playerMessage"){
-    $("#messages").append("<div class='message player-message'><span class='username'>" + data.username + 
+  var messageType = "";
+
+  if(data.type === "playerMessage")
+  {
+      messageType = "player-message";
+  } else if (data.type === "playerStatus") {
+      messageType = "player-status";
+  }
+
+ if(data.type === "playerMessage" || data.type === "playerStatus"){
+    $("#messages").append("<div class='message " + messageType +"'><span class='username'>" + data.username + 
                           "</span><span class='text'>" + data.message + "</span><div>");    
   }
 
@@ -57,17 +66,65 @@ function sendChat(data) {
 }
 
 function updatePlayersList(players) {
-    console.log("Updating players list");
+    //console.log("Updating players list");
     // $("#userlist").html("");
 
     $("#userlist ul").empty();
 
+    console.log(players);
+
     players.forEach(function(player) {
-       $("#userlist ul").append(
-          "<li class='user'><span class='userphoto'><img class=fa fa-user' src='img/default_user.png' alt='' /></span><div class='usertext'><div class='username'>" + player.username +
-          "</div><div class='user-points'><span class='user-points-value'>0</span> points</div>"
-        )
+        console.log(player);
+       // console.log(player.playerInfo);
     });
+
+    players.forEach(function(player) {
+
+     var extraInfo = "";
+     var photoFaded = "";
+
+      if(player.status === "AFK" || player.status === "Idle") 
+      {
+        extraInfo = "AFK";
+        photoFaded = "faded"
+      }
+
+       $("#userlist ul").append(
+          "<li class='user'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
+          " src='" + (player.avatarUrl ? player.avatarUrl : "img/default_user.png" ) + "' alt='' />" +
+          "</span><div class='usertext'>" +
+          "<div class='extra-info'> " + player.status +"</div>" +
+          "<div class='username'>" + player.username +"</div>" + 
+          "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>"
+
+        );
+    });
+
+    // players.forEach(function(player) {
+
+    //   var idleTime = moment(player.lastPing);
+
+    //   var extraInfo = "";
+    //   var photoFaded = "";
+
+    //   if(player.afk) 
+    //   {
+    //     extraInfo = "AFK";
+    //     photoFaded = "faded"
+    //   }
+
+
+
+    //    $("#userlist ul").append(
+    //       "<li class='user'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
+    //       " src='" + (player.playerInfo.avatarUrl ? player.playerInfo.avatarUrl : "img/default_user.png" ) + "' alt='' />" +
+    //       "</span><div class='usertext'>" +
+    //       "<div class='extra-info'> " + extraInfo +"</div>" +
+    //       "<div class='username'>" + player.playerInfo.username +"</div>" + 
+    //       "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>"
+
+    //     );
+    // });
 
 }
 

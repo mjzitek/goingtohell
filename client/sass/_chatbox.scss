@@ -25,23 +25,40 @@
 	float: left;
 	height: 32px;
 	width: 32px;
+
 }
+
+#userlist .user  .faded {
+	opacity: .3;
+}
+
 #userlist .user .usertext {
 	font-size: .9em;
 	float: left;
 	padding-left: 4px;
 	padding-bottom: 0;
+	width: 200px;
 }
 
 #userlist .user .usertext .user-points {
 	padding-left: 6px;
 	font-size: .85em;
 	color: #18B52D;
+	float: left;
+	width: 100px;
 }
 
 #userlist .user .usertext .username {
 
 	padding-left: 3px;
+	float: left;
+	width: 100px;
+}
+
+#userlist .user .usertext .extra-info {
+	float: right;
+	width: 30px;
+	color: #777;
 }
 
 #chatbox  {
@@ -55,10 +72,16 @@
 	padding: 3px;	
 	height: 271px;
 	overflow-y: scroll;
+	color: #000;
 }
 
 #chatbox .message {
 	padding: 3px;
+}
+
+#chatbox #messages .player-status {
+	font-style: italic;
+	color: #444;
 }
 
 #chatbox .message .username {
