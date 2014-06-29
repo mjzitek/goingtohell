@@ -6,9 +6,10 @@ var mongoose = require('mongoose'),
 var WhiteCardSchema = new mongoose.Schema({
 	text:         String,
 	deck:     { type: Schema.Types.ObjectId, ref: 'carddeck' },
-	createdate :  Date,
+	createdate : Date,
 	createdby  : { type: Schema.Types.ObjectId, ref: 'users' },
-	active: 	  Boolean
+	active:    { type: Boolean, default: true },
+	nsfw:      { type: Boolean, default: false }
 });
 
 mongoose.model('whitecards', WhiteCardSchema);

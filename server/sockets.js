@@ -43,7 +43,7 @@ exports.initialize = function(server) {
 	
 
 		var sendPlayerList = function() {
-			console.log("Sending player List");
+			//console.log("Sending player List");
 			gamesession.getPlayerList('53ac67251f55d70e969cda55',function(players) {
 				//console.log(players);
 				socket.emit("players_list", players);
@@ -53,7 +53,7 @@ exports.initialize = function(server) {
 			// 	});
 
 			});
-		}			
+		}	
 
 		socket.on("join_room", function(data) {
 
@@ -101,6 +101,37 @@ exports.initialize = function(server) {
 
 			//socket.leave(socket.room);
 		});
+	});
+
+	var gameInfaTimerStarted = false;
+
+	var gameInfa = io.of("/game_infa")
+		.on("connection", function(socket){
+
+			socket.on("get_cards", function(data) {
+				console.log("Received request for cards");
+				sendActiveCards();
+			});
+
+			if(!gameInfaTimerStarted)
+			{
+				gameInfaTimerStarted = true;
+				console.log("Starting timer...");
+				setInterval(function() {
+					sendActiveCards();
+				}, 5000);		
+			}
+
+			var sendActiveCards = function() {
+				console.log("Sending active cards");
+				gamesession.getActiveCards('53ac67251f55d70e969cda55', function(cards) {
+					socket.emit("cards_list", cards);
+					socket.broadcast.emit("cards_list", cards);
+				})
+			}		
+
+			sendActiveCards();
+
 	});
 
 	var chatCom = io.of("/chat_com")

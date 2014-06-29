@@ -66,7 +66,7 @@ exports.addPlayer = function(gameSessionId,player, callback) {
 
 exports.getPlayerList = function(gameSessionId, callback) {
 	GameSession.findOne( {_id: gameSessionId}, 
-	 { "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1 })
+	 { "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1})
 	 .populate("players.playerInfo", "username avatarUrl").exec(function(err, playersInfo) {
 		if(err) {
 			callback(err);
@@ -74,10 +74,10 @@ exports.getPlayerList = function(gameSessionId, callback) {
 			var playersList = [];
 			//console.log(playersInfo);
 
-		    playersInfo.players.forEach(function(player) {
-		    		console.log(player);
-		    		console.log(player.playerInfo);
-			});
+		 //    playersInfo.players.forEach(function(player) {
+		 //    		console.log(player);
+		 //    		console.log(player.playerInfo);
+			// });
 
 			playersInfo.players.forEach(function(p) {
 				var player = {};
@@ -88,16 +88,17 @@ exports.getPlayerList = function(gameSessionId, callback) {
 				player.lastPing = p.lastPing;
 
 				var idleTime = (new Date().getTime() - p.lastPing.getTime())/1000;
-				console.log(p.lastPing);
-				console.log(new Date);
-				console.log(idleTime);
+
 				if(p.afk) {
 					player.status = 'AFK';
 				} else if(idleTime >= 300) {
 					player.status = 'Idle'
+				}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
+					player.status = 'Card Czar';
 				} else {
 					player.status = '';
 				}
+
 
 				playersList.push(player);
 			});
@@ -146,5 +147,32 @@ exports.updatePlayerPingTime = function(gameSessionId,player,callback) {
 	});
 }
 
+exports.newRound = function(req, res) {
+	GameSession.update({ _id: req.params.sessionId },
+		{
+			$inc : { roundsPlayed : 1 },
+			$set : { whiteCardsActive : [] }  
+		},
+		{upsert:false }, function(err, doc) { 
+			if(err) { console.log(err); res.send(err);}
+			else { 
+				console.log("Rounds Updated: " + doc);
+				res.send('updated')
+			}
 
+	});
+	
+}
+
+exports.getActiveCards = function(gameSessionId, callback) {
+	GameSession.find({ _id: gameSessionId}, 
+		{ roundsPlayed : 1, nsfwMode: 1, currentCardCzar : 1, blackCardActive: 1, whiteCardsActive: 1})
+	.populate("blackCardActive whiteCardsActive.whitecard").exec(function(err, cards) {
+		if(err) {
+			callback(err);
+		} else {
+			callback(cards);
+		}
+	});
+}
 

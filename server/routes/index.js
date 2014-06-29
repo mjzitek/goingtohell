@@ -1,4 +1,5 @@
 var index = require('../controllers/index');
+var gamesession = require('../controllers/gamesession');
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -25,8 +26,7 @@ function needsGroup(group) {
 module.exports = function(app, models) {
 
 	app.get('/', isLoggedIn, index.getIndex);
-
-
+	app.post('/newround/:sessionId', gamesession.newRound);
 }
 
 

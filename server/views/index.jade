@@ -13,8 +13,12 @@ block content
 					ul
 				div#buttons
 					input(type='submit', id='newblackcard')
-			div#whitecards
-				ul
+					input(type='submit', id='new-round',value='New Round')
+			div#whitecard-area		
+				div#card-czar-overlay
+					div#card-czar-overlay-message CARD CZAR
+				div#whitecards
+					ul
 		div#userarea
 			div#userlist
 				ul							
@@ -22,10 +26,11 @@ block content
 				div#messages
 				div#chatbox-entry
 					span 
-						input(id='chatbox-input',type='text',value='Blah Blah Blah',name='entry') 	
+						input(id='chatbox-input',type='text',value='',name='entry')
 						input(type='submit', value='Submit', id='chatbox-submit')
 
-	input(type='hidden', id='gamesession', value='53ac67251f55d70e969cda55')					
+	input(type='hidden', id='gamesession', value='53ac67251f55d70e969cda55')
+	input(type='hidden', id='card-czar', value='')
 block append scripts
 	script(src="js/config.js")
 	script(src="js/data.js")                             

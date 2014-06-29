@@ -4,7 +4,20 @@ var socket = io.connect('http://192.168.0.10:3000');
 //socket.emit("set_chat", { id: "531e31aa897073c968e8afe7"});
 
 var chatInfa = io.connect('/chat_infa'),
-    chatCom = io.connect('/chat_com');
+    chatCom = io.connect('/chat_com'),
+    gameInfa = io.connect('/game_infa');
+
+
+gameInfa.on('connect', function() {
+    console.log("Connecting and getting card data");
+    chatInfa.emit("get_cards", {});
+})
+
+gameInfa.on("cards_list", function(cards) {
+    console.log("Received card list");
+    updateCards(cards);
+});
+
 
 
 
@@ -16,12 +29,14 @@ chatInfa.on('connect', function() {
 
   chatInfa.emit("get_players", {});
   chatInfa.emit("join_room", data);
-  chatInfa.on("players_list", function(players) {
-    //console.log(players);
-    updatePlayersList(players);
-  });
+
+
 });
 
+chatInfa.on("players_list", function(players) {
+    //console.log(players);
+    updatePlayersList(players);
+});
 
 chatInfa.on('message', function(data) {
   data = JSON.parse(data);
@@ -71,12 +86,12 @@ function updatePlayersList(players) {
 
     $("#userlist ul").empty();
 
-    console.log(players);
+   // console.log(players);
 
-    players.forEach(function(player) {
-        console.log(player);
-       // console.log(player.playerInfo);
-    });
+    // players.forEach(function(player) {
+    //     //console.log(player);
+    //    // console.log(player.playerInfo);
+    // });
 
     players.forEach(function(player) {
 
@@ -91,47 +106,71 @@ function updatePlayersList(players) {
 
        $("#userlist ul").append(
           "<li class='user'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
-          " src='" + (player.avatarUrl ? player.avatarUrl : "img/default_user.png" ) + "' alt='' />" +
+          " src='" + (player.avatarUrl ? player.avatarUrl : "img/avatars/default_user.png" ) + "' alt='' />" +
           "</span><div class='usertext'>" +
           "<div class='extra-info'> " + player.status +"</div>" +
           "<div class='username'>" + player.username +"</div>" + 
           "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>"
 
         );
+
+
     });
 
-    // players.forEach(function(player) {
 
-    //   var idleTime = moment(player.lastPing);
 
-    //   var extraInfo = "";
-    //   var photoFaded = "";
+}
 
-    //   if(player.afk) 
-    //   {
-    //     extraInfo = "AFK";
-    //     photoFaded = "faded"
-    //   }
+function updateCards(cards) {
+  console.log(cards);
+
+  updateCzar(cards[0].currentCardCzar);
+
+  $("#blackcard-text").html(cards[0].blackCardActive.text);
 
 
 
-    //    $("#userlist ul").append(
-    //       "<li class='user'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
-    //       " src='" + (player.playerInfo.avatarUrl ? player.playerInfo.avatarUrl : "img/default_user.png" ) + "' alt='' />" +
-    //       "</span><div class='usertext'>" +
-    //       "<div class='extra-info'> " + extraInfo +"</div>" +
-    //       "<div class='username'>" + player.playerInfo.username +"</div>" + 
-    //       "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>"
 
-    //     );
-    // });
+  //$("#played-cards ul").empty();
+  cards[0].whiteCardsActive.forEach(function(card) {
+        
+      var found = false;
+
+        $("#played-cards li").each(function(index) {
+            //console.log(index + ": " + $(this).data("id"));
+            if($(this).data("id") === card.whitecard._id) {
+              //console.log("** Card found");
+              found = true;
+            } 
+        });
+
+        if(!found)
+        {
+          var card = "<li class='whitecard' data-id='" + card.whitecard._id + "' data-playerid='" + card.playerInfo +"'>" +
+              "<span class='whitecard-text'>" + card.whitecard.text + "</span></li>";
+
+          $("#played-cards ul").append(card);          
+        }
+
+            
+        if($( "#played-cards ul li" ).size() > 5) {
+            $('#played-cards ul li').each(function (index) {
+                $(this).addClass("whitecard-sm");
+            });            
+        }
+  });
+
 
 }
 
 
-        // div.user
-        //   span.userphoto 
-        //     <img src="img/photo2.jpg" alt="" />
-        //   div.usertext
-        //     div.username zblu64
-        //     div.user-points 3 points  
+function updateCzar(czar) {
+
+  if($("#player-info #name").data("id") === czar) {
+    $("#card-czar").val("true");
+    $("#card-czar-overlay").show();
+  } else {
+    $("#card-czar").val("false");    
+    $("#card-czar-overlay").hide();
+  }
+}

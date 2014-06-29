@@ -14,6 +14,8 @@ var GameSessionSchema = new mongoose.Schema({
 									lastPing:     Date 
 								}
 						   ],
+		roundsPlayed :    { type: Number, default: 0 },
+		nsfwMode :        { type: Boolean, default: true },
 		currentCardCzar : { type: Schema.Types.ObjectId, ref: 'users' },
 		previousCardCzar: { type: Schema.Types.ObjectId, ref: 'users' },
 		decks :            [ { type: Schema.Types.ObjectId, ref: 'carddecks' }],

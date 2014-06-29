@@ -168,6 +168,28 @@ ul {
 #played-cards li {
   float: left; }
 
+#whitecard-area {
+  height: 170px; }
+
+#card-czar-overlay {
+  height: 170px;
+  width: 1300px;
+  top: 340px;
+  z-index: 1000;
+  position: absolute;
+  opacity: .8;
+  background-color: #d6d3d0;
+  display: none; }
+
+#card-czar-overlay-message {
+  color: #000;
+  text-align: center;
+  top: 60px;
+  position: relative;
+  height: 100px;
+  width: 1300px;
+  font-size: 2.4em; }
+
 .whitecard {
   border: 1px solid #cccccc;
   -webkit-border-radius: 6px;
@@ -243,8 +265,9 @@ ul {
 
 #userlist .user .usertext .extra-info {
   float: right;
-  width: 30px;
-  color: #777; }
+  width: 60px;
+  color: #777;
+  text-align: right; }
 
 #chatbox {
   background-color: #fff;

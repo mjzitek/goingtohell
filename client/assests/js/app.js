@@ -5,6 +5,12 @@ $(function() {
         getNewWhiteCards();
 	})
 
+    $("#new-round").click(function() {
+        setNewRound($("#gamesession").val());
+    });
+
+
+
 
     $("#whitecards").on("click", "li.whitecard", function() {
         $('#whitecards li').each(function (index) {
@@ -118,21 +124,10 @@ function playCard(playerId, cardId, sessionId) {
       console.log(data);
     });
 
-    // $.ajax({
-    //     dataType: 'jsonp',
-    //     //data: data,
-    //     type: "POST",
-    //     //jsonp: 'jsonp_callback',
-    //     url: 'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId,
-    //     success: function (res) {
-    //         console.log(res);
-    //     },
-    //     error: function( xhr, status, errorThrown ) {
-    //         alert( "Sorry, there was a problem!" );
-    //         console.log( "Error: " + errorThrown );
-    //         console.log( "Status: " + status );
-    //         console.dir( xhr );
-    //     } 
+}
 
-    // });
+function setNewRound(sessionId) {
+    $.post('http://' + Config.hostserver +  ':3000/newround/' + sessionId, function(data) {
+        console.log(data);
+    });
 }

@@ -8,7 +8,8 @@ var BlackCardSchema = new mongoose.Schema({
 	deck:     { type: Schema.Types.ObjectId, ref: 'carddecks' },
 	createdate :  Date,
 	createdby  : { type: Schema.Types.ObjectId, ref: 'users' },
-	active: 	  Boolean
+	active:    { type: Boolean, default: true },
+	nsfw:      { type: Boolean, default: false }
 });
 
 mongoose.model('blackcards', BlackCardSchema);
