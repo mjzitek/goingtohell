@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
 	username:     { type: String, required: true},
 	info:         { type: String},
 	avatarUrl:    { type: String},
-	active:       { type: Boolean, default: false},
+	active:       { type: Boolean, default: true},
 	lastLogin:    { type: Date},
 	hashed_password: { type: String},
 	provider:     { type: String},

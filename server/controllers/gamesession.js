@@ -3,6 +3,7 @@ var _ = require("underscore");
 var moment = require("moment");
 
 var timeHelper = require("../helpers/time.js");
+var config = require('../../config/config');
 
 var mongoose = require('mongoose'),
 	Users = mongoose.model('users'),
@@ -91,7 +92,7 @@ exports.getPlayerList = function(gameSessionId, callback) {
 
 				if(p.afk) {
 					player.status = 'AFK';
-				} else if(idleTime >= 300) {
+				} else if(idleTime >= config.idletime) {
 					player.status = 'Idle'
 				}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
 					player.status = 'Card Czar';
@@ -119,10 +120,24 @@ exports.updatePlayerAFK = function(gameSessionId,player, afk, callback) {
 				$set : { "players.$.afk" : true }
 			},
 			{upsert:false }, function(err, doc) { 
+
 				if(err) { console.log(err); callback(err);}
 				else { 
-					console.log("AFK Updated: " + doc);
-					callback('updated')
+					GameSession.findOne({ _id: gameSessionId}, { "players.playerInfo" : 1, "currentCardCzar" : 1},
+					 function(err, gameInfo) {
+						console.log("AFK Updated: " + doc);
+
+						if(gameInfo.currentCardCzar.equals(p._id)) {
+							getNextCardCzar(function() {
+								callback('updated');	
+							});
+						} else {
+							callback('updated');
+						}
+
+									 	
+					 });
+
 				}
 
 		});
@@ -157,8 +172,7 @@ function newRound(gameSessionId, callback) {
 					$inc : { 	roundsPlayed : 1 },
 					$set : { 
 								whiteCardsActive : [], 
-								blackCardActive : blackCard._id,
-								currentCardCzar : cardCzar
+								blackCardActive : blackCard._id
 						   }  
 				},
 				{upsert:false }, function(err, doc) { 
@@ -249,6 +263,9 @@ function getNextCardCzar(callback) {
 			   }
 			}
 		console.log("Current Card Czar: " + czarIndex);
+		
+		var previousCardCzar = gameInfo.currentCardCzar;
+
 		if(czarIndex + 1 >= gameInfo.players.length) 
 		{ czarIndex = 0 } 
 		else {
@@ -264,7 +281,28 @@ function getNextCardCzar(callback) {
 			}
 		} 
 
-	callback(gameInfo.players[czarIndex].playerInfo);
+		GameSession.update({ _id:  gameSessionId},
+		{
+			$set : { 
+						previousCardCzar : previousCardCzar,
+						currentCardCzar : gameInfo.players[czarIndex].playerInfo
+				   }  
+		},
+		{upsert:false }, function(err, doc) { 
+			if(err) { 
+				console.log(err); 
+				callback(err);
+			}
+			else { 
+				console.log("New Round: " + doc);
+
+					callback('updated');
+
+			}
+
+		});
+
+		//callback(gameInfo.players[czarIndex].playerInfo);
 		
-	})
+	});
 }

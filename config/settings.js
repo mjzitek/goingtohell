@@ -1,5 +1,6 @@
 
 
 module.exports = {
-	accesscode : 'sixtygigisawesome'
+	accesscode : 'sixtygigisawesome',
+	idletime : 600
 }
