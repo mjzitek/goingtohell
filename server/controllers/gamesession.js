@@ -12,9 +12,9 @@ var mongoose = require('mongoose'),
 
 
 
+var cards = require('./cards');
 
-
-
+var gameSessionId = "53ac67251f55d70e969cda55";
 
 
 /*
@@ -147,19 +147,36 @@ exports.updatePlayerPingTime = function(gameSessionId,player,callback) {
 	});
 }
 
-exports.newRound = function(req, res) {
-	GameSession.update({ _id: req.params.sessionId },
-		{
-			$inc : { roundsPlayed : 1 },
-			$set : { whiteCardsActive : [] }  
-		},
-		{upsert:false }, function(err, doc) { 
-			if(err) { console.log(err); res.send(err);}
-			else { 
-				console.log("Rounds Updated: " + doc);
-				res.send('updated')
-			}
+exports.newRound = newRound;
+function newRound(gameSessionId, callback) {
+	cards.getRandomBlackCard("", function(blackCard) {
+	//	console.log(blackCard);
+		getNextCardCzar(function(cardCzar) {
+			GameSession.update({ _id:  gameSessionId},
+				{
+					$inc : { 	roundsPlayed : 1 },
+					$set : { 
+								whiteCardsActive : [], 
+								blackCardActive : blackCard._id,
+								currentCardCzar : cardCzar
+						   }  
+				},
+				{upsert:false }, function(err, doc) { 
+					if(err) { 
+						console.log(err); 
+						callback(err);
+					}
+					else { 
+						console.log("New Round: " + doc);
 
+							callback('updated');
+						
+						
+
+					}
+
+			});
+		});
 	});
 	
 }
@@ -196,16 +213,18 @@ exports.winningCard = function(data, callback) {
 	GameSession.update({ _id: data.sessionId, "players.playerInfo" : data.winningPlayerId },
 		{
 			$inc : { "players.$.points" : 1, roundsPlayed : 1 },
-			$set : { whiteCardsActive : [] }  
 		},
 		{upsert:false }, function(err, doc) { 
 			if(err) { console.log(err); callback(err);}
 			else { 
 				console.log("Winner Updated: " + doc);
 
+				newRound(gameSessionId, function(data) {
+					callback('updated');
+				});
+					
 
-
-				callback('updated')
+				
 			}
 
 	});
@@ -215,4 +234,37 @@ exports.winningCard = function(data, callback) {
 
 
 
+}
+
+
+function getNextCardCzar(callback) {
+	GameSession.findOne({ _id: gameSessionId},
+	{ "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1},
+	function(err, gameInfo) {
+		console.log(gameInfo);
+		var czarIndex = -1
+			for(var i = 0; i < gameInfo.players.length; i++) {
+			   if(gameInfo.players[i].playerInfo.equals(gameInfo.currentCardCzar)) {
+			     czarIndex = i;
+			   }
+			}
+		console.log("Current Card Czar: " + czarIndex);
+		if(czarIndex + 1 >= gameInfo.players.length) 
+		{ czarIndex = 0 } 
+		else {
+			czarIndex++;
+		}
+
+		var nextCardCzarId = gameInfo.players[czarIndex].playerInfo
+		while(gameInfo.players[czarIndex].afk === true) {
+			if(czarIndex + 1 >= gameInfo.players.length) { 
+				czarIndex = 0 
+			} else {
+				czarIndex++;
+			}
+		} 
+
+	callback(gameInfo.players[czarIndex].playerInfo);
+		
+	})
 }

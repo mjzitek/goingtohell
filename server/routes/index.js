@@ -26,7 +26,7 @@ function needsGroup(group) {
 module.exports = function(app, models) {
 
 	app.get('/', isLoggedIn, index.getIndex);
-	app.post('/newround/:sessionId', gamesession.newRound);
+	//app.post('/newround/:sessionId', gamesession.newRound);
 }
 
 

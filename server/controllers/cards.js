@@ -120,12 +120,13 @@ exports.play = function(req, res) {
 	var cardId = [req.params.cardId];
 	var whiteCardsActive = [{ whitecard: req.params.cardId, playerInfo: req.params.playerId }];
 
-	GameSession.update({ _id: req.params.sessionId}, 
+	GameSession.update({ _id: req.params.sessionId, "players.playerInfo" : req.params.playerId }, 
 		{
 			 $pushAll : { 
 			 				whiteCardsPlayed :  cardId,
 			 				whiteCardsActive :  whiteCardsActive 
-			 }
+			 },
+			 $set : { "players.$.lastPing" : new Date(), "players.$.afk" : false }
 
 	  	
 
@@ -148,6 +149,7 @@ exports.newHand = function(req, res) {
 	});
 }
 
+exports.getRandomBlackCard = getRandomBlackCard;
 function getRandomBlackCard(deck, callback) {
 
 	var filter = {};

@@ -59,6 +59,10 @@ gameInfa.on('winner_notfication', function(data) {
                           " is the winner of this round</span><div>");    
 
     $("#played-cards ul").empty();
+
+    amount = 8 - $("#whitecards ul li").size();
+    console.log("Getting " + amount + " white card(s)...");
+    getNewWhiteCards(amount);
 });
 
 
@@ -183,9 +187,11 @@ function updateCzar(czar) {
   if($("#player-info #name").data("id") === czar) {
     $("#card-czar").val("true");
     $("#card-czar-overlay").show();
+    $("#playing-area #buttons #pick-card").removeAttr('disabled');
   } else {
     $("#card-czar").val("false");    
     $("#card-czar-overlay").hide();
+    $("#playing-area #buttons #pick-card").attr('disabled','disabled');
   }
 }
 

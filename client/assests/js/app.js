@@ -1,9 +1,11 @@
 $(function() {
 
-	$("#newblackcard").click(function() {
-		getNewBlackCard();
-        getNewWhiteCards();
-	})
+    getNewWhiteCards(8);
+
+	// $("#newblackcard").click(function() {
+	// 	getNewBlackCard();
+ //        getNewWhiteCards(8);
+	// })
 
     $("#new-round").click(function() {
         setNewRound($("#gamesession").val());
@@ -107,7 +109,7 @@ function getNewBlackCard() {
 }
 
 
-function getNewWhiteCards() {
+function getNewWhiteCards(amount) {
     $("#whitecards").html();
 
     var output = "";
@@ -117,14 +119,15 @@ function getNewWhiteCards() {
         //data: data,
         type: "GET",
         //jsonp: 'jsonp_callback',
-        url: 'http://' + Config.hostserver +  ':3000/whitecards/8',
+        url: 'http://' + Config.hostserver +  ':3000/whitecards/' + amount,
         success: function (res) {
             console.log(res);
             res.cards.forEach(function(c) {
-                output += "<li class='whitecard' data-id='" + c._id + "'><span class='whitecard-text'>" + c.text + "</span></li>"
+                $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
+                    "'><span class='whitecard-text'>" + c.text + "</span></li>");
             });
 
-            $("#whitecards").html(output);
+            //$("#whitecards").html(output);
         },
         error: function( xhr, status, errorThrown ) {
             alert( "Sorry, there was a problem!" );
