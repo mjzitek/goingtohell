@@ -176,3 +176,43 @@ exports.getActiveCards = function(gameSessionId, callback) {
 	});
 }
 
+//  /cards/winningcard/:sessionId/:winningCardId/:winningPlayerId/:playedById
+// exports.winningcard = function(sessionId, winningCardId, winningPlayerId, playedById) {
+
+//53ac67251f55d70e969cda55/53ab82bcedeb7c4f27a42225 
+
+exports.winningCard = function(data, callback) {
+	// Announce winner
+
+	// Update points
+//	console.log("Session ID: " + req.params.sessionId);
+//	console.log("Player Info: " + req.params.winningPlayerId);
+// Session ID: 53ac67251f55d70e969cda55
+// Player Info: 53ab82bcedeb7c4f27a42225
+// Winner Updated: 0
+
+
+
+	GameSession.update({ _id: data.sessionId, "players.playerInfo" : data.winningPlayerId },
+		{
+			$inc : { "players.$.points" : 1, roundsPlayed : 1 },
+			$set : { whiteCardsActive : [] }  
+		},
+		{upsert:false }, function(err, doc) { 
+			if(err) { console.log(err); callback(err);}
+			else { 
+				console.log("Winner Updated: " + doc);
+
+
+
+				callback('updated')
+			}
+
+	});
+
+
+	// Select next card czar
+
+
+
+}

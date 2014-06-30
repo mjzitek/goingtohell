@@ -174,7 +174,7 @@ ul {
 #card-czar-overlay {
   height: 170px;
   width: 1300px;
-  top: 340px;
+  top: 342px;
   z-index: 1000;
   position: absolute;
   opacity: .8;
@@ -182,13 +182,13 @@ ul {
   display: none; }
 
 #card-czar-overlay-message {
-  color: #000;
-  text-align: center;
   top: 60px;
   position: relative;
   height: 100px;
   width: 1300px;
-  font-size: 2.4em; }
+  font-size: 2.8em;
+  color: #000;
+  text-align: center; }
 
 .whitecard {
   border: 1px solid #cccccc;
@@ -287,6 +287,10 @@ ul {
 #chatbox #messages .player-status {
   font-style: italic;
   color: #444; }
+
+#chatbox #messages .winner-message {
+  color: #081569;
+  font-weight: bold; }
 
 #chatbox .message .username {
   padding-right: 6px;

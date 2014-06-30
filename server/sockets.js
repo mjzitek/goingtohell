@@ -13,14 +13,23 @@ var _ = require("underscore");
 // });
 // _("fabio").capitalize();
 
+var mongoose = require('mongoose'),
+	Users = mongoose.model('users');
+
 var gamesession = require('./controllers/gamesession');
+
+
+
 
 var players = [];
 
 var timerStarted = false;
 
 exports.initialize = function(server) {
+
+
 	io = io.listen(server);
+	io.set('log level', 2);
 
 	var chatInfa = io.of("/chat_infa")
 		.on("connection", function(socket) {
@@ -113,6 +122,14 @@ exports.initialize = function(server) {
 				sendActiveCards();
 			});
 
+			socket.on("winning_card", function(data) {
+				console.log("Winning card selected");
+				data = JSON.parse(data);
+				gamesession.winningCard(data, 
+					function() {});
+				sendWinningCardNotfication(data, function() {});
+			});
+
 			if(!gameInfaTimerStarted)
 			{
 				gameInfaTimerStarted = true;
@@ -128,7 +145,17 @@ exports.initialize = function(server) {
 					socket.emit("cards_list", cards);
 					socket.broadcast.emit("cards_list", cards);
 				})
-			}		
+			}	
+
+			var sendWinningCardNotfication = function(data, callback) {
+
+				Users.find({ _id : data.winningPlayerId }, { username : 1}, function(err, user) {
+					socket.emit("winner_notfication", JSON.stringify(user));
+					socket.broadcast.emit("winner_notfication", JSON.stringify(user));
+					callback(user);
+				});
+
+			}	
 
 			sendActiveCards();
 

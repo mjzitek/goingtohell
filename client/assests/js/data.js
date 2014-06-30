@@ -51,6 +51,17 @@ chatInfa.on('message', function(data) {
 });
 
 
+gameInfa.on('winner_notfication', function(data) {
+  data = JSON.parse(data);
+  console.log(data);
+  console.log("Winner " + data[0].username);
+    $("#messages").append("<div class='message winner-message'>" + data[0].username + 
+                          " is the winner of this round</span><div>");    
+
+    $("#played-cards ul").empty();
+});
+
+
 chatCom.on('message', function(data) {
   data = JSON.parse(data);
   //console.log(data);
@@ -72,7 +83,10 @@ chatCom.on('message', function(data) {
 });
 
 
-
+function sendWinningCard(data) {
+  console.log(data);
+  gameInfa.emit("winning_card", JSON.stringify(data));
+}
 
 
 function sendChat(data) {
@@ -174,3 +188,4 @@ function updateCzar(czar) {
     $("#card-czar-overlay").hide();
   }
 }
+

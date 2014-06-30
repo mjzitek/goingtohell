@@ -85,6 +85,11 @@
 	color: #444;
 }
 
+#chatbox #messages .winner-message {
+	color: $darkBlue1;
+	font-weight: bold;
+}
+
 #chatbox .message .username {
 	padding-right: 6px;
 	font-weight: bold;

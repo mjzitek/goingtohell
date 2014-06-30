@@ -9,8 +9,23 @@ $(function() {
         setNewRound($("#gamesession").val());
     });
 
+    $("#pick-card").click(function() {
+        var selectedCardId = $("#played-cards ul").children("ul li.selected").data("id");
+        var selectedPlayerId = $("#played-cards ul").children("ul li.selected").data("playerid");
 
+        var playerId = $("#player-info #name").data("id");
 
+        setWinningCard($("#gamesession").val(), selectedCardId, selectedPlayerId, playerId);
+    });
+
+    $("#played-cards").on("click", "li.whitecard",  function() {
+        $('#played-cards li').each(function (index) {
+            $(this).removeClass("selected");
+        });
+
+        $(this).addClass('selected');
+
+    });
 
     $("#whitecards").on("click", "li.whitecard", function() {
         $('#whitecards li').each(function (index) {
@@ -49,6 +64,8 @@ $(function() {
         if(data.message != "")
             sendChat(data);
     });
+
+
 
     $("#chatbox-input").on("keypress", function(e) {
             if (e.keyCode == 13) {
@@ -130,4 +147,18 @@ function setNewRound(sessionId) {
     $.post('http://' + Config.hostserver +  ':3000/newround/' + sessionId, function(data) {
         console.log(data);
     });
+}
+
+function setWinningCard(sessionId, winningCardId, winningPlayerId, playedById) {
+
+    var data = {};
+
+    data.messsageType = "winning-card";
+    data.sessionId = sessionId;
+    data.winningCardId = winningCardId;
+    data.winningPlayerId = winningPlayerId;
+    data.playedById = playedById;
+
+    sendWinningCard(data);
+
 }
