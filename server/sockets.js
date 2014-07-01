@@ -165,16 +165,17 @@ exports.initialize = function(server) {
 		.on("connection", function(socket) {
 			socket.on('message', function (data) {
 				data = JSON.parse(data);
+				console.log(data);
 				if(data.message.trim() === "/AFK") {
 					console.log("marking " + data.username + " AFK");
 					var afk = true;
-					gamesession.updatePlayerAFK('53ac67251f55d70e969cda55',data.username, afk,function(doc) {
+					gamesession.updatePlayerAFK('53ac67251f55d70e969cda55',data.userid, afk,function(doc) {
 
 					});
 					data.type = "playerStatus";
 					data.message = "is now AFK.";
 				} else {
-					gamesession.updatePlayerPingTime('53ac67251f55d70e969cda55',data.username, function(doc){});
+					gamesession.updatePlayerPingTime('53ac67251f55d70e969cda55',data.userid, function(doc){});
 				}
 				var dataMessageOrg = data.message;
 				data.message = sanitize(data.message);

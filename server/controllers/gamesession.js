@@ -114,13 +114,10 @@ exports.getPlayerList = function(gameSessionId, callback) {
 	});
 }
 
-exports.updatePlayerAFK = function(gameSessionId,player, afk, callback) {
-	Users.findOne({username: player}, {username: 1 }, function(err,p) {
-	
-		//var player = [{ playerInfo: p._id, points: 0, whitecards: [], afk: false, lastPing: new Date() }]
-		//console.log(p);
-		//console.log(gameSessionId);
-		GameSession.update({ _id: gameSessionId, "players.playerInfo" : p._id },
+exports.updatePlayerAFK = updatePlayerAFK;
+function updatePlayerAFK(gameSessionId,playerId, afk, callback) {
+
+		GameSession.update({ _id: gameSessionId, "players.playerInfo" : playerId },
 			{
 				$set : { "players.$.afk" : true }
 			},
@@ -132,7 +129,7 @@ exports.updatePlayerAFK = function(gameSessionId,player, afk, callback) {
 					 function(err, gameInfo) {
 						console.log("AFK Updated: " + doc);
 
-						if(gameInfo.currentCardCzar.equals(p._id)) {
+						if(gameInfo.currentCardCzar.equals(playerId)) {
 							getNextCardCzar(function() {
 								callback('updated');	
 							});
@@ -147,12 +144,11 @@ exports.updatePlayerAFK = function(gameSessionId,player, afk, callback) {
 
 		});
 	
-	});
 }
 
-exports.updatePlayerPingTime = function(gameSessionId,player,callback) {
-	Users.findOne({username: player}, {username: 1 }, function(err,p) {
-		GameSession.update({ _id: gameSessionId, "players.playerInfo" : p._id },
+exports.updatePlayerPingTime = function(gameSessionId,playerId,callback) {
+
+		GameSession.update({ _id: gameSessionId, "players.playerInfo" : playerId },
 			{
 				$set : { "players.$.lastPing" : new Date(), "players.$.afk" : false }
 			},
@@ -164,7 +160,7 @@ exports.updatePlayerPingTime = function(gameSessionId,player,callback) {
 				}
 
 		});
-	});
+
 }
 
 exports.newRound = newRound;
