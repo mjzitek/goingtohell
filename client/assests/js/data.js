@@ -84,6 +84,9 @@ chatCom.on('message', function(data) {
                           "</span><span class='text'>" + data.message + "</span><div>");    
   }
 
+
+  $("#messages").scrollTop($(document).height());
+
 });
 
 
@@ -123,7 +126,7 @@ function updatePlayersList(players) {
       }
 
        $("#userlist ul").append(
-          "<li class='user'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
+          "<li class='user' data-id='" + player.id +"'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
           " src='" + (player.avatarUrl ? player.avatarUrl : "img/avatars/default_user.png" ) + "' alt='' />" +
           "</span><div class='usertext'>" +
           "<div class='extra-info'> " + player.status +"</div>" +

@@ -2,5 +2,6 @@
 
 module.exports = {
 	accesscode : 'sixtygigisawesome',
-	idletime : 600
+	idletime : 300,
+	afktime : 600
 }

@@ -92,6 +92,11 @@ exports.getPlayerList = function(gameSessionId, callback) {
 
 				if(p.afk) {
 					player.status = 'AFK';
+				} else if(idleTime >= config.afktime) {
+					player.status = 'AFK';
+					updatePlayerAFK(gameSessionId, p.playerInfo._id, true, function(data) {
+
+					});
 				} else if(idleTime >= config.idletime) {
 					player.status = 'Idle'
 				}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
@@ -251,6 +256,29 @@ exports.winningCard = function(data, callback) {
 }
 
 
+exports.setCzar = function(req, res) {
+	GameSession.update({ _id:  gameSessionId},
+	{
+		$set : { 
+						//previousCardCzar : previousCardCzar,
+						currentCardCzar : req.params.playerId
+			   }  
+	},		
+	{upsert:false }, function(err, doc) { 
+			if(err) { 
+				console.log(err); 
+				//callback(err);
+				res.send("updated");				
+			}
+			else { 
+					console.log("New Czar: " + doc);
+					//callback('updated');
+					res.send("updated");
+			}
+
+		});
+}
+
 function getNextCardCzar(callback) {
 	GameSession.findOne({ _id: gameSessionId},
 	{ "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1},
@@ -272,12 +300,19 @@ function getNextCardCzar(callback) {
 			czarIndex++;
 		}
 
-		var nextCardCzarId = gameInfo.players[czarIndex].playerInfo
-		while(gameInfo.players[czarIndex].afk === true) {
+		var nextCardCzarId = gameInfo.players[czarIndex].playerInfo;
+		var numOfPlayers = gameInfo.players.length;
+		var counter1 = 0;
+
+		while((gameInfo.players[czarIndex].afk === true) && (counter1 <= numOfPlayers) && (counter1 < 20)) {
+			console.log("Finding new card czar");
+			console.log("counter1: " + counter1 + " || numOfPlayers: " + numOfPlayers);
 			if(czarIndex + 1 >= gameInfo.players.length) { 
 				czarIndex = 0 
+				counter1++;
 			} else {
 				czarIndex++;
+				counter1++;
 			}
 		} 
 
@@ -294,7 +329,7 @@ function getNextCardCzar(callback) {
 				callback(err);
 			}
 			else { 
-				console.log("New Round: " + doc);
+				console.log("New Czar: " + doc);
 
 					callback('updated');
 

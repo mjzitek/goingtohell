@@ -27,6 +27,7 @@ module.exports = function(app, models) {
 
 	app.get('/', isLoggedIn, index.getIndex);
 	//app.post('/newround/:sessionId', gamesession.newRound);
+	app.post('/setczar/:playerId', isLoggedIn, needsGroup("admins"), gamesession.setCzar);
 }
 
 

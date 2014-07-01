@@ -140,7 +140,7 @@ exports.initialize = function(server) {
 			}
 
 			var sendActiveCards = function() {
-				console.log("Sending active cards");
+				//console.log("Sending active cards");
 				gamesession.getActiveCards('53ac67251f55d70e969cda55', function(cards) {
 					socket.emit("cards_list", cards);
 					socket.broadcast.emit("cards_list", cards);

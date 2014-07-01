@@ -80,10 +80,20 @@ $(function() {
             if(data.message != "")
                 sendChat(data);
         }
-});
+    });
+
+    $("#userlist").on("dblclick", "li.user", function() {
+        setNewCzar($(this).data("id"));
+    })
 
 
 });
+
+function setNewCzar(playerId) {
+    $.post('http://' + Config.hostserver +  ':3000/setczar/' + playerId, function(data) {
+        console.log(data);
+    });
+}
 
 
 
@@ -99,7 +109,7 @@ function getNewBlackCard() {
                 $("#blackcard-text").html(res.text);
             },
             error: function( xhr, status, errorThrown ) {
-                alert( "Sorry, there was a problem!" );
+                //alert( "Sorry, there was a problem!" );
                 console.log( "Error: " + errorThrown );
                 console.log( "Status: " + status );
                 console.dir( xhr );
@@ -130,7 +140,7 @@ function getNewWhiteCards(amount) {
             //$("#whitecards").html(output);
         },
         error: function( xhr, status, errorThrown ) {
-            alert( "Sorry, there was a problem!" );
+            //alert( "Sorry, there was a problem!" );
             console.log( "Error: " + errorThrown );
             console.log( "Status: " + status );
             console.dir( xhr );
