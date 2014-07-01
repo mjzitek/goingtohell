@@ -1,3 +1,4 @@
 node_modules/
 config/settings.js
 client/assests/js/config.js
+logs/
