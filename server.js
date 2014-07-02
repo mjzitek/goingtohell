@@ -11,6 +11,7 @@ var config = require('./config/config');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -36,8 +37,6 @@ var dblogger = logging.Logging().get('db');
 ///////////////////////
 // DB Set up
 
-
-//var mongoose = require("./core/server/models/db");
 var db = mongoose.connect(config.db);
 
 var models_path = __dirname + '/server/models';
@@ -58,20 +57,9 @@ var walk = function(path) {
 
 walk(models_path);
 
-
-// var models = {
-// 	ItemsData: require('./core/server/models/Items'),
-// 	InventoryData: require('./core/server/models/Inventory'),
-// 	UserData: require('./core/server/models/Users'),
-// 	BuildingsData: require('./core/server/models/Buildings'),
-
-// 	modelHelpers: require('./core/server/models/helpers')
-// }
-
+/////////////////////////
 // Passport
 require('./config/passport')(passport);
-
-
 
 /////////////////////////
 // Create an http server
@@ -79,10 +67,11 @@ require('./config/passport')(passport);
 	app.set('views', __dirname + '/server/views');
 	app.set('view engine', 'jade');
 	app.use(express.static(__dirname + '/client/assests'));
+	app.use(favicon(__dirname + '/client/assests/favicon.ico'));
 	app.use(bodyParser.urlencoded());
 	//app.use(express.cookieParser());
     app.use(session({
-        secret: 'secret',
+        secret: config.sessionSecret,
         key: 'express.sid',
         cookie: { maxAge: 24 * 60 * 60 * 1000 },
         store:  sessionStore
@@ -98,9 +87,9 @@ fs.readdirSync('./server/routes').forEach(function(file) {
   require('./server/routes/' + routeName)(app, passport);
 });
 
-
+/////////////////////////
 var io = require('./server/sockets');
-io.initialize(app.server);
+io.initialize(app.server, sessionStore);
 
 /////////////////////////
 var port = process.env.PORT || config.port;

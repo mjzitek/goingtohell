@@ -10,16 +10,6 @@ var mongoose = require('mongoose'),
 
 exports.getBlackCards = function(req, res) {
 
-	// populationCountFiltered(query, function (persCount) {
-
-
-	// 		var ranNum = (Math.floor(Math.random() * persCount))
-	// 		//console.log(ranNum);
-	// 		Person.findOne(query, fields).skip(ranNum).limit(1).exec(function(err, per) {
-	// 				callback(per);
-	// 		});
-
-	// });
 	getRandomBlackCard("", function(card) {
 		return res.jsonp(card);
 	});
@@ -101,6 +91,7 @@ exports.create = function(req, res) {
 				message = "Card Saved";
 				msg_class = "alert alert-success";
 			}
+
 			res.render("cards/addcard", {
 				message: message,
 				msg_class: msg_class,
@@ -119,23 +110,24 @@ exports.play = function(req, res) {
 
 	var cardId = [req.params.cardId];
 	var whiteCardsActive = [{ whitecard: req.params.cardId, playerInfo: req.params.playerId }];
+	GameSession.findOne({ _id: req.params.sessionId, "whiteCardsActive.playerInfo" : req.params.playerId}, function(err,doc) {
+		//console.log(doc);
+		if(doc === null) {
+			GameSession.update({ _id: req.params.sessionId, "players.playerInfo" : req.params.playerId }, 
+				{
+					 $pushAll : { 
+					 				whiteCardsPlayed :  cardId,
+					 				whiteCardsActive :  whiteCardsActive 
+					 },
+					 $set : { "players.$.lastPing" : new Date(), "players.$.afk" : false }
 
-	GameSession.update({ _id: req.params.sessionId, "players.playerInfo" : req.params.playerId }, 
-		{
-			 $pushAll : { 
-			 				whiteCardsPlayed :  cardId,
-			 				whiteCardsActive :  whiteCardsActive 
-			 },
-			 $set : { "players.$.lastPing" : new Date(), "players.$.afk" : false }
-
-	  	
-
-		},{upsert:true }, function(err, doc) { 
-			if(err) { console.log(err);}
-			else { res.send("updated");}
+				},{upsert:true }, function(err, doc) { 
+					if(err) { console.log(err);}
+					else { res.send("updated");}
+			});			
+		}
 	});
 
-	//GameSession.find({ _id: req.params.sessionId },function(err,doc) {console.log(doc)});
 }
 
 exports.newHand = function(req, res) {
@@ -148,6 +140,8 @@ exports.newHand = function(req, res) {
 			else { res.send("updated");}
 	});
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 exports.getRandomBlackCard = getRandomBlackCard;
 function getRandomBlackCard(deck, callback) {

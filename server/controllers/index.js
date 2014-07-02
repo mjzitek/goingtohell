@@ -14,7 +14,10 @@ exports.getIndex = function(req, res) {
 		username = "Guest";
 	}
 
+	req.session.test = 'test';
 
+
+	console.log("Session Test: " + req.session.test);
 	res.render("index", {
 		username: username,
 		userid: userid

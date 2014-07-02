@@ -9,12 +9,12 @@ var chatInfa = io.connect('/chat_infa'),
 
 
 gameInfa.on('connect', function() {
-    console.log("Connecting and getting card data");
+    //console.log("Connecting and getting card data");
     chatInfa.emit("get_cards", {});
 })
 
 gameInfa.on("cards_list", function(cards) {
-    console.log("Received card list");
+    //console.log("Received card list");
     updateCards(cards);
 });
 
@@ -34,64 +34,48 @@ chatInfa.on('connect', function() {
 });
 
 chatInfa.on("players_list", function(players) {
-    //console.log(players);
     updatePlayersList(players);
 });
 
 chatInfa.on('message', function(data) {
-  data = JSON.parse(data);
-  //console.log(data);
-
-  if(data.type === "serverMessage") {
-    $("#messages").html("");
-    $("#messages").append("<div class='message server-message'>" + data.message + "<div>");
-  } 
-
-
+    data = JSON.parse(data);
+    writeChat(data);
 });
 
 
 gameInfa.on('winner_notfication', function(data) {
-  data = JSON.parse(data);
-  console.log(data);
-  console.log("Winner " + data[0].username);
-    $("#messages").append("<div class='message winner-message'>" + data[0].username + 
-                          " is the winner of this round</span><div>");    
+    data = JSON.parse(data);
+    writeChat(data);
 
     $("#played-cards ul").empty();
+    $("#white-card-played").val("false");
 
     amount = 8 - $("#whitecards ul li").size();
-    console.log("Getting " + amount + " white card(s)...");
+
     getNewWhiteCards(amount);
 });
 
 
+chatCom.on('chat_log', function(data) {
+
+    console.log(data);
+    data = JSON.parse(data);
+    data.forEach(function(chatLine) {
+        writeChat(chatLine);
+    });
+
+
+
+});
+
 chatCom.on('message', function(data) {
-  data = JSON.parse(data);
-  //console.log(data);
-
-  var messageType = "";
-
-  if(data.type === "playerMessage")
-  {
-      messageType = "player-message";
-  } else if (data.type === "playerStatus") {
-      messageType = "player-status";
-  }
-
- if(data.type === "playerMessage" || data.type === "playerStatus"){
-    $("#messages").append("<div class='message " + messageType +"'><span class='username'>" + data.username + 
-                          "</span><span class='text'>" + data.message + "</span><div>");    
-  }
-
-
-  $("#messages").scrollTop($(document).height());
-
+    data = JSON.parse(data);
+    writeChat(data);
 });
 
 
 function sendWinningCard(data) {
-  console.log(data);
+  //console.log(data);
   gameInfa.emit("winning_card", JSON.stringify(data));
 }
 
@@ -102,17 +86,8 @@ function sendChat(data) {
 }
 
 function updatePlayersList(players) {
-    //console.log("Updating players list");
-    // $("#userlist").html("");
 
     $("#userlist ul").empty();
-
-   // console.log(players);
-
-    // players.forEach(function(player) {
-    //     //console.log(player);
-    //    // console.log(player.playerInfo);
-    // });
 
     players.forEach(function(player) {
 
@@ -143,25 +118,17 @@ function updatePlayersList(players) {
 }
 
 function updateCards(cards) {
-  console.log(cards);
+    updateCzar(cards[0].currentCardCzar);
 
-  updateCzar(cards[0].currentCardCzar);
+    $("#blackcard-text").html(cards[0].blackCardActive.text);
 
-  $("#blackcard-text").html(cards[0].blackCardActive.text);
-
-
-
-
-  //$("#played-cards ul").empty();
-  cards[0].whiteCardsActive.forEach(function(card) {
+    cards[0].whiteCardsActive.forEach(function(card) {
         
       var found = false;
 
         $("#played-cards li").each(function(index) {
-            //console.log(index + ": " + $(this).data("id"));
             if($(this).data("id") === card.whitecard._id) {
-              //console.log("** Card found");
-              found = true;
+                found = true;
             } 
         });
 
@@ -198,3 +165,39 @@ function updateCzar(czar) {
   }
 }
 
+
+function writeChat(chatLine) {
+    var messageType = "";
+
+    console.log(chatLine);
+
+
+
+    switch(chatLine.type) {
+        case 'playerMessage':
+        case 'playerStatus':
+              if(chatLine.type === "playerMessage")
+              {
+                  messageType = "player-message";
+              } else if (chatLine.type === "playerStatus") {
+                  messageType = "player-status";
+              }
+
+            $("#messages").append("<div class='message " + messageType +"'><span class='username'>" + 
+                chatLine.username + 
+                "</span><span class='text'>" + chatLine.message + "</span><div>"); 
+
+            break;
+
+        case 'winnerNotfication':
+            $("#messages").append("<div class='message winner-message'>" + 
+                    (chatLine.message != null ? chatLine.message : chatLine.username) + 
+                    " is the winner of this round</span><div>");    
+            break;
+        case 'serverMessage':
+            $("#messages").append("<div class='message server-message'>" + chatLine.message + "<div>");
+            break;
+    }
+
+    $("#messages").scrollTop($(document).height());
+}

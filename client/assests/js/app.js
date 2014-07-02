@@ -1,5 +1,7 @@
 $(function() {
 
+
+
     getNewWhiteCards(8);
 
 	// $("#newblackcard").click(function() {
@@ -30,27 +32,31 @@ $(function() {
     });
 
     $("#whitecards").on("click", "li.whitecard", function() {
-        $('#whitecards li').each(function (index) {
-            $(this).removeClass("selected");
-        });
-
-        if($( "#played-cards ul li" ).size() < 18)
+        if($("#white-card-played").val() === "false")
         {
-            $(this).addClass('selected');
-            $("#played-cards ul").append(this);
-            
-            console.log("Player " + $("#player-info #name").data("id") + 
-                        " played card " + $(this).data("id") + " on game " + $("#gamesession").val() )
+            $('#whitecards li').each(function (index) {
+                $(this).removeClass("selected");
+            });
 
-                        // userid, cardid, sessionid 
-            playCard($("#player-info #name").data("id"), $(this).data("id"), $("#gamesession").val())
-        }
+            if($( "#played-cards ul li" ).size() < 18)
+            {
+                $("#white-card-played").val("true");
+                $(this).addClass('selected');
+                $("#played-cards ul").append(this);
+                
+                // console.log("Player " + $("#player-info #name").data("id") + 
+                //             " played card " + $(this).data("id") + " on game " + $("#gamesession").val() )
+
+                            // userid, cardid, sessionid 
+                playCard($("#player-info #name").data("id"), $(this).data("id"), $("#gamesession").val())
+            }
 
 
-        if($( "#played-cards ul li" ).size() > 5) {
-            $('#played-cards ul li').each(function (index) {
-                $(this).addClass("whitecard-sm");
-            });            
+            if($( "#played-cards ul li" ).size() > 5) {
+                $('#played-cards ul li').each(function (index) {
+                    $(this).addClass("whitecard-sm");
+                });            
+            }
         }
 
 
@@ -91,7 +97,7 @@ $(function() {
 
 function setNewCzar(playerId) {
     $.post('http://' + Config.hostserver +  ':3000/setczar/' + playerId, function(data) {
-        console.log(data);
+        //console.log(data);
     });
 }
 
@@ -105,14 +111,14 @@ function getNewBlackCard() {
             //jsonp: 'jsonp_callback',
             url: 'http://' + Config.hostserver +  ':3000/blackcard/',
             success: function (res) {
-                console.log(res.text);
+               // console.log(res.text);
                 $("#blackcard-text").html(res.text);
             },
             error: function( xhr, status, errorThrown ) {
                 //alert( "Sorry, there was a problem!" );
-                console.log( "Error: " + errorThrown );
-                console.log( "Status: " + status );
-                console.dir( xhr );
+                //console.log( "Error: " + errorThrown );
+               //console.log( "Status: " + status );
+                //console.dir( xhr );
             } 
 
         });
@@ -131,7 +137,7 @@ function getNewWhiteCards(amount) {
         //jsonp: 'jsonp_callback',
         url: 'http://' + Config.hostserver +  ':3000/whitecards/' + amount,
         success: function (res) {
-            console.log(res);
+            //console.log(res);
             res.cards.forEach(function(c) {
                 $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
                     "'><span class='whitecard-text'>" + c.text + "</span></li>");
@@ -151,14 +157,14 @@ function getNewWhiteCards(amount) {
 
 function playCard(playerId, cardId, sessionId) {
     $.post( 'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId, function( data ) {
-      console.log(data);
+     // console.log(data);
     });
 
 }
 
 function setNewRound(sessionId) {
     $.post('http://' + Config.hostserver +  ':3000/newround/' + sessionId, function(data) {
-        console.log(data);
+       // console.log(data);
     });
 }
 

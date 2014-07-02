@@ -14,12 +14,12 @@ function isLoggedIn(req, res, next) {
 
 module.exports = function(app, models) {
 
-	app.get('/blackcard', cards.getBlackCards);
-	app.get('/whitecards/:amt', cards.getWhiteCards);
-	app.get('/cards/addcard', cards.addCard);
+	app.get('/blackcard', isLoggedIn, cards.getBlackCards);
+	app.get('/whitecards/:amt', isLoggedIn, cards.getWhiteCards);
+	app.get('/cards/addcard', isLoggedIn, cards.addCard);
 
-	app.post('/cards/addcard', cards.create);
-	app.post('/playcard/:playerId/:cardId/:sessionId', cards.play);
+	app.post('/cards/addcard', isLoggedIn, cards.create);
+	app.post('/playcard/:playerId/:cardId/:sessionId', isLoggedIn, cards.play);
 
 	//app.post('/cards/winningcard', gamesession.winningcard);
 	//app.post('/cards/winningcard/:sessionId/:winningPlayerId', gamesession.winningcard);

@@ -2,34 +2,36 @@
 extends layout
 
 block content
-	div#content 
+	div#content
 
 	div#main
 		div#cardarea
 			div#playing-area
-				div#blackcard 
+				div#blackcard
 					span#blackcard-text
 				div#played-cards
 					ul
 				div#buttons
 					input(type='submit', id='pick-card',value='Select Card', disabled)
-			div#whitecard-area		
+			div#whitecard-area
 				div#card-czar-overlay
 					div#card-czar-overlay-message CARD CZAR
 				div#whitecards
 					ul
 		div#userarea
 			div#userlist
-				ul							
+				ul
 			div#chatbox
 				div#messages
 				div#chatbox-entry
-					span 
+					span
 						input(id='chatbox-input',type='text',value='',name='entry')
 						input(type='submit', value='Submit', id='chatbox-submit')
 
 	input(type='hidden', id='gamesession', value='53ac67251f55d70e969cda55')
 	input(type='hidden', id='card-czar', value='')
+	input(type='hidden', id='white-card-played', value='false')
+	input(type='hidden', id='num-cards-to-play', value='1')
 block append scripts
 
 	script(src="js/data.js")                             

@@ -58,55 +58,68 @@ exports.addPlayer = function(gameSessionId,player, callback) {
 						else { callback('updated')}
 
 				});
+			} else {
+				updatePlayerRoomStatus(gameSessionId, p._id, true, function(err, doc) {
+					callback(doc);
+				});
 			}
 		});
 
 	});
 }
 
+exports.updatePlayerRoomStatus = updatePlayerRoomStatus;
+function updatePlayerRoomStatus(gameSessionId, playerId, inRoom, callback) {
+		GameSession.update({ _id: gameSessionId, "players.playerInfo" : playerId },
+			{
+				$set : { "players.$.connected" : inRoom }
+			},
+			{upsert:false }, function(err, doc) { 
+				callback(doc);
+			}
+		);
+}
 
 exports.getPlayerList = function(gameSessionId, callback) {
 	GameSession.findOne( {_id: gameSessionId}, 
-	 { "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1})
+	 { "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, 
+	   "players.connected" : 1, "currentCardCzar" : 1})
 	 .populate("players.playerInfo", "username avatarUrl").exec(function(err, playersInfo) {
 		if(err) {
 			callback(err);
 		}else {
 			var playersList = [];
-			//console.log(playersInfo);
-
-		 //    playersInfo.players.forEach(function(player) {
-		 //    		console.log(player);
-		 //    		console.log(player.playerInfo);
-			// });
 
 			playersInfo.players.forEach(function(p) {
-				var player = {};
-				player.id = p.playerInfo._id;
-				player.username = p.playerInfo.username;
-				player.avatarUrl = p.playerInfo.avatarUrl;
-				player.points = p.points;
-				player.lastPing = p.lastPing;
+				//console.log(p.playerInfo.username + " => " + p.connected);
+				if(p.connected) {
+					var player = {};
+					player.id = p.playerInfo._id;
+					player.username = p.playerInfo.username;
+					player.avatarUrl = p.playerInfo.avatarUrl;
+					player.points = p.points;
+					player.lastPing = p.lastPing;
 
-				var idleTime = (new Date().getTime() - p.lastPing.getTime())/1000;
+					var idleTime = (new Date().getTime() - p.lastPing.getTime())/1000;
 
-				if(p.afk) {
-					player.status = 'AFK';
-				} else if(idleTime >= config.afktime) {
-					player.status = 'AFK';
-					updatePlayerAFK(gameSessionId, p.playerInfo._id, true, function(data) {
+					if(p.afk) {
+						player.status = 'AFK';
+					} else if(idleTime >= config.afktime) {
+						player.status = 'AFK';
+						updatePlayerAFK(gameSessionId, p.playerInfo._id, true, function(data) {
 
-					});
-				} else if(idleTime >= config.idletime) {
-					player.status = 'Idle'
-				}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
-					player.status = 'Card Czar';
-				} else {
-					player.status = '';
+						});
+					} else if(idleTime >= config.idletime) {
+						player.status = 'Idle'
+					}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
+						player.status = 'Card Czar';
+					} else {
+						player.status = '';
+					}
+
+
+					playersList.push(player);
 				}
-
-
-				playersList.push(player);
 			});
 
 			callback(playersList);
@@ -279,14 +292,14 @@ function getNextCardCzar(callback) {
 	GameSession.findOne({ _id: gameSessionId},
 	{ "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1},
 	function(err, gameInfo) {
-		console.log(gameInfo);
+		//console.log(gameInfo);
 		var czarIndex = -1
 			for(var i = 0; i < gameInfo.players.length; i++) {
 			   if(gameInfo.players[i].playerInfo.equals(gameInfo.currentCardCzar)) {
 			     czarIndex = i;
 			   }
 			}
-		console.log("Current Card Czar: " + czarIndex);
+		//console.log("Current Card Czar: " + czarIndex);
 		
 		var previousCardCzar = gameInfo.currentCardCzar;
 
@@ -301,8 +314,8 @@ function getNextCardCzar(callback) {
 		var counter1 = 0;
 
 		while((gameInfo.players[czarIndex].afk === true) && (counter1 <= numOfPlayers) && (counter1 < 20)) {
-			console.log("Finding new card czar");
-			console.log("counter1: " + counter1 + " || numOfPlayers: " + numOfPlayers);
+			//console.log("Finding new card czar");
+			//console.log("counter1: " + counter1 + " || numOfPlayers: " + numOfPlayers);
 			if(czarIndex + 1 >= gameInfo.players.length) { 
 				czarIndex = 0 
 				counter1++;

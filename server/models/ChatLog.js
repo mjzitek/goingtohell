@@ -4,10 +4,11 @@ var mongoose = require('mongoose'),
 
 
 var ChatLogSchema = new mongoose.Schema({
-	user :       { type: Schema.Types.ObjectId, ref: 'users' },
-	timestamp :  Date,
-	text :       String,
-	roomId:      { type: Schema.Types.ObjectId, ref: 'rooms' }
+	session : { type: Schema.Types.ObjectId, ref: 'gamesession' },
+	player :       { type: Schema.Types.ObjectId, ref: 'users' },
+	messageType: String,
+	timestamp :  { type: Date, default: new Date() },
+	text :       String
 });
 
 mongoose.model('chatlog', ChatLogSchema);  

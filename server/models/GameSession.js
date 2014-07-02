@@ -11,7 +11,8 @@ var GameSessionSchema = new mongoose.Schema({
 									points:       Number,
 									whitecards:   [{ type: Schema.Types.ObjectId, ref: 'whitecards' }],
 									afk: 		  { type: Boolean, default: false},
-									lastPing:     Date 
+									lastPing:     Date,
+									connected:    { type: Boolean, default: true } 
 								}
 						   ],
 		roundsPlayed :    { type: Number, default: 0 },
