@@ -217,6 +217,14 @@ ul {
 .selected {
   border: 2px solid #3593e6; }
 
+#cards-listing {
+  width: 1000px;
+  height: 700px;
+  overflow-y: scroll;
+  margin: 10px;
+  padding: 5px;
+  background-color: #fff; }
+
 #userlist {
   background-color: #fff;
   width: 20%;
@@ -423,3 +431,6 @@ ul {
 
 #addcard #message {
   margin: 10px; }
+
+.form-input {
+  margin: 5px 0; }

@@ -12,13 +12,26 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/signin');
 }
 
+function needsGroup(group) {
+  return function(req, res, next) {
+
+    if (req.user && ((req.user.groups.indexOf(group) >= 0) || req.user.groups.indexOf("admins") >= 0)) )
+
+      next();
+    else
+      res.send(401, 'Unauthorized');
+  };
+};
+
+
 module.exports = function(app, models) {
 
+	app.get('/cards/view/:color', isLoggedIn, cards.showCards);
 	app.get('/blackcard', isLoggedIn, cards.getBlackCards);
 	app.get('/whitecards/:amt', isLoggedIn, cards.getWhiteCards);
-	app.get('/cards/addcard', isLoggedIn, cards.addCard);
+	app.get('/cards/addcard', isLoggedIn, needsGroup("cardmaster"), cards.addCard);
 
-	app.post('/cards/addcard', isLoggedIn, cards.create);
+	app.post('/cards/addcard', isLoggedIn, needsGroup("cardmaster"), cards.create);
 	app.post('/playcard/:playerId/:cardId/:sessionId', isLoggedIn, cards.play);
 
 	//app.post('/cards/winningcard', gamesession.winningcard);

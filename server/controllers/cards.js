@@ -6,6 +6,23 @@ var mongoose = require('mongoose'),
 	WhiteCards = mongoose.model('whitecards'),
 	GameSession = mongoose.model('gamesession');
 
+exports.showCards = function(req, res) {
+
+	if(req.params.color === "black") {
+		BlackCards.find({}, function(err, cards) {
+			res.render("cards/cards", {
+				cards : cards
+			});
+		});
+	} else if (req.params.color === "white"){
+		WhiteCards.find({}, function(err, cards) {
+			res.render("cards/cards", {
+				cards : cards
+			});
+		});
+	}
+}
+
 
 
 exports.getBlackCards = function(req, res) {

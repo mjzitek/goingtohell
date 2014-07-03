@@ -92,3 +92,17 @@
 .selected {
 	border: 2px solid $highlightBlue;	
 } 
+
+
+
+
+#cards-listing {
+	width: 1000px;
+	height: 700px;
+	overflow-y: scroll;
+
+	margin: 10px;
+	padding: 5px;
+
+	background-color: #fff;
+}

@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+
+	div#cards-listing
+		each card, i in cards
+			p #{i}. #{card.text}

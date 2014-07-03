@@ -136,12 +136,7 @@ exports.initialize = function(server, sessionStore) {
 
 				// when the user disconnects.. perform this
 		socket.on('disconnect', function(){
-			// remove the username from global usernames list
-			// delete usernames[socket.username];
-			// // update list of users in chat, client-side
-			// io.sockets.emit('updateusers', usernames);
-			// // echo globally that this client has left
-			// socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
+
 			gamesession.updatePlayerRoomStatus(config.gameSessionId, socket.user.userid, false, function(){});
 
 			var d = {}

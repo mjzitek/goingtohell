@@ -6,7 +6,7 @@ block content
 
 
         form(action='/cards/addcard', method='post', id='addcard-form')
-            div
+            div.form-input
                 label(for='cardtype') Card Type:
                 span.inputs
                    span.radio-label Black
@@ -15,19 +15,32 @@ block content
                    input(type="radio", id='radio-white', name="card_type", value="white")
 
                   
-            div
+            div.form-input
                 label(for='cardtext') Text:
                 textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard' )
-            div
-                label(for='username') Category: 
+            div.form-input
+                label(for='username') Decks: 
+            
                 select(id='card_category', name='card_category')
-
+            div.form-input
+                label(for='nsfw') NSFW:
+                span.inputs
+                    span.radio-label No
+                    input(type="radio", id='radio-nsfw', name="nsfw", value="false", checked)
+                    span.radio-label Yes
+                    input(type="radio", id='radio-nsfw', name="nsfw", value="true")               
                                   
-            div
+            div.form-input
                 input(type='submit', value='Add Card', id='submit')
-            div
+            div.form-input
                 input(type='hidden', value="#{last_card_type}" id='last-card-type')
         div(id='message' class="#{msg_class}") #{message}
+
+        div(style='margin: 10px 0 5px 50px;')
+            a(href='/cards/view/black') View black cards
+        div(style='margin: 10px 0 5px 50px;')
+            a(href='/cards/view/white') View white cards
+
 
 block append scripts
     script(src="/js/addcards.js")  
