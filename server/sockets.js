@@ -67,12 +67,14 @@ exports.initialize = function(server, sessionStore) {
 
 			
 			//console.log(socket);
-			socket.send(JSON.stringify(
-				{
-					type: 'serverMessage',
-					message: 'Welcome'
-				}
-			));
+			// socket.send(JSON.stringify(
+			// 	{
+			// 		type: 'serverMessage',
+			// 		message: 'Welcome'
+			// 	}
+			// ));
+
+
 
 		if(!timerStarted)
 		{
@@ -115,7 +117,16 @@ exports.initialize = function(server, sessionStore) {
 				socket.username = data.username;
 			}
 
+			var d = {}
+			d.type = "serverMessage";
+			d.message = socket.user.username + " has joined";
 
+			chat.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
+
+			d = JSON.stringify(d);
+
+			socket.emit("message", d);
+			socket.broadcast.emit("message", d);
 
 			//socket.emit("players_list", players);
 			//socket.broadcast.emit("players_list", players);
@@ -132,6 +143,18 @@ exports.initialize = function(server, sessionStore) {
 			// // echo globally that this client has left
 			// socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
 			gamesession.updatePlayerRoomStatus(config.gameSessionId, socket.user.userid, false, function(){});
+
+			var d = {}
+			d.type = "serverMessage";
+			d.message = socket.user.username + " has left";
+
+			chat.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
+
+			d = JSON.stringify(d);
+
+			socket.emit("message", d);
+			socket.broadcast.emit("message", d);
+
 
 			console.log(socket.user.username + " disconnected");
 		});
