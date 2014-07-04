@@ -99,9 +99,16 @@ exports.getPlayerList = function(gameSessionId, callback) {
 					player.avatarUrl = p.playerInfo.avatarUrl;
 					player.points = p.points;
 					player.lastPing = p.lastPing;
+					player.afk = p.playerInfo.afk
+					player.cardCzar = false;
 
 					var idleTime = (new Date().getTime() - p.lastPing.getTime())/1000;
 
+					if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
+						player.status = 'Card Czar';
+						player.cardCzar = true;
+					}
+					
 					if(p.afk) {
 						player.status = 'AFK';
 					} else if(idleTime >= config.afktime) {
@@ -111,8 +118,6 @@ exports.getPlayerList = function(gameSessionId, callback) {
 						});
 					} else if(idleTime >= config.idletime) {
 						player.status = 'Idle'
-					}  else if (playersInfo.currentCardCzar.equals(p.playerInfo._id)) {
-						player.status = 'Card Czar';
 					} else {
 						player.status = '';
 					}

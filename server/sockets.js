@@ -65,17 +65,6 @@ exports.initialize = function(server, sessionStore) {
 	var chatInfa = io.of("/chat_infa")
 		.on("connection", function(socket) {
 
-			
-			//console.log(socket);
-			// socket.send(JSON.stringify(
-			// 	{
-			// 		type: 'serverMessage',
-			// 		message: 'Welcome'
-			// 	}
-			// ));
-
-
-
 		if(!timerStarted)
 		{
 			timerStarted = true;
@@ -90,12 +79,9 @@ exports.initialize = function(server, sessionStore) {
 			//console.log("Sending player List");
 			gamesession.getPlayerList(config.gameSessionId,function(players) {
 				//console.log(players);
+				//console.log(players.length);
 				socket.emit("players_list", players);
 				socket.broadcast.emit("players_list", players);
-			// 	players.forEach(function(player) {
-			// 		console.log(player.playerInfo);
-			// 	});
-
 			});
 		}	
 
@@ -128,13 +114,9 @@ exports.initialize = function(server, sessionStore) {
 			socket.emit("message", d);
 			socket.broadcast.emit("message", d);
 
-			//socket.emit("players_list", players);
-			//socket.broadcast.emit("players_list", players);
-
 			gamesession.addPlayer(config.gameSessionId, data.username, function() {});
 		});
 
-				// when the user disconnects.. perform this
 		socket.on('disconnect', function(){
 
 			gamesession.updatePlayerRoomStatus(config.gameSessionId, socket.user.userid, false, function(){});
@@ -202,8 +184,6 @@ exports.initialize = function(server, sessionStore) {
 					data.type = 'winnerNotfication';
 					data.username = user[0].username;
 
-
-
 					socket.emit("winner_notfication", JSON.stringify(data));
 					socket.broadcast.emit("winner_notfication", JSON.stringify(data));
 					callback(data);
@@ -211,11 +191,7 @@ exports.initialize = function(server, sessionStore) {
 
 			}	
 
-
-
 			sendActiveCards();
-
-
 
 	});
 
@@ -254,6 +230,7 @@ exports.initialize = function(server, sessionStore) {
 				data.message = sanitize(data.message);
 
 				if(dataMessageOrg != data.message) {
+					console.log("** Chat was sanitized: " + dataMessageOrg);
 					data.message = "<span class='message-error'>** SANITIZED **</span>"
 				}
 

@@ -15,7 +15,7 @@ function isLoggedIn(req, res, next) {
 function needsGroup(group) {
   return function(req, res, next) {
 
-    if (req.user && ((req.user.groups.indexOf(group) >= 0) || req.user.groups.indexOf("admins") >= 0)) )
+    if (req.user && ((req.user.groups.indexOf(group) >= 0) || (req.user.groups.indexOf("admins") >= 0)))
 
       next();
     else

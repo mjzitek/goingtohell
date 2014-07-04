@@ -11,6 +11,10 @@
 	margin: 0;
 }
 
+#userlist li {
+	border-bottom: 1px solid #eee;
+}
+
 #userlist .user {
 	height: 40px;
 	padding: 3px;
@@ -37,7 +41,7 @@
 	float: left;
 	padding-left: 4px;
 	padding-bottom: 0;
-	width: 200px;
+	width: 210px;
 }
 
 #userlist .user .usertext .user-points {
@@ -52,13 +56,20 @@
 
 	padding-left: 3px;
 	float: left;
-	width: 100px;
+	width: 120px;
 }
 
 #userlist .user .usertext .extra-info {
 	float: right;
 	width: 60px;
 	color: #777;
+	text-align: right;
+}
+
+#userlist .user .usertext .card-czar {
+	float: right;
+	width: 60px;
+	color: $darkBlue1;
 	text-align: right;
 }
 

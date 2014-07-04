@@ -94,9 +94,10 @@ function updatePlayersList(players) {
      var extraInfo = "";
      var photoFaded = "";
 
+
       if(player.status === "AFK" || player.status === "Idle") 
       {
-        extraInfo = "AFK";
+
         photoFaded = "faded"
       }
 
@@ -104,10 +105,11 @@ function updatePlayersList(players) {
           "<li class='user' data-id='" + player.id +"'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
           " src='" + (player.avatarUrl ? player.avatarUrl : "img/avatars/default_user.png" ) + "' alt='' />" +
           "</span><div class='usertext'>" +
+      
           "<div class='extra-info'> " + player.status +"</div>" +
           "<div class='username'>" + player.username +"</div>" + 
-          "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>"
-
+          "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>" +
+          "<div class='card-czar'> " + (player.cardCzar ? "Card Czar" : "") +"</div>"
         );
 
 
@@ -157,7 +159,7 @@ function updateCzar(czar) {
   if($("#player-info #name").data("id") === czar) {
     $("#card-czar").val("true");
     $("#card-czar-overlay").show();
-    $("#playing-area #buttons #pick-card").removeAttr('disabled');
+
   } else {
     $("#card-czar").val("false");    
     $("#card-czar-overlay").hide();

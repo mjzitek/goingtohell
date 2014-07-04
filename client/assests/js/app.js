@@ -4,14 +4,17 @@ $(function() {
 
     getNewWhiteCards(8);
 
-	// $("#newblackcard").click(function() {
-	// 	getNewBlackCard();
- //        getNewWhiteCards(8);
-	// })
+    $('#played-cards ul li').each(function (index) {
+        if($(this).data("playerid") === ($("#player-info #name").data("id")))
+        {
+            $(this).addClass('selected');
+        }
+    });  
 
     $("#new-round").click(function() {
         setNewRound($("#gamesession").val());
     });
+
 
     $("#pick-card").click(function() {
         var selectedCardId = $("#played-cards ul").children("ul li.selected").data("id");
@@ -19,15 +22,26 @@ $(function() {
 
         var playerId = $("#player-info #name").data("id");
 
-        setWinningCard($("#gamesession").val(), selectedCardId, selectedPlayerId, playerId);
+
+        if(selectedCardId)
+        {   
+            setWinningCard($("#gamesession").val(), selectedCardId, selectedPlayerId, playerId);
+        }
     });
 
     $("#played-cards").on("click", "li.whitecard",  function() {
-        $('#played-cards li').each(function (index) {
-            $(this).removeClass("selected");
-        });
 
-        $(this).addClass('selected');
+
+        if($("#card-czar").val() === "true")
+        {
+            $('#played-cards li').each(function (index) {
+                $(this).removeClass("selected");
+            });
+
+            $(this).addClass('selected');
+
+            $("#playing-area #buttons #pick-card").removeAttr('disabled');
+        }
 
     });
 
