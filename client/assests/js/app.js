@@ -1,6 +1,6 @@
 $(function() {
 
-
+    var allowWinningSelection = true;
 
     getNewWhiteCards(8);
 
@@ -40,7 +40,9 @@ $(function() {
 
             $(this).addClass('selected');
 
-            $("#playing-area #buttons #pick-card").removeAttr('disabled');
+            if(allowWinningSelection) {
+                $("#playing-area #buttons #pick-card").removeAttr('disabled');
+            }
         }
 
     });

@@ -163,6 +163,9 @@ exports.initialize = function(server, sessionStore) {
 				console.log("Starting timer...");
 				setInterval(function() {
 					sendActiveCards();
+					
+
+
 				}, 5000);		
 			}
 

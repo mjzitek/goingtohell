@@ -93,12 +93,22 @@ function updatePlayersList(players) {
 
      var extraInfo = "";
      var photoFaded = "";
-
+     var playStatus = "";
+     //console.log(player.username + " played card: " + player.playedCard);
 
       if(player.status === "AFK" || player.status === "Idle") 
       {
 
         photoFaded = "faded"
+      }
+
+
+      console.log(player.username + " " + player.playedCard);
+
+      if(player.cardCzar) {
+        playStatus = "Card Czar";
+      } else if (player.playedCard) {
+        playStatus = "Played Card";
       }
 
        $("#userlist ul").append(
@@ -109,7 +119,7 @@ function updatePlayersList(players) {
           "<div class='extra-info'> " + player.status +"</div>" +
           "<div class='username'>" + player.username +"</div>" + 
           "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>" +
-          "<div class='card-czar'> " + (player.cardCzar ? "Card Czar" : "") +"</div>"
+          "<div class='card-czar'> " +  playStatus +"</div>"
         );
 
 
@@ -202,4 +212,9 @@ function writeChat(chatLine) {
     }
 
     $("#messages").scrollTop($(document).height());
+}
+
+
+function allowWinnerSelection() {
+
 }

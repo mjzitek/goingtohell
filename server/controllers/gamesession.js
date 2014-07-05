@@ -83,12 +83,20 @@ function updatePlayerRoomStatus(gameSessionId, playerId, inRoom, callback) {
 exports.getPlayerList = function(gameSessionId, callback) {
 	GameSession.findOne( {_id: gameSessionId}, 
 	 { "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, 
-	   "players.connected" : 1, "currentCardCzar" : 1})
+	   "players.connected" : 1, "currentCardCzar" : 1, "whiteCardsActive" : 1 })
 	 .populate("players.playerInfo", "username avatarUrl").exec(function(err, playersInfo) {
 		if(err) {
 			callback(err);
 		}else {
 			var playersList = [];
+			var playersPlayedCards = [];
+
+			playersInfo.whiteCardsActive.forEach(function(c) {
+				//console.log(c.playerInfo);
+				playersPlayedCards.push(c.playerInfo);
+			});
+
+			//console.log(playersPlayedCards);
 
 			playersInfo.players.forEach(function(p) {
 				//console.log(p.playerInfo.username + " => " + p.connected);
@@ -101,6 +109,15 @@ exports.getPlayerList = function(gameSessionId, callback) {
 					player.lastPing = p.lastPing;
 					player.afk = p.playerInfo.afk
 					player.cardCzar = false;
+					player.playedCard = false;
+
+
+					playersPlayedCards.forEach(function(pl) {
+						if(pl.equals(p.playerInfo._id)) {
+							player.playedCard = true;
+						}
+					});
+
 
 					var idleTime = (new Date().getTime() - p.lastPing.getTime())/1000;
 
@@ -108,7 +125,7 @@ exports.getPlayerList = function(gameSessionId, callback) {
 						player.status = 'Card Czar';
 						player.cardCzar = true;
 					}
-					
+
 					if(p.afk) {
 						player.status = 'AFK';
 					} else if(idleTime >= config.afktime) {
@@ -354,4 +371,12 @@ function getNextCardCzar(callback) {
 		//callback(gameInfo.players[czarIndex].playerInfo);
 		
 	});
+}
+
+
+
+function idInArray(array, id) {
+	array.some(function(e){ 
+  		return e == id; 
+	}) 
 }
