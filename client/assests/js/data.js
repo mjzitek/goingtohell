@@ -55,6 +55,10 @@ gameInfa.on('winner_notfication', function(data) {
     getNewWhiteCards(amount);
 });
 
+gameInfa.on('server_notification', function(data) {
+
+});
+
 
 chatCom.on('chat_log', function(data) {
 
@@ -103,7 +107,7 @@ function updatePlayersList(players) {
       }
 
 
-      console.log(player.username + " " + player.playedCard);
+     // console.log(player.username + " " + player.playedCard);
 
       if(player.cardCzar) {
         playStatus = "Card Czar";

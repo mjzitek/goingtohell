@@ -111,6 +111,7 @@ exports.getPlayerList = function(gameSessionId, callback) {
 					player.cardCzar = false;
 					player.playedCard = false;
 
+					
 
 					playersPlayedCards.forEach(function(pl) {
 						if(pl.equals(p.playerInfo._id)) {

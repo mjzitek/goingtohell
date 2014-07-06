@@ -115,6 +115,7 @@ exports.initialize = function(server, sessionStore) {
 			socket.broadcast.emit("message", d);
 
 			gamesession.addPlayer(config.gameSessionId, data.username, function() {});
+			gamesession.updatePlayerPingTime(config.gameSessionId,data.userid, function() {});
 		});
 
 		socket.on('disconnect', function(){
@@ -205,8 +206,6 @@ exports.initialize = function(server, sessionStore) {
 
 			var sendLatestChat = function(sessionId) {
 					chat.get(sessionId, 10, function(data) {
-
-
 
 						socket.emit("chat_log", JSON.stringify(data));
 					});

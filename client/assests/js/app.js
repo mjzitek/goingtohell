@@ -1,5 +1,7 @@
 $(function() {
 
+    $("#game-notification").delay(3000).slideUp();
+
     var allowWinningSelection = true;
 
     getNewWhiteCards(8);
