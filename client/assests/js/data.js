@@ -55,8 +55,15 @@ gameInfa.on('winner_notfication', function(data) {
     getNewWhiteCards(amount);
 });
 
-gameInfa.on('server_notification', function(data) {
+gameInfa.on('server_notification', function(message) {
 
+    console.log(message);
+    $("#server-message").html(message.text);
+    $("#game-notification").slideDown();
+
+
+    $("#server-message").delay(3000).fadeOut();
+    $("#game-notification").delay(3000).slideUp();
 });
 
 

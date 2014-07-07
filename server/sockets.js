@@ -25,7 +25,7 @@ var gamesession = require('./controllers/gamesession'),
 
 
 
-var players = [];
+var players = {};
 
 
 var timerStarted = false;
@@ -77,31 +77,34 @@ exports.initialize = function(server, sessionStore) {
 
 		var sendPlayerList = function() {
 			//console.log("Sending player List");
-			gamesession.getPlayerList(config.gameSessionId,function(players) {
+			gamesession.getPlayerList(config.gameSessionId,function(playersList) {
 				//console.log(players);
 				//console.log(players.length);
-				socket.emit("players_list", players);
-				socket.broadcast.emit("players_list", players);
+				socket.emit("players_list", playersList);
+				socket.broadcast.emit("players_list", playersList);
 			});
 		}	
+
+
 
 		socket.on("join_room", function(data) {
 			console.log(data);
 
 			socket.user = data;
 			console.log(socket.user.username + " connected");
-			var found = false;
-			players.forEach(function(player) {
-				if(player.username === data.username)
-				{
-					found = true;
-				}
-			});
+			console.log(socket.id);
 
-			if(!found) {
-				players.push(data);
-				socket.username = data.username;
+
+			players[data.username] = {
+				"socket" : socket.id,
+				"userid" : data.userid,
+				"username" : data.username,
+				"connectTime" : new Date(),
+				"room" : null
 			}
+
+
+			console.log(data);
 
 			var d = {}
 			d.type = "serverMessage";
@@ -133,6 +136,14 @@ exports.initialize = function(server, sessionStore) {
 			socket.emit("message", d);
 			socket.broadcast.emit("message", d);
 
+			for(var name in players) {
+
+
+  				if(players[socket.user.username].socket && players[socket.user.username].socket === socket.id) {
+  					delete players[socket.user.username];
+  				}
+  			}
+  		
 
 			console.log(socket.user.username + " disconnected");
 		});
@@ -143,6 +154,30 @@ exports.initialize = function(server, sessionStore) {
 	var gameInfa = io.of("/game_infa")
 		.on("connection", function(socket){
 
+
+		var sendServerNotfication = function(message, playerId, broadcast) {
+
+			if(broadcast) {
+				socket.broadcast.emit("server_notification", message);
+			}
+
+			if(playerId) {
+				for(var name in players)
+				{					
+
+					playersUserId = mongoose.Types.ObjectId(players[name].userid);
+					playerId = mongoose.Types.ObjectId(playerId);
+
+					if(playersUserId.equals(playerId))
+					{
+						console.log(players[name]);
+
+						gameInfa.socket(players[name].socket).emit("server_notification", message);						
+					}
+				}
+
+			}
+		}
 
 
 			socket.on("get_cards", function(data) {
@@ -155,6 +190,11 @@ exports.initialize = function(server, sessionStore) {
 				data = JSON.parse(data);
 				gamesession.winningCard(data, 
 					function() {});
+
+				var message = {}
+				message.text = "You won!!!!";
+
+				sendServerNotfication(message, data.winningPlayerId ,false);
 				sendWinningCardNotfication(data, function() {});
 			});
 
