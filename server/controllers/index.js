@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 
 exports.getIndex = function(req, res) {
-	//console.log(req.user);
+
 	if(req.user) {
 		username = req.user.username;
 		userid = req.user._id;

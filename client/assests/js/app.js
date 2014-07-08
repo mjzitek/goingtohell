@@ -34,7 +34,7 @@ $(function() {
     $("#played-cards").on("click", "li.whitecard",  function() {
 
 
-        if($("#card-czar").val() === "true")
+        if($("#card-czar").val() === "true" && $("#all-cards-played").val() === "true")
         {
             $('#played-cards li').each(function (index) {
                 $(this).removeClass("selected");

@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.0.10:3000');
+var socket = io.connect(Config.hostserver + ':3000');
 
 
 //socket.emit("set_chat", { id: "531e31aa897073c968e8afe7"});
@@ -53,17 +53,12 @@ gameInfa.on('winner_notfication', function(data) {
     amount = 8 - $("#whitecards ul li").size();
 
     getNewWhiteCards(amount);
+
+    $("#playing-area").children(".whitecard-text").hide();
 });
 
 gameInfa.on('server_notification', function(message) {
-
-    console.log(message);
-    $("#server-message").html(message.text);
-    $("#game-notification").slideDown();
-
-
-    $("#server-message").delay(3000).fadeOut();
-    $("#game-notification").delay(3000).slideUp();
+    showServerNotfication(message.text, false);
 });
 
 
@@ -100,6 +95,11 @@ function updatePlayersList(players) {
 
     $("#userlist ul").empty();
 
+
+    var totalPlayers = 0;
+    var totalAvailablePlayers = 0;
+    var totalPlayedPlayers = 0;
+
     players.forEach(function(player) {
 
      var extraInfo = "";
@@ -113,14 +113,31 @@ function updatePlayersList(players) {
         photoFaded = "faded"
       }
 
+      // totalPlayers++;
 
-     // console.log(player.username + " " + player.playedCard);
+      // if(player.cardCzar || player.playedCard)
+      // {
+      //   totalPlayedPlayers++;
+      // } else if (player.status != "AFK") {
+      //   totalAvailablePlayers++;
+      // } 
+
+      // if(totalAvailablePlayers === 0) {
+      //       showPlayedWhiteCardText();
+      //      $("#all-cards-played").val("true");
+      // } else {
+      //   $("#all-cards-played").val("false");
+      // }
 
       if(player.cardCzar) {
         playStatus = "Card Czar";
       } else if (player.playedCard) {
         playStatus = "Played Card";
       }
+
+      // console.log("Total Players: " + totalPlayers);
+      // console.log("Total Played Players: " + totalPlayedPlayers);
+      // console.log("Total Available Players: " + totalAvailablePlayers);
 
        $("#userlist ul").append(
           "<li class='user' data-id='" + player.id +"'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +

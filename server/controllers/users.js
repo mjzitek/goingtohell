@@ -22,8 +22,20 @@ exports.signup = function(req, res) {
 }
 
 exports.profile = function(req, res) {
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+	}
+
+	console.log(req.user);
+
+
 	res.render('users/profile', {
 		user : req.user,
+		username: username,
+		userid: userid
 	})
 }
 
@@ -98,11 +110,11 @@ exports.getUsers = function(callback) {
 
 };
 
+exports.getUsersById = getUsersById
+function getUsersById(id, callback) {
 
-exports.getUsersById = function(id, callback) {
-
-	User.find({userId:id}, function(err,doc) {
-			callback(doc);
+	User.findOne({_id:id}, { username: 1, name: 1, email : 1, groups: 1, active: 1, avatarUrl: 1  }, function(err,u) {
+			callback(u);
 	});
 
 };		

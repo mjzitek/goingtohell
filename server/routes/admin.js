@@ -28,4 +28,5 @@ module.exports = function(app, models) {
 
   app.get('/admin/usereditor/:username', isLoggedIn, needsGroup("admins"), admin.useredit);
   app.get('/admin/user/activate/:userid', isLoggedIn, needsGroup("admins"), admin.activateuser);
+  //app.post('/admin/notification/:message', isLoggedIn, needsGroup("admins"), admin.sendNotification);
 }

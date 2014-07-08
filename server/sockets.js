@@ -46,7 +46,7 @@ exports.initialize = function(server, sessionStore) {
 		   data.sessionID = data.cookie['express.sid']
 		   sessionStore.load(data.sessionID, function (err, session) {
 			   if (err || !session) {
-				   // invalid session identifier. tl;dr gtfo.
+				   // invalid session idendtifier. tl;dr gtfo.
 				   accept('session error', false)
 			   } else {
 				   data.session = session
@@ -138,10 +138,12 @@ exports.initialize = function(server, sessionStore) {
 
 			for(var name in players) {
 
-
-  				if(players[socket.user.username].socket && players[socket.user.username].socket === socket.id) {
-  					delete players[socket.user.username];
-  				}
+				if(players[socket.user.username])
+				{
+	  				if(players[socket.user.username].socket === socket.id) {
+	  					delete players[socket.user.username];
+	  				}
+	  			}
   			}
   		
 

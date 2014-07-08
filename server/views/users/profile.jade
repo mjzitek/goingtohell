@@ -2,18 +2,27 @@ extends ../layout
 
 block content
   div(id="profile-box")
-    div.
-        Username: #{user.username}
-    div. 
-        Name: #{user.name}
-    div.
-        Email: #{user.email}
-    div
-       != "<script>"
-       != "console.log(" + JSON.stringify(user.groups) + ");"
-       != "</script>"
-    div
-       span Groups:
-       ul
-          each group in user.groups
-            li #{group}           
+    div.profile-line
+        label Username: 
+        span.profile-info #{user.username}
+    div.profile-line 
+        label Name: 
+        span.profile-info #{user.name}
+    div.profile-line
+        label Email: 
+        span.profile-info #{user.email}
+    div.profile-line 
+        label Avatar: 
+        span.profile-info
+           - var avatar = user.avatarUrl
+           if(!avatar)
+           -   avatar = '/img/avatars/default_user.png'
+           img(src='#{avatar}')
+
+    div.profile-line
+       span 
+          label Groups:
+          span.profile-info
+            ul
+            each group in user.groups
+              li #{group}           
