@@ -68,7 +68,7 @@ gameInfa.on('server_notification', function(message) {
 
 chatCom.on('chat_log', function(data) {
 
-    console.log(data);
+   // console.log(data);
     data = JSON.parse(data);
     data.forEach(function(chatLine) {
         writeChat(chatLine);
@@ -174,8 +174,8 @@ function updatePlayer(player) {
 
 
         //console.log(czar);
-        console.log(player.username + " => " + status + " / " + extra + " / " + points);
-        console.log(playStatus);
+        // console.log(player.username + " => " + status + " / " + extra + " / " + points);
+        // console.log(playStatus);
 
         if(imgSrc.indexOf(newAvatar) === -1 )
         {
@@ -194,7 +194,7 @@ function updatePlayer(player) {
         if(extra != player.status) {
             $(playerItem).children(".usertext").children(".extra-info").html(player.status)
 
-            console.log(player.username + " ***************** " + photoFaded);
+            //console.log(player.username + " ***************** " + photoFaded);
 
             if(photoFaded === "faded") {
                 $(playerItem).children(".userphoto").addClass("faded");
@@ -213,7 +213,7 @@ function updatePlayer(player) {
 }
 
 function removePlayer(playerId) {
-    console.log('Removing ' + playerId);
+    //console.log('Removing ' + playerId);
     if($("#userlist li")) {
         $("#userlist li").each(function(index) {
             if($(this).data("id") == playerId) {
@@ -275,7 +275,7 @@ function updateCzar(czar) {
 function writeChat(chatLine) {
     var messageType = "";
 
-    console.log(chatLine);
+   // console.log(chatLine);
 
 
 
