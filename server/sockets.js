@@ -136,6 +136,8 @@ exports.initialize = function(server, sessionStore) {
 			socket.emit("message", d);
 			socket.broadcast.emit("message", d);
 
+			socket.broadcast.emit("player_disconnected", socket.user.userid);
+
 			for(var name in players) {
 
 				if(players[socket.user.username])

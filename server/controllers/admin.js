@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-	User = mongoose.model('users');
+	User = mongoose.model('users'),
+
+var gamesession = require('../controllers/gamesession');
 
 
 exports.useredit = function(req, res) {	
@@ -29,4 +31,13 @@ exports.activateuser = function(req, res) {
 			});
 		});
 	})
+}
+
+
+
+exports.resetplayers = function(req, res) {
+
+	gamesession.resetPlayers(function(doc) {
+		res.send("updated");
+	});
 }

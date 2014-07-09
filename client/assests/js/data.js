@@ -1,4 +1,4 @@
-var socket = io.connect(Config.hostserver + ':3000');
+var socket = io.connect(Config.hostserver + ':' + Config.port);
 
 
 //socket.emit("set_chat", { id: "531e31aa897073c968e8afe7"});
@@ -42,6 +42,10 @@ chatInfa.on('message', function(data) {
     writeChat(data);
 });
 
+chatInfa.on("player_disconnected", function(data) {
+    //data = JSON.parse(data);
+    removePlayer(data);
+});
 
 gameInfa.on('winner_notfication', function(data) {
     data = JSON.parse(data);
@@ -93,7 +97,7 @@ function sendChat(data) {
 
 function updatePlayersList(players) {
 
-    $("#userlist ul").empty();
+    //$("#userlist ul").empty();
 
 
     var totalPlayers = 0;
@@ -101,60 +105,122 @@ function updatePlayersList(players) {
     var totalPlayedPlayers = 0;
 
     players.forEach(function(player) {
-
-     var extraInfo = "";
-     var photoFaded = "";
-     var playStatus = "";
-     //console.log(player.username + " played card: " + player.playedCard);
-
-      if(player.status === "AFK" || player.status === "Idle") 
-      {
-
-        photoFaded = "faded"
-      }
-
-      // totalPlayers++;
-
-      // if(player.cardCzar || player.playedCard)
-      // {
-      //   totalPlayedPlayers++;
-      // } else if (player.status != "AFK") {
-      //   totalAvailablePlayers++;
-      // } 
-
-      // if(totalAvailablePlayers === 0) {
-      //       showPlayedWhiteCardText();
-      //      $("#all-cards-played").val("true");
-      // } else {
-      //   $("#all-cards-played").val("false");
-      // }
-
-      if(player.cardCzar) {
-        playStatus = "Card Czar";
-      } else if (player.playedCard) {
-        playStatus = "Played Card";
-      }
-
-      // console.log("Total Players: " + totalPlayers);
-      // console.log("Total Played Players: " + totalPlayedPlayers);
-      // console.log("Total Available Players: " + totalAvailablePlayers);
-
-       $("#userlist ul").append(
-          "<li class='user' data-id='" + player.id +"'><span class='userphoto " + photoFaded + "'><img class=fa fa-user'" +
-          " src='" + (player.avatarUrl ? player.avatarUrl : "img/avatars/default_user.png" ) + "' alt='' />" +
-          "</span><div class='usertext'>" +
-      
-          "<div class='extra-info'> " + player.status +"</div>" +
-          "<div class='username'>" + player.username +"</div>" + 
-          "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>" +
-          "<div class='card-czar'> " +  playStatus +"</div>"
-        );
-
-
+        updatePlayer(player);
     });
 
 
 
+}
+
+function updatePlayer(player) {
+
+    var playerInList = false;
+    var playerIndex = 0;
+
+    var extraInfo = "";
+    var photoFaded = "";
+    var playStatus = "";
+
+    if($("#userlist li")) {
+        $("#userlist li").each(function(index) {
+            if($(this).data("id") == player.id) {
+                playerInList = true;
+                playerIndex = index;
+            }
+        });
+    }
+
+    if(player.cardCzar) {
+        playStatus = "Card Czar";
+    } else if (player.playedCard) {
+        playStatus = "Played Card";
+    } else {
+        playStatus = "";
+    }
+
+    if(player.status === "AFK" || player.status === "Idle") 
+    {
+
+        photoFaded = "faded"
+    }  else {
+        photoFaded = "";
+    }  
+
+    if(!playerInList)
+    {
+
+        $("#userlist ul").append(
+            "<li class='user' data-id='" + player.id +"'><span class='userphoto " + photoFaded + "'><img class='fa fa-user'" +
+            " src='" + (player.avatarUrl ? player.avatarUrl : "/img/avatars/default_user.png" ) + "' alt='' />" +
+            "</span><div class='usertext'>" +
+          
+            "<div class='extra-info'> " + player.status +"</div>" +
+            "<div class='username'>" + player.username +"</div>" + 
+            "<div class='user-points'><span class='user-points-value'> " + player.points + "</span> points</div>" +
+            "<div class='play-status'> " +  playStatus +"</div>"
+        );    
+    } else {
+
+        var playerItem = $("#userlist li:eq("+ playerIndex +")");
+        //console.log($(playerItem).data("id"));
+        
+        var imgSrc = $(playerItem).children(".userphoto").children("img").prop("src");
+        var points = $(playerItem).children(".usertext").children(".user-points").children(".user-points-value").html();
+        var status   = $(playerItem).children(".usertext").children(".play-status").html();
+        var extra  = $(playerItem).children(".usertext").children(".extra-info").html();
+        //console.log(points);
+
+        var newAvatar = (player.avatarUrl ? player.avatarUrl : "/img/avatars/default_user.png" )
+
+
+        //console.log(czar);
+        console.log(player.username + " => " + status + " / " + extra + " / " + points);
+        console.log(playStatus);
+
+        if(imgSrc.indexOf(newAvatar) === -1 )
+        {
+            $(playerItem).children(".userphoto").children("img").attr("src", newAvatar);
+        }
+
+
+
+        if(points != player.points)
+        {
+            $(playerItem).children(".usertext").children(".user-points").children(".user-points-value").html(player.points);
+        }
+
+            
+
+        if(extra != player.status) {
+            $(playerItem).children(".usertext").children(".extra-info").html(player.status)
+
+            console.log(player.username + " ***************** " + photoFaded);
+
+            if(photoFaded === "faded") {
+                $(playerItem).children(".userphoto").addClass("faded");
+            } else {
+                $(playerItem).children(".userphoto").removeClass("faded"); 
+            }
+        }
+
+        if(status != playStatus) {
+            $(playerItem).children(".usertext").children(".play-status").html(playStatus)
+        }
+
+    }
+
+
+}
+
+function removePlayer(playerId) {
+    console.log('Removing ' + playerId);
+    if($("#userlist li")) {
+        $("#userlist li").each(function(index) {
+            if($(this).data("id") == playerId) {
+                $(this).remove();
+            }
+        });
+    }
 }
 
 function updateCards(cards) {
@@ -178,8 +244,8 @@ function updateCards(cards) {
               "<span class='whitecard-text'>" + card.whitecard.text + "</span></li>";
 
           $("#played-cards ul").append(card);          
-        }
 
+        }
             
         if($( "#played-cards ul li" ).size() > 5) {
             $('#played-cards ul li').each(function (index) {
