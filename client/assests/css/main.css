@@ -59,7 +59,8 @@ footer {
   background: linear-gradient(to bottom, #4c4c4c 0%, #010e0f 0%, #010e0f 70%, #222e30 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c4c4c', endColorstr='#222e30',GradientType=0 );
-  /* IE6-9 */ }
+  /* IE6-9 */
+  font-size: .8em; }
 
 ul {
   list-style-type: none;
@@ -187,7 +188,8 @@ ul {
   clear: both; }
 
 #playing-area #buttons #pick-card {
-  margin-left: 276px; }
+  margin-left: 578px;
+  display: none; }
 
 #played-cards {
   float: left;

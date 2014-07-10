@@ -263,11 +263,13 @@ function updateCzar(czar) {
   if($("#player-info #name").data("id") === czar) {
     $("#card-czar").val("true");
     $("#card-czar-overlay").show();
+    $("#pick-card").show();
 
   } else {
     $("#card-czar").val("false");    
     $("#card-czar-overlay").hide();
     $("#playing-area #buttons #pick-card").attr('disabled','disabled');
+    $("#pick-card").hide();
   }
 }
 

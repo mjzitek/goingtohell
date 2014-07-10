@@ -163,7 +163,7 @@ function updatePlayerAFK(gameSessionId,playerId, afk, callback) {
 				else { 
 					GameSession.findOne({ _id: gameSessionId}, { "players.playerInfo" : 1, "currentCardCzar" : 1},
 					 function(err, gameInfo) {
-						console.log("AFK Updated: " + doc);
+						//console.log("AFK Updated: " + doc);
 
 						if(gameInfo.currentCardCzar.equals(playerId)) {
 							getNextCardCzar(function() {
@@ -311,9 +311,12 @@ exports.setCzar = function(req, res) {
 		});
 }
 
+exports.getNextCardCzar = getNextCardCzar;
 function getNextCardCzar(callback) {
 	GameSession.findOne({ _id: gameSessionId},
-	{ "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, "players.lastPing" : 1, "currentCardCzar" : 1},
+	{ "players.playerInfo" : 1, "players.points" : 1, "players.afk" : 1, 
+	  "players.lastPing" : 1, "currentCardCzar" : 1, "players.connected" : 1
+	},
 	function(err, gameInfo) {
 		//console.log(gameInfo);
 		var czarIndex = -1
@@ -336,7 +339,8 @@ function getNextCardCzar(callback) {
 		var numOfPlayers = gameInfo.players.length;
 		var counter1 = 0;
 
-		while((gameInfo.players[czarIndex].afk === true) && (counter1 <= numOfPlayers) && (counter1 < 20)) {
+		while((gameInfo.players[czarIndex].afk === true) && (gameInfo.players[czarIndex].connected === false) && 
+			  (counter1 <= numOfPlayers) && (counter1 < 20)) {
 			//console.log("Finding new card czar");
 			//console.log("counter1: " + counter1 + " || numOfPlayers: " + numOfPlayers);
 			if(czarIndex + 1 >= gameInfo.players.length) { 
@@ -382,6 +386,58 @@ function resetPlayers(callback) {
 	});
 
 }
+
+exports.playersCount = playersCount;
+function playersCount(gameSessionId, callback) {
+	async.series({
+		totalPlayers: function(callback) {
+			GameSession.aggregate( [
+        		{ $unwind: '$players' },
+        		{ $group : { _id : {  }, 
+        			count : { $sum : 1 }}},
+    		], function(err, doc) {
+
+    			callback(null, doc);
+    		});			
+		},
+		totalConnected: function(callback) {
+			GameSession.aggregate( [
+        		{ $unwind: '$players' },
+        		{ $group : { _id : { connected : '$players.connected' }, 
+        			count : { $sum : 1 }}},
+        		{ $match : { '_id.connected' : true } }
+    		], function(err, doc) {
+
+    			callback(null, doc);
+    		});				
+		},
+		totalAvailable: function(callback) {
+			GameSession.aggregate( [
+        		{ $unwind: '$players' },
+        		{ $group : { _id : { afk : '$players.afk', connected: '$players.connected' }, 
+        			count : { $sum : 1 }}},
+        		{ $match : { '_id.afk' : false, '_id.connected' : true  } }
+    		], function(err, doc) {
+
+    			callback(null, doc);
+    		});				
+		}
+
+	},
+	function(err, results) {
+		if(err)
+		{
+			console.log(err);
+		} else {
+			console.log(results);
+			callback(results);
+		}
+
+	});
+
+
+}
+
 
 function idInArray(array, id) {
 	array.some(function(e){ 

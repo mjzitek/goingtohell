@@ -117,8 +117,34 @@ exports.initialize = function(server, sessionStore) {
 			socket.emit("message", d);
 			socket.broadcast.emit("message", d);
 
-			gamesession.addPlayer(config.gameSessionId, data.username, function() {});
-			gamesession.updatePlayerPingTime(config.gameSessionId,data.userid, function() {});
+			gamesession.addPlayer(config.gameSessionId, data.username, function() {
+			});
+			gamesession.updatePlayerPingTime(config.gameSessionId,data.userid, function(doc) {
+				var playersCount = {};
+				gamesession.playersCount(config.gameSessionId, function(p) {
+					playersCount.all = (p.totalPlayers[0] ? p.totalPlayers[0].count : 0);
+					playersCount.connected = (p.totalConnected[0] ? p.totalConnected[0].count : 0);
+					playersCount.available = (p.totalAvailable[0] ? p.totalAvailable[0].count : 0);
+					console.log(playersCount);
+
+					// Assume no one was connected and someone just connected
+					if(playersCount.connected === 1) {
+						// Assign CZAR to person who is connected
+						gamesession.getNextCardCzar(function() {});
+					}
+
+
+				});
+
+			});
+
+			// Check czar
+			// - If current czar is AFK and you join the room, and no one else is in the room
+			//   or you join the room and you are the only one there
+			//   make you current czar
+
+
+
 		});
 
 		socket.on('disconnect', function(){
@@ -147,7 +173,16 @@ exports.initialize = function(server, sessionStore) {
 	  				}
 	  			}
   			}
-  		
+
+  			// Check to see if player was czar, and if so, reassign
+			var playersCount = {};
+			gamesession.playersCount(config.gameSessionId, function(p) {
+				playersCount.all = (p.totalPlayers[0] ? p.totalPlayers[0].count : 0);
+				playersCount.connected = (p.totalConnected[0] ? p.totalConnected[0].count : 0);
+				playersCount.available = (p.totalAvailable[0] ? p.totalAvailable[0].count : 0);
+				console.log(playersCount);
+
+			});  		
 
 			console.log(socket.user.username + " disconnected");
 		});
