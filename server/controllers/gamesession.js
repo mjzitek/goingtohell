@@ -288,6 +288,15 @@ exports.winningCard = function(data, callback) {
 }
 
 
+exports.getCardCzar = getCardCzar
+function getCardCzar(sessionId, callback) {
+
+	GameSession.findOne({ _id: sessionId}, { currentCardCzar : 1} ,function(err, czar) {
+		callback(czar.currentCardCzar);
+	});
+
+}
+
 exports.setCzar = function(req, res) {
 	GameSession.update({ _id:  gameSessionId},
 	{
@@ -429,7 +438,7 @@ function playersCount(gameSessionId, callback) {
 		{
 			console.log(err);
 		} else {
-			console.log(results);
+			//console.log(results);
 			callback(results);
 		}
 

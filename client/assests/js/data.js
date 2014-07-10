@@ -50,15 +50,14 @@ chatInfa.on("player_disconnected", function(data) {
 gameInfa.on('winner_notfication', function(data) {
     data = JSON.parse(data);
     writeChat(data);
+});
 
-    $("#played-cards ul").empty();
-    $("#white-card-played").val("false");
+gameInfa.on('new_round', function() {
+    setNewRound();
+});
 
-    amount = 8 - $("#whitecards ul li").size();
-
-    getNewWhiteCards(amount);
-
-    $("#playing-area").children(".whitecard-text").hide();
+chatInfa.on('new_round', function() {
+    setNewRound();
 });
 
 gameInfa.on('server_notification', function(message) {
@@ -83,6 +82,18 @@ chatCom.on('message', function(data) {
     writeChat(data);
 });
 
+
+function setNewRound() {
+
+    $("#played-cards ul").empty();
+    $("#white-card-played").val("false");
+
+    amount = 8 - $("#whitecards ul li").size();
+
+    getNewWhiteCards(amount);
+
+    $("#playing-area").children(".whitecard-text").hide();
+}
 
 function sendWinningCard(data) {
   //console.log(data);

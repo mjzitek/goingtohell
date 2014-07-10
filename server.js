@@ -38,6 +38,7 @@ var dblogger = logging.Logging().get('db');
 // DB Set up
 
 var db = mongoose.connect(config.db);
+db.autoReconnect = true
 
 var models_path = __dirname + '/server/models';
 

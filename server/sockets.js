@@ -20,6 +20,7 @@ var mongoose = require('mongoose'),
 var config = require('../config/config');
 
 var gamesession = require('./controllers/gamesession'),
+	user = require('./controllers/users'),
     chat = require('./controllers/chat');
 
 
@@ -61,6 +62,10 @@ exports.initialize = function(server, sessionStore) {
 	   }
 
 }); 
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//  chatInfa
 
 	var chatInfa = io.of("/chat_infa")
 		.on("connection", function(socket) {
@@ -130,7 +135,9 @@ exports.initialize = function(server, sessionStore) {
 					// Assume no one was connected and someone just connected
 					if(playersCount.connected === 1) {
 						// Assign CZAR to person who is connected
-						gamesession.getNextCardCzar(function() {});
+						//gamesession.getNextCardCzar(function() {
+							gamesession.newRound(config.gameSessionId, function() {});
+						//});
 					}
 
 
@@ -147,6 +154,7 @@ exports.initialize = function(server, sessionStore) {
 
 		});
 
+	//  Disconnected
 		socket.on('disconnect', function(){
 
 			gamesession.updatePlayerRoomStatus(config.gameSessionId, socket.user.userid, false, function(){});
@@ -184,9 +192,28 @@ exports.initialize = function(server, sessionStore) {
 
 			});  		
 
+			gamesession.getCardCzar(config.gameSessionId, function(czar) {
+				if(czar.equals(socket.user.userid)) {
+					gamesession.getNextCardCzar(function() {
+						gamesession.newRound(config.gameSessionId, function() {
+							sendNewRound();
+						});
+					});
+				};
+			});
+
+			var sendNewRound = function() {
+					socket.emit("new_round", null);
+					socket.broadcast.emit("new_round", null);				
+			}
+
 			console.log(socket.user.username + " disconnected");
 		});
 	});
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//  gameInfa
 
 	var gameInfaTimerStarted = false;
 
@@ -269,15 +296,29 @@ exports.initialize = function(server, sessionStore) {
 
 					socket.emit("winner_notfication", JSON.stringify(data));
 					socket.broadcast.emit("winner_notfication", JSON.stringify(data));
+					sendNewRound();
+
 					callback(data);
 				});
 
 			}	
 
+
+			var sendNewRound = function() {
+					socket.emit("new_round", null);
+					socket.broadcast.emit("new_round", null);				
+			}
+
+
+
 			sendActiveCards();
+
 
 	});
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//  chatCom
 
 	var chatCom = io.of("/chat_com")
 		.on("connection", function(socket) {

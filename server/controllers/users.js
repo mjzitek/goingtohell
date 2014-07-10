@@ -29,7 +29,7 @@ exports.profile = function(req, res) {
 		username = "Guest";
 	}
 
-	console.log(req.user);
+	//console.log(req.user);
 
 
 	res.render('users/profile', {
