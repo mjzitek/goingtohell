@@ -80,7 +80,7 @@ exports.initialize = function(server, sessionStore) {
 			}, 3000);		
 		}
 	
-		testTest(socket);
+		//testTest(socket);
 
 		var sendPlayerList = function() {
 			//console.log("Sending player List");
@@ -214,7 +214,7 @@ exports.initialize = function(server, sessionStore) {
 		});
 	});
 
-	var testTest = function(socket) {test.socketTest(socket); console.log("testTest");}
+	//var testTest = function(socket) {test.socketTest(socket); console.log("testTest");}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // 
