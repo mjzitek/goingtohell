@@ -21,7 +21,8 @@ var config = require('../config/config');
 
 var gamesession = require('./controllers/gamesession'),
 	user = require('./controllers/users'),
-    chat = require('./controllers/chat');
+    chat = require('./controllers/chat'),
+    test = require('./controllers/test');
 
 
 
@@ -79,6 +80,7 @@ exports.initialize = function(server, sessionStore) {
 			}, 3000);		
 		}
 	
+		testTest(socket);
 
 		var sendPlayerList = function() {
 			//console.log("Sending player List");
@@ -98,6 +100,7 @@ exports.initialize = function(server, sessionStore) {
 			socket.user = data;
 			console.log(socket.user.username + " connected");
 			console.log(socket.id);
+
 
 
 			players[data.username] = {
@@ -210,6 +213,8 @@ exports.initialize = function(server, sessionStore) {
 			console.log(socket.user.username + " disconnected");
 		});
 	});
+
+	var testTest = function(socket) {test.socketTest(socket); console.log("testTest");}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // 

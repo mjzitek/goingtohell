@@ -42,6 +42,10 @@ chatInfa.on('message', function(data) {
     writeChat(data);
 });
 
+chatInfa.on('test', function(data) {
+    console.log(data);
+})
+
 chatInfa.on("player_disconnected", function(data) {
     //data = JSON.parse(data);
     removePlayer(data);

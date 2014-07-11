@@ -18,10 +18,11 @@ var cards = require('./cards');
 var gameSessionId = "53ac67251f55d70e969cda55";
 
 
-/*
-	Create a new game session
-	
-*/
+/**
+ * Creates a new game session
+ *
+  * @return {ObjectId}
+ */
 exports.create = create
 function create(callback) {
 	var gameSessionId;
@@ -30,13 +31,41 @@ function create(callback) {
 
 	gameSessionId = gameSession._id;
 
-	newCard.save(function(err) {
-		callback(gameSessionId)
+	gameSession.save(function(err) {
+		if(err) {
+			callback(err);
+		} else {
+			callback(gameSessionId)
+		}
 	});
 
 }
 
+/**
+ * Removes specified game session
+ *
+ * @param  {ObjectId} gameSessionId
+ * @return {String}
+ */
+exports.remove = remove
+function remove(gameSessionId, callback) {
+	GameSession.remove({ _id: gameSessionId}, function(err, doc) {
+		if(err) {
+			callback(err)
+		} else {
+			callback("removed");			
+		}
 
+	});
+}
+
+/**
+ * Add's a player to the specified game session
+ *
+ * @param  {ObjectId} gameSessionId
+ * @param  {String}   player
+ * @return {String}
+ */
 exports.addPlayer = function(gameSessionId,player, callback) {
 	//console.log(gameSessionId);
 	//console.log(player);
