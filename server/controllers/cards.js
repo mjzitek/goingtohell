@@ -6,131 +6,92 @@ var mongoose = require('mongoose'),
 	WhiteCards = mongoose.model('whitecards'),
 	GameSession = mongoose.model('gamesession');
 
-exports.showCards = function(req, res) {
 
-	if(req.params.color === "black") {
+
+
+exports.listCards = listCards;
+function listCards(color, callback) {
+
+	if(color === "black") {
 		BlackCards.find({}, function(err, cards) {
-			res.render("cards/cards", {
-				cards : cards
-			});
+			callback(cards);
 		});
-	} else if (req.params.color === "white"){
+	} else if (color === "white"){
 		WhiteCards.find({}, function(err, cards) {
-			res.render("cards/cards", {
-				cards : cards
-			});
+			callback(cards);
 		});
 	}
 }
 
 
-
-exports.getBlackCards = function(req, res) {
-
-	getRandomBlackCard("", function(card) {
-		return res.jsonp(card);
-	});
-				
-};
-
-exports.getWhiteCards = function(req, res) {
-	
-	getRandomWhiteCards(req.params.amt,"", function(cards) {
-		return res.jsonp(cards);
-	});
-}
-
-exports.addCard = function(req, res) {
-	if(req.user) {
-		username = req.user.username;
-		userid = req.user._id;
-	} else {
-		username = "Guest";
-		userid = "";
-	}
-
-	res.render("cards/addcard", {
-		username: username,
-		userid: userid
-	});
-}
-
-exports.create = function(req, res) {
-
-	var card = req.body;
-	
-	console.log(card);
-
-	if(req.user) {
-		username = req.user.username;
-		userid = req.user._id;
-	} else {
-		username = "Guest";
-		userid = "";
-	}
+exports.create = createCard;
+exports.createCard = createCard;
+function createCard(cardInfo, callback) {
+	console.log(cardInfo);
 
 	var newCard = null;
-	if(card.card_type === "black")
+	if(cardInfo.card_type === "black")
 	{
 		newCard = new BlackCards({
-			text: 		card.card_text,
-			deck: 		card.card_category,
+			text: 		cardInfo.card_text,
+			deck: 		cardInfo.card_category,
 			createdate: new Date(),
-			createdby: 	card.userid,
+			createdby: 	cardInfo.userid,
 			active: 	true,
 		});
 	}
-	else if(card.card_type === "white")
+	else if(cardInfo.card_type === "white")
 	{
 		newCard = new WhiteCards({
-			text: 		card.card_text,
-			deck: 		card.card_category,
+			text: 		cardInfo.card_text,
+			deck: 		cardInfo.card_category,
 			createdate: new Date(),
-			createdby: 	card.userid,
+			createdby: 	cardInfo.userid,
 			active: 	true,
 		});
 	}
 
 	if(newCard) {
 		newCard.save(function(err) {
-			var message;
-			var msg_class;
+			var doc = {};
+			
 			if(err) {
 				if (11001 === err.code || 11000 === err.code) {
-					message = "A card with this text has already been added."
+					doc.message = "A card with this text has already been added."
 				} else {
-					message = "A error has occured";
+					doc.message = "A error has occured";
 					console.log(err);
 				}
 
-				msg_class = "alert alert-warning";
+				doc.msg_class = "alert alert-warning";
+				callback(doc);
 			} else {
-				message = "Card Saved";
-				msg_class = "alert alert-success";
+				doc.message = "Card Saved";
+				doc.msg_class = "alert alert-success";
+				callback(doc);
 			}
 
-			res.render("cards/addcard", {
-				message: message,
-				msg_class: msg_class,
-				username: username,
-				userid: userid,
-				last_card_type: card.card_type
-			});
+
 
 		});
+	} else {
+		callback("");
 	}
 }
 
-exports.play = function(req, res) {
-	console.log("Player " + req.params.playerId + 
-                        " played card " + req.params.cardId + " on game " + req.params.sessionId );
 
-	var cardId = [req.params.cardId];
-	var whiteCardsActive = [{ whitecard: req.params.cardId, playerInfo: req.params.playerId }];
-	GameSession.findOne({ _id: req.params.sessionId, "whiteCardsActive.playerInfo" : req.params.playerId}, function(err,doc) {
-		//console.log(doc);
+exports.play = function(sessionId, playerId, cardId, callback) {
+
+	console.log("Player " + playerId + 
+                        " played card " + cardId + " on game " + sessionId );
+
+	var cardId = [cardId];
+	var whiteCardsActive = [{ whitecard: cardId, playerInfo: playerId }];
+
+	//console.log(whiteCardsActive);
+	GameSession.findOne({ _id: sessionId, "whiteCardsActive.playerInfo" : playerId}, function(err,doc) {
 		if(doc === null) {
-			GameSession.update({ _id: req.params.sessionId, "players.playerInfo" : req.params.playerId }, 
+			GameSession.update({ _id: sessionId, "players.playerInfo" : playerId }, 
 				{
 					 $pushAll : { 
 					 				whiteCardsPlayed :  cardId,
@@ -140,21 +101,20 @@ exports.play = function(req, res) {
 
 				},{upsert:true }, function(err, doc) { 
 					if(err) { console.log(err);}
-					else { res.send("updated");}
+					else { callback("updated");}
 			});			
 		}
 	});
-
 }
 
-exports.newHand = function(req, res) {
-	GameSession.update({ _id: req.params.sessionId}, 
+exports.newHand = function(sessionId, callback) {
+	GameSession.update({ _id: sessionId}, 
 		{
 			whiteCardsActive : []	  	
 
 		},{upsert:true }, function(err, doc) { 
 			if(err) { console.log(err);}
-			else { res.send("updated");}
+			else { callback("updated"); }
 	});
 }
 
@@ -168,15 +128,14 @@ function getRandomBlackCard(deck, callback) {
 	if(deck != "") {
 		filter.deck = deck;
 	}
-		BlackCards.count(filter, function(err, cardCount) {
-			var randNum = (Math.floor(Math.random() * cardCount));
-			BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
-					callback(card);
-			});
 
+	BlackCards.count(filter, function(err, cardCount) {
+		var randNum = (Math.floor(Math.random() * cardCount));
+		BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
+				callback(card);
 		});
 
-
+	});
 }
 
 exports.getRandomWhiteCards = getRandomWhiteCards;

@@ -326,24 +326,22 @@ function getCardCzar(sessionId, callback) {
 
 }
 
-exports.setCzar = function(req, res) {
+exports.setCzar = setCzar
+function setCzar(callback) {
 	GameSession.update({ _id:  gameSessionId},
 	{
 		$set : { 
-						//previousCardCzar : previousCardCzar,
-						currentCardCzar : req.params.playerId
+					currentCardCzar : req.params.playerId
 			   }  
 	},		
 	{upsert:false }, function(err, doc) { 
 			if(err) { 
 				console.log(err); 
-				//callback(err);
-				res.send("updated");				
+				callback(err);			
 			}
 			else { 
-					console.log("New Czar: " + doc);
-					//callback('updated');
-					res.send("updated");
+				console.log("New Czar: " + doc);
+				callback('updated');
 			}
 
 		});

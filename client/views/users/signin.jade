@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    div
+
+    div(class='col-sm-6 col-sm-offset-3 login-box')
+        h1
+            span(class='fa fa-arrow-circle-right')  
+            span Login
+        div
+            #{message}
+
+        form(action='/users/session', method='post')
+            div.form-group
+                label(for='email') Email
+                input(id='email',type='text',value='',name='email',class='form-control')        
+            div.form-group
+                label(for='password') Password
+                input(id='password',type='password',value='',name='password',class='form-control')                       
+            div
+                button(type='submit', class='btn btn-primary btn-lg') Log In
+
+        p Need an account?  
+          a(href='/signup') Sign Up        

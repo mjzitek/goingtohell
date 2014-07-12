@@ -65,7 +65,7 @@ require('./config/passport')(passport);
 /////////////////////////
 // Create an http server
 
-	app.set('views', __dirname + '/server/views');
+	app.set('views', __dirname + '/client/views');
 	app.set('view engine', 'jade');
 	app.use(express.static(__dirname + '/client/assests'));
 	app.use(favicon(__dirname + '/client/assests/favicon.ico'));
@@ -82,10 +82,10 @@ require('./config/passport')(passport);
 
 /////////////////////////
 // Import the routes
-fs.readdirSync('./server/routes').forEach(function(file) {
+fs.readdirSync('./client/routes').forEach(function(file) {
   if ( file[0] == '.' ) return;
   var routeName = file.substr(0, file.indexOf('.'));
-  require('./server/routes/' + routeName)(app, passport);
+  require('./client/routes/' + routeName)(app, passport);
 });
 
 /////////////////////////
