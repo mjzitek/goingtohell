@@ -21,8 +21,7 @@ var config = require('../config/config');
 
 var gamesession = require('./controllers/gamesession'),
 	user = require('./controllers/users'),
-    chat = require('./controllers/chat'),
-    test = require('./controllers/test');
+    chatLog = require('./controllers/chat');
 
 
 
@@ -118,7 +117,7 @@ exports.initialize = function(server, sessionStore) {
 			d.type = "serverMessage";
 			d.message = socket.user.username + " has joined";
 
-			chat.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
+			chatLog.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
 
 			d = JSON.stringify(d);
 
@@ -166,14 +165,14 @@ exports.initialize = function(server, sessionStore) {
 			d.type = "serverMessage";
 			d.message = socket.user.username + " has left";
 
-			chat.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
+			chatLog.add(config.sessionId, "serverMessage", null,  d.message, function(doc) {});
 
 			d = JSON.stringify(d);
 
 			socket.emit("message", d);
 			socket.broadcast.emit("message", d);
 
-			socket.broadcast.emit("player_disconnected", socket.user.userid);
+			socket.emit("player_disconnected", socket.user.userid);
 
 			for(var name in players) {
 
@@ -207,7 +206,7 @@ exports.initialize = function(server, sessionStore) {
 
 			var sendNewRound = function() {
 					socket.emit("new_round", null);
-					socket.broadcast.emit("new_round", null);				
+					//socket.broadcast.emit("new_round", null);				
 			}
 
 			console.log(socket.user.username + " disconnected");
@@ -229,6 +228,7 @@ exports.initialize = function(server, sessionStore) {
 		var sendServerNotfication = function(message, playerId, broadcast) {
 
 			if(broadcast) {
+				socekt.emit("server_notification", message)
 				socket.broadcast.emit("server_notification", message);
 			}
 
@@ -275,9 +275,6 @@ exports.initialize = function(server, sessionStore) {
 				console.log("Starting timer...");
 				setInterval(function() {
 					sendActiveCards();
-					
-
-
 				}, 5000);		
 			}
 
@@ -291,21 +288,19 @@ exports.initialize = function(server, sessionStore) {
 
 			var sendWinningCardNotfication = function(data, callback) {
 
-				Users.find({ _id : data.winningPlayerId }, { username : 1}, function(err, user) {
-					chat.add(config.sessionId, "winnerNotfication", null,  user[0].username, function(doc) {});
+				user.getUserById(data.winningPlayerId, function(u) {
+					chatLog.add(config.sessionId, "winnerNotfication", null,  u.username, function(doc) {});
 
 					var data = {};
 
 					data.type = 'winnerNotfication';
-					data.username = user[0].username;
+					data.username = u.username;
 
 					socket.emit("winner_notfication", JSON.stringify(data));
 					socket.broadcast.emit("winner_notfication", JSON.stringify(data));
+					
 					sendNewRound();
-
-					callback(data);
 				});
-
 			}	
 
 
@@ -330,7 +325,7 @@ exports.initialize = function(server, sessionStore) {
 
 
 			var sendLatestChat = function(sessionId) {
-					chat.get(sessionId, 10, function(data) {
+					chatLog.get(sessionId, 10, function(data) {
 
 						socket.emit("chat_log", JSON.stringify(data));
 					});
@@ -361,7 +356,7 @@ exports.initialize = function(server, sessionStore) {
 					data.message = "<span class='message-error'>** SANITIZED **</span>"
 				}
 
-				chat.add(config.sessionId, data.type, data.userid, data.message, function(doc) {});
+				chatLog.add(config.sessionId, data.type, data.userid, data.message, function(doc) {});
 
 
 				if(data.type === "playerMessage" || data.type === "playerStatus") {

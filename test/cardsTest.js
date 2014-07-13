@@ -20,7 +20,7 @@ var BlackCard = mongoose.model('blackcards'),
 var cards = require('../server/controllers/cards');
 
 
-describe.only("Cards", function() {
+describe("Cards", function() {
 
 
 	beforeEach(function(done) {
@@ -47,9 +47,23 @@ describe.only("Cards", function() {
 	describe('#getRandomBlackCard()', function () {
 		it("should return a card", function(done) {
 			cards.getRandomBlackCard("",function(card) {
-				console.log(ObjectId);
-				console.log(card);
 				expect(card.text).to.equal("This is a test black card (#1)");
+				done();
+			});
+		});
+	});
+
+	var card = {};
+
+	card.card_text = "Card Create Test - White";
+	card.card_category = mongoose.Types.ObjectId();
+	card.userid = mongoose.Types.ObjectId();
+	card.card_type = "white";
+
+	describe('#createCard()', function() {
+		it("should create a card", function(done) {
+			cards.createCard(card, function(doc) {
+				expect(doc.message).to.equal("Card Saved");
 				done();
 			});
 		});

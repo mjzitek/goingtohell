@@ -27,7 +27,7 @@ function listCards(color, callback) {
 exports.create = createCard;
 exports.createCard = createCard;
 function createCard(cardInfo, callback) {
-	console.log(cardInfo);
+	//console.log(cardInfo);
 
 	var newCard = null;
 	if(cardInfo.card_type === "black")

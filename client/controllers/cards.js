@@ -56,9 +56,12 @@ exports.getBlackCards = function(req, res) {
 };
 
 exports.getWhiteCards = function(req, res) {
-	cards.getRandomWhiteCards(req.params.amt,"", function(cards) {
-		return res.jsonp(cards);
-	});
+	if(req.params.amt > 0)
+	{
+		cards.getRandomWhiteCards(req.params.amt,"", function(cards) {
+			return res.jsonp(cards);
+		});		
+	}
 }
 
 

@@ -17,7 +17,7 @@ exports.getUserByName = getUserByName;
 function getUserByName(username, callback) {
 	User.findOne({username: username }, { username: 1, name: 1, email: 1, _id: 1, groups: 1, active: 1 }, 
 	  function(err,user) {
-		console.log(user);
+		//console.log(user);
 		callback(user);
 	});
 };
