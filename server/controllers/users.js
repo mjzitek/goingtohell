@@ -25,7 +25,7 @@ function getUserByName(username, callback) {
 exports.activateUser = activateUser;
 function activateUser(playerId, callback) {
 	User.update({_id: playerId }, { active : true}, function(err, doc) {
-		User.findOne({_id: req.params.userid }, { username: 1, name: 1, email: 1, _id: 1, groups: 1, active: 1 }, 
+		User.findOne({_id: playerId }, { username: 1, name: 1, email: 1, _id: 1, groups: 1, active: 1 }, 
 		  function(err,user) {
 		  	callback(user);
 

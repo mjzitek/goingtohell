@@ -27,7 +27,7 @@ describe("Users", function() {
 			email: 'tester@tester.com',
 			username: 'tester',
 			password: 'password',
-			active: true
+			active: false
 		}, function(err, model) {
 			done(err);
 		});
@@ -46,5 +46,23 @@ describe("Users", function() {
 			});
 		});
 	});
+
+	describe('#getUserById()', function() {
+		it("should return 'tester'", function(done) {
+			user.getUserById(ObjectId, function(user) {
+				expect(user.username).to.equal("tester");
+				done();
+			});
+		});
+	});
+
+	describe('#activateUser()', function() {
+		it("should return 'true'", function(done) {
+			user.activateUser(ObjectId, function(user) {
+				expect(user.active).to.equal(true);
+				done();
+			})
+		});
+	})
 
 });

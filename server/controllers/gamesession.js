@@ -41,6 +41,16 @@ function create(callback) {
 
 }
 
+exports.get = getGameSessionById;
+exports.getGameSessionById = getGameSessionById;
+function getGameSessionById(gameSessionId, callback) {
+	//console.log(gameSessionId);
+	GameSession.findOne( { _id: gameSessionId }, function(err, game) {
+		//console.log(game);
+		callback(game);
+	})
+}
+
 /**
  * Removes specified game session
  *
@@ -63,7 +73,7 @@ function remove(gameSessionId, callback) {
  * Add's a player to the specified game session
  *
  * @param  {ObjectId} gameSessionId
- * @param  {String}   player
+ * @param  {String}   player 		Player name
  * @return {String}
  */
 exports.addPlayer = function(gameSessionId,player, callback) {
@@ -71,8 +81,17 @@ exports.addPlayer = function(gameSessionId,player, callback) {
 	//console.log(player);
 
 	Users.findOne({username: player}, function(err,p) {
-	
-		var player = [{ playerInfo: p._id, points: 0, whitecards: [], afk: false, lastPing: new Date() }]
+		//console.log(p._id);
+		var player = [
+						{ 
+							playerInfo: p._id, 
+							points: 0, 
+							whitecards: [], 
+							afk: true,
+							connected: false,
+							lastPing: new Date() 
+						}
+					 ]
 
 		GameSession.findOne({ "players.playerInfo" :  p._id }, function(err, pp) {
 			//console.log(pp);
@@ -84,7 +103,8 @@ exports.addPlayer = function(gameSessionId,player, callback) {
 						$pushAll : { players : player } 
 					},{upsert:true }, function(err, doc) { 
 						if(err) { console.log(err); callback(err);}
-						else { callback('updated')}
+
+						else { callback(doc)}
 
 				});
 			} else {
@@ -127,7 +147,10 @@ exports.getPlayerList = function(gameSessionId, callback) {
 
 			//console.log(playersPlayedCards);
 
+			//console.log(playersInfo);
+
 			playersInfo.players.forEach(function(p) {
+				//console.log(p);
 				//console.log(p.playerInfo.username + " => " + p.connected);
 				if(p.connected) {
 					var player = {};
