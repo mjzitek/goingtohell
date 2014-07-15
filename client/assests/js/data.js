@@ -94,8 +94,10 @@ function setNewRound() {
 
     amount = 8 - $("#whitecards ul li").size();
 
-    getNewWhiteCards(amount);
-
+    if(amount > 0) {
+        getNewWhiteCards(amount);
+    }
+        
     $("#playing-area").children(".whitecard-text").hide();
 }
 
@@ -321,8 +323,7 @@ function writeChat(chatLine) {
             $("#messages").append("<div class='message server-message'>" + chatLine.message + "<div>");
             break;
     }
-
-    $("#messages").scrollTop($(document).height());
+    $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight}, 500);
 }
 
 
