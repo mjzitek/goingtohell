@@ -529,7 +529,8 @@ function addWhiteCardsToPlayersDeck(playerId, cards, callback) {
 	var c = [];
 
 	cards.forEach(function( card ) {
-		c.push(card._id);
+		if(card)
+			c.push(card._id);
 	});
 
 	GameSession.update({ _id: config.gameSessionId, "players.playerInfo" : playerId },

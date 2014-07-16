@@ -1,5 +1,6 @@
 var cards = require('../../server/controllers/cards');
 var gamesession = require('../../server/controllers/gamesession');
+var winningpairs = require('../../server/controllers/winningpairs');
 
 exports.listCards = function(req, res) {
 	cards.listCards(req.params.color, function(cards) {
@@ -78,5 +79,13 @@ exports.play = function(req, res) {
 exports.newHand = function(req, res) {
 	cards.newHand(sessionId, function(doc) {
 		res.send("updated");
+	});
+}
+
+exports.getWinningPairs = function(req, res) {
+	winningpairs.getWinningPairs(function(pairs) {
+		res.render("cards/winning-pairs", {
+			pairs : pairs
+		});
 	});
 }

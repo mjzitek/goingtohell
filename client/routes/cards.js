@@ -10,9 +10,11 @@ module.exports = function(app, models) {
 	app.get('/blackcard', auth.isLoggedIn, cards.getBlackCards);
 	app.get('/whitecards/:amt', auth.isLoggedIn, cards.getWhiteCards);
 	app.get('/cards/addcard', auth.isLoggedIn, auth.needsGroup("cardmaster"), cards.addCard);
-
+	app.get('/cards/winning-pairs', auth.isLoggedIn, cards.getWinningPairs);
+	
 	app.post('/cards/addcard', auth.isLoggedIn, auth.needsGroup("cardmaster"), cards.createCard);
 	app.post('/playcard/:playerId/:cardId/:sessionId', auth.isLoggedIn, cards.play);
+
 
 }
 

@@ -22,3 +22,11 @@ function add(gameSessionId, playerId, blackCardId, whiteCardId, callback) {
 		}
 	});
 }
+
+
+exports.getWinningPairs = getWinningPairs
+function getWinningPairs(callback) {
+	WinningPair.find({}).sort( {_id: -1} ).limit(100).populate("blackcard whitecard").exec(function(err, pairs) {
+		callback(pairs);
+	});
+}

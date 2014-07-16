@@ -6,7 +6,7 @@
 	clear: both;
 }
 
-#blackcard {
+#blackcard, .blackcard {
 	@include box1(6px);
 	width: 230px;
 	height: 240px;
@@ -16,6 +16,10 @@
 	font-size: 1.2em;
 	margin: 10px;
 	float: left;
+
+	-webkit-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+	box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);	
 }
 
 /*#playing-area .whitecard-text {
@@ -93,6 +97,13 @@
 	font-size: .85em;
 }
 
+.whitecard-lg {
+	width: 230px;
+	height: 240px;
+	padding: 10px;
+	font-size: 1.2em;
+	margin: 10px;
+}
 
 .selected {
 	border: 2px solid $highlightBlue;	
@@ -102,7 +113,7 @@
 
 
 #cards-listing {
-	width: 1000px;
+	width: 800px;
 	height: 700px;
 	overflow-y: scroll;
 
@@ -110,4 +121,9 @@
 	padding: 5px;
 
 	background-color: #fff;
+}
+
+
+#cards-listing #card-pair {
+	clear: both;
 }

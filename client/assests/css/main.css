@@ -165,7 +165,7 @@ ul {
   height: 285px;
   clear: both; }
 
-#blackcard {
+#blackcard, .blackcard {
   border: 1px solid #cccccc;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -178,7 +178,10 @@ ul {
   padding: 10px;
   font-size: 1.2em;
   margin: 10px;
-  float: left; }
+  float: left;
+  -webkit-box-shadow: 4px 4px 26px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 26px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 4px 26px -6px rgba(0, 0, 0, 0.75); }
 
 /*#playing-area .whitecard-text {
 	display: none;
@@ -245,16 +248,26 @@ ul {
   height: 110px;
   font-size: .85em; }
 
+.whitecard-lg {
+  width: 230px;
+  height: 240px;
+  padding: 10px;
+  font-size: 1.2em;
+  margin: 10px; }
+
 .selected {
   border: 2px solid #3593e6; }
 
 #cards-listing {
-  width: 1000px;
+  width: 800px;
   height: 700px;
   overflow-y: scroll;
   margin: 10px;
   padding: 5px;
   background-color: #fff; }
+
+#cards-listing #card-pair {
+  clear: both; }
 
 #userlist {
   background-color: #fff;

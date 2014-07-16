@@ -241,7 +241,7 @@ function removePlayer(playerId) {
 }
 
 function updateCards(cards) {
-    console.log(cards);
+    //console.log(cards);
     updateCzar(cards[0].currentCardCzar);
 
     $("#blackcard-text").html(cards[0].blackCardActive.text);

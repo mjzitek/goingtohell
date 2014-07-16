@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 	WhiteCards = mongoose.model('whitecards'),
 	GameSession = mongoose.model('gamesession');
 
+var ObjectId = require('mongoose').Types.ObjectId;
 
 var gamesession = require('./gamesession');
 
@@ -91,6 +92,7 @@ exports.play = function(sessionId, playerId, cardId, callback) {
 	var whiteCardsActive = [{ whitecard: cardId, playerInfo: playerId }];
 
 	//console.log(whiteCardsActive);
+
 	GameSession.findOne({ _id: sessionId, "whiteCardsActive.playerInfo" : playerId}, function(err,doc) {
 		if(doc === null) {
 			GameSession.update({ _id: sessionId, "players.playerInfo" : playerId }, 
@@ -99,11 +101,15 @@ exports.play = function(sessionId, playerId, cardId, callback) {
 					 				whiteCardsPlayed :  cardId,
 					 				whiteCardsActive :  whiteCardsActive 
 					 },
-					 $set : { "players.$.lastPing" : new Date(), "players.$.afk" : false }
+					 $set : { "players.$.lastPing" : new Date(), "players.$.afk" : false },
+					 $pullAll : { "players.$.whitecards" : cardId }
 
-				},{upsert:true }, function(err, doc) { 
+				},{upsert:true, multi: true }, function(err, doc) { 
 					if(err) { console.log(err);}
-					else { callback("updated");}
+					else { 
+						console.log("Play: " + doc);
+						callback("updated");
+					}
 			});			
 		}
 	});
@@ -155,7 +161,7 @@ function getRandomWhiteCards(amount, deck, callback) {
         		{ $group : { _id : {  }, 
         			count : { $sum : 1 }}}
     		], function(err, cardsPlayedCount) {
-    			console.log(cardsPlayedCount);
+    			//console.log(cardsPlayedCount);
     			cardsPlayedCount = (cardsPlayedCount[0] ? cardsPlayedCount[0].count : 0)
 
     			callback(null, cardCount, cardsPlayedCount);
@@ -173,8 +179,8 @@ function getRandomWhiteCards(amount, deck, callback) {
 
 		},
 		function(cardCount, cardsPlayedCount, cardsPlayed, callback) {
-			console.log(cardCount);
-			console.log(cardsPlayedCount);
+			console.log("Total White Cards: " + cardCount);
+			console.log("White Cards Played: " + cardsPlayedCount);
 			//console.log(cardsPlayed);
 
 			var cards = [];
@@ -223,3 +229,4 @@ function getRandomWhiteCards(amount, deck, callback) {
 		}
 	});
 }
+

@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+
+	div#cards-listing
+		each pair, i in pairs
+			p#card-pair
+				div.blackcard
+					span.blackcard-text #{pair.blackcard.text}
+				div(class='whitecard whitecard-lg')
+					span.whitecard-text #{pair.whitecard.text}
