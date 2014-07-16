@@ -1,5 +1,5 @@
 var cards = require('../../server/controllers/cards');
-
+var gamesession = require('../../server/controllers/gamesession');
 
 exports.listCards = function(req, res) {
 	cards.listCards(req.params.color, function(cards) {
@@ -56,10 +56,14 @@ exports.getBlackCards = function(req, res) {
 };
 
 exports.getWhiteCards = function(req, res) {
+	
 	if(req.params.amt > 0)
 	{
 		cards.getRandomWhiteCards(req.params.amt,"", function(cards) {
-			return res.jsonp(cards);
+			gamesession.addWhiteCardsToPlayersDeck(req.user._id, cards, function() {
+				return res.jsonp(cards);
+			});
+			
 		});		
 	}
 }

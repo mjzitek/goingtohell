@@ -14,6 +14,7 @@ var mongoose = require('mongoose'),
 
 
 var cards = require('./cards');
+var winningpairs = require('./winningpairs');
 
 var gameSessionId = "53ac67251f55d70e969cda55";
 
@@ -244,7 +245,7 @@ exports.updatePlayerPingTime = function(gameSessionId,playerId,callback) {
 				if(err) { console.log(err); callback(err);}
 				else { 
 					console.log("AFK Updated: " + doc);
-					callback('updated')
+					callback(doc)
 				}
 
 		});
@@ -272,7 +273,7 @@ function newRound(gameSessionId, callback) {
 					else { 
 						console.log("New Round: " + doc);
 
-							callback('updated');
+							callback(doc);
 						
 						
 
@@ -301,7 +302,8 @@ exports.getActiveCards = function(gameSessionId, callback) {
 
 //53ac67251f55d70e969cda55/53ab82bcedeb7c4f27a42225 
 
-exports.winningCard = function(data, callback) {
+exports.winningCard = winningCard;
+function winningCard(data, callback) {
 	// Announce winner
 
 	// Update points
@@ -311,6 +313,8 @@ exports.winningCard = function(data, callback) {
 // Player Info: 53ab82bcedeb7c4f27a42225
 // Winner Updated: 0
 
+	
+	winningpairs.add(data.sessionId, data.winningPlayerId, data.blackcard, data.winningCardId, function() {});
 
 
 	GameSession.update({ _id: data.sessionId, "players.playerInfo" : data.winningPlayerId },
@@ -453,7 +457,7 @@ function playersCount(gameSessionId, callback) {
 			GameSession.aggregate( [
         		{ $unwind: '$players' },
         		{ $group : { _id : {  }, 
-        			count : { $sum : 1 }}},
+        			count : { $sum : 1 }}}
     		], function(err, doc) {
 
     			callback(null, doc);
@@ -497,6 +501,48 @@ function playersCount(gameSessionId, callback) {
 
 }
 
+exports.resetPlayedWhiteCards = resetPlayedWhiteCards;
+function resetPlayedWhiteCards(callback) {
+	console.log("Reseting played white cards");
+	GameSession.update({ _id:  gameSessionId},
+	{
+		$set : { 
+					whiteCardsPlayed : [], 
+			   }  
+	},
+	{upsert:false }, function(err, doc) { 
+		if(err) { 
+			console.log(err); 
+			callback(err);
+		}
+		else { 
+				callback(doc);
+		}
+
+	});
+}
+
+exports.addWhiteCardsToPlayersDeck = addWhiteCardsToPlayersDeck;
+function addWhiteCardsToPlayersDeck(playerId, cards, callback) {
+	//console.log(cards);
+
+	var c = [];
+
+	cards.forEach(function( card ) {
+		c.push(card._id);
+	});
+
+	GameSession.update({ _id: config.gameSessionId, "players.playerInfo" : playerId },
+		{
+			$push : { "players.$.whitecards" : { $each : c  } }
+		},
+		{upsert:false }, function(err, doc) { 
+			if(err) { console.log(err); callback(err);}
+			else { 
+				callback(doc);
+			}
+	});
+}
 
 function idInArray(array, id) {
 	array.some(function(e){ 

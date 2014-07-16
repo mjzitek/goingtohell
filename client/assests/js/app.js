@@ -27,7 +27,7 @@ $(function() {
 
         if(selectedCardId)
         {   
-            setWinningCard($("#gamesession").val(), selectedCardId, selectedPlayerId, playerId);
+            setWinningCard($("#gamesession").val(), selectedCardId, $('#blackcard').data('id'), selectedPlayerId, playerId);
         }
     });
 
@@ -155,8 +155,8 @@ function getNewWhiteCards(amount) {
         //jsonp: 'jsonp_callback',
         url: 'http://' + Config.hostserver +  ':3000/whitecards/' + amount,
         success: function (res) {
-            //console.log(res);
-            res.cards.forEach(function(c) {
+            console.log(res);
+            res.forEach(function(c) {
                 $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
                     "'><span class='whitecard-text'>" + c.text + "</span></li>");
             });
@@ -186,16 +186,18 @@ function setNewRound(sessionId) {
     });
 }
 
-function setWinningCard(sessionId, winningCardId, winningPlayerId, playedById) {
+function setWinningCard(sessionId, winningCardId, blackcard, winningPlayerId, playedById) {
 
     var data = {};
 
     data.messsageType = "winning-card";
     data.sessionId = sessionId;
-    data.winningCardId = winningCardId;
+    data.winningCardId = winningCardId; // winning white card
+    data.blackcard = blackcard;
     data.winningPlayerId = winningPlayerId;
     data.playedById = playedById;
 
+    console.log(data);
     sendWinningCard(data);
 
 }

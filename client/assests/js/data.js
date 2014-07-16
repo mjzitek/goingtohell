@@ -241,9 +241,13 @@ function removePlayer(playerId) {
 }
 
 function updateCards(cards) {
+    console.log(cards);
     updateCzar(cards[0].currentCardCzar);
 
     $("#blackcard-text").html(cards[0].blackCardActive.text);
+    $('#blackcard').data('id', cards[0].blackCardActive._id);
+
+   //console.log($('#blackcard').data('id'));
 
     cards[0].whiteCardsActive.forEach(function(card) {
         

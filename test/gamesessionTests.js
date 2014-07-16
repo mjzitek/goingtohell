@@ -163,6 +163,34 @@ describe("Game Session", function () {
 		});
 	})
 
+	// ** NOTE:  Mockgoose does not support aggregate at this time
+	// describe("#playersCount", function() {
+	// 	it("should return 2", function(done) {
+	// 		gamesession.playersCount(gameSessionId, function(count) {
+	// 			expect(count.totalPlayers).to.equal(0);
+	// 			done();
+	// 		});
+	// 	});
+	// });
+
+	describe("#updatePlayerPingTime()" ,function () {
+		it("should return 1", function(done) {
+			gamesession.updatePlayerPingTime(gameSessionId, playerId, function(doc) {
+				expect(doc).to.equal(1);
+				done();
+			})
+		})
+	});
+
+	// describe("#newRound()", function() {
+	// 	it("should return 1", function(done) {
+	// 		gamesession.newRound(gameSessionId, playerId, function(doc) {
+	// 			expect(doc).to.equal(0);
+	// 			done();
+	// 		})
+	// 	});
+	// });
+
 	describe("#remove()", function() {
 		it("should return 'removed'", function(done) {
 			gamesession.remove(newGameSessionId, function(doc) {
@@ -172,6 +200,24 @@ describe("Game Session", function () {
 		});
 	});
 
+	// describe("#updatePlayerPingTime()");
+
+	// describe("#newRound()");
+
+	// describe("#getActiveCards()");
+
+	// describe("#winningCard()");
+
+
+	// describe("#getCardCzar()");
+
+	// describe("#setCzar");
+
+	// describe("#getNextCardCzar");
+
+	// describe("#resetPlayers");		
+
+		
 
 
 });

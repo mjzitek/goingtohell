@@ -7,7 +7,9 @@ var mongoose = require('mongoose'),
 	GameSession = mongoose.model('gamesession');
 
 
+var gamesession = require('./gamesession');
 
+var config = require('../../config/config');
 
 exports.listCards = listCards;
 function listCards(color, callback) {
@@ -141,19 +143,58 @@ function getRandomBlackCard(deck, callback) {
 exports.getRandomWhiteCards = getRandomWhiteCards;
 function getRandomWhiteCards(amount, deck, callback) {
 
-	async.series({
-		cards: function(callback) {
+	async.waterfall([
+		function(callback) {
+			WhiteCards.count({}, function(err, cardCount) {
+				callback(null, cardCount);
+			});
+		},
+		function(cardCount, callback) {
+			GameSession.aggregate( [
+        		{ $unwind: '$whiteCardsPlayed' },
+        		{ $group : { _id : {  }, 
+        			count : { $sum : 1 }}}
+    		], function(err, cardsPlayedCount) {
+    			console.log(cardsPlayedCount);
+    			cardsPlayedCount = (cardsPlayedCount[0] ? cardsPlayedCount[0].count : 0)
+
+    			callback(null, cardCount, cardsPlayedCount);
+    		});	
+		},
+		function(cardCount, cardsPlayedCount, callback) {
+			var cardsPlayed = [];
+			GameSession.findOne({}, function(err, gs) {
+				gs.whiteCardsPlayed.forEach(function(card) {
+					cardsPlayed.push(card);
+				});
+
+				callback(null, cardCount, cardsPlayedCount, cardsPlayed);
+			});
+
+		},
+		function(cardCount, cardsPlayedCount, cardsPlayed, callback) {
+			console.log(cardCount);
+			console.log(cardsPlayedCount);
+			//console.log(cardsPlayed);
 
 			var cards = [];
 
 			var filter = {};
 
+			filter['_id'] = { '$nin' : cardsPlayed }
+
+
 			if(deck != "") {
 				filter.deck = deck;
 			}
 
+			if(cardsPlayedCount > (cardCount * .9)) // if 90% of cards have been played then reset
+			{
+				 gamesession.resetPlayedWhiteCards(function() { });
+			}
+
 			for(var i = 0; i < amount; i++) {
-				WhiteCards.count(filter, function(err, cardCount) {
+				//WhiteCards.count(filter, function(err, cardCount) {
 					var randNum = (Math.floor(Math.random() * cardCount));
 					
 					WhiteCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
@@ -161,24 +202,24 @@ function getRandomWhiteCards(amount, deck, callback) {
 						amount--;
 
 						if(amount == 0)
-			{
+						{
 							callback(null, cards);
 						}
 					});
 
-				});
+				//});
 
 			}
 
 
-
 		}
-	},
-	function(err, results) {
+	],
+	function(err, cards) {
+		//console.log(cards);
 		if(err) {
 			callback(err);
 		} else {
-			callback(results);
+			callback(cards);
 		}
 	});
 }

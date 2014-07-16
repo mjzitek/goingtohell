@@ -289,12 +289,19 @@ exports.initialize = function(server, sessionStore) {
 			var sendWinningCardNotfication = function(data, callback) {
 
 				user.getUserById(data.winningPlayerId, function(u) {
-					chatLog.add(config.sessionId, "winnerNotfication", null,  u.username, function(doc) {});
+					username = (u ? u.username : "")
+
+					if(!u) {
+						console.log("** ERROR **")
+						console.log(data);
+					}
+
+					chatLog.add(config.sessionId, "winnerNotfication", null,  username, function(doc) {});
 
 					var data = {};
 
 					data.type = 'winnerNotfication';
-					data.username = u.username;
+					data.username = username;
 
 					socket.emit("winner_notfication", JSON.stringify(data));
 					socket.broadcast.emit("winner_notfication", JSON.stringify(data));
@@ -349,7 +356,11 @@ exports.initialize = function(server, sessionStore) {
 					gamesession.updatePlayerPingTime(config.gameSessionId,data.userid, function(doc){});
 				}
 				var dataMessageOrg = data.message;
-				data.message = sanitize(data.message);
+				// Need to figure out something better.  Sanitize library is too restrictive
+				// and will not allow any lt/gt characters so getting lots of false positives
+//				data.message = sanitize(data.message);
+
+				if(data.message.indexOf('<script') != -1) { data.message = ""; }
 
 				if(dataMessageOrg != data.message) {
 					console.log("** Chat was sanitized: " + dataMessageOrg);
