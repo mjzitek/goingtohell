@@ -204,8 +204,10 @@ function getRandomWhiteCards(amount, deck, callback) {
 					var randNum = (Math.floor(Math.random() * cardCount));
 					
 					WhiteCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
-						cards.push(card);
-						amount--;
+						if(card) {
+							cards.push(card);
+							amount--;
+						}
 
 						if(amount == 0)
 						{

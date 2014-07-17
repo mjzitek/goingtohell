@@ -143,35 +143,35 @@ function getNewBlackCard() {
 }
 
 
-function getNewWhiteCards(amount) {
-    $("#whitecards").html();
+// function getNewWhiteCards(amount) {
+//     // $("#whitecards").html();
 
-    var output = "";
+//     // var output = "";
 
-    $.ajax({
-        dataType: 'jsonp',
-        //data: data,
-        type: "GET",
-        //jsonp: 'jsonp_callback',
-        url: 'http://' + Config.hostserver +  ':3000/whitecards/' + amount,
-        success: function (res) {
-            console.log(res);
-            res.forEach(function(c) {
-                $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
-                    "'><span class='whitecard-text'>" + c.text + "</span></li>");
-            });
+//     // $.ajax({
+//     //     dataType: 'jsonp',
+//     //     //data: data,
+//     //     type: "GET",
+//     //     //jsonp: 'jsonp_callback',
+//     //     url: 'http://' + Config.hostserver +  ':3000/whitecards/' + amount,
+//     //     success: function (res) {
+//     //         console.log(res);
+//     //         res.forEach(function(c) {
+//     //             $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
+//     //                 "'><span class='whitecard-text'>" + c.text + "</span></li>");
+//     //         });
 
-            //$("#whitecards").html(output);
-        },
-        error: function( xhr, status, errorThrown ) {
-            //alert( "Sorry, there was a problem!" );
-            console.log( "Error: " + errorThrown );
-            console.log( "Status: " + status );
-            console.dir( xhr );
-        } 
+//     //         //$("#whitecards").html(output);
+//     //     },
+//     //     error: function( xhr, status, errorThrown ) {
+//     //         //alert( "Sorry, there was a problem!" );
+//     //         console.log( "Error: " + errorThrown );
+//     //         console.log( "Status: " + status );
+//     //         console.dir( xhr );
+//     //     } 
 
-    });
-}
+//    // });
+// }
 
 function playCard(playerId, cardId, sessionId) {
     $.post( 'http://' + Config.hostserver +  ':3000/playcard/' + playerId + '/' + cardId + '/' + sessionId, function( data ) {

@@ -20,6 +20,8 @@ var mongoose = require('mongoose'),
 var config = require('../config/config');
 
 var gamesession = require('./controllers/gamesession'),
+	handmanager = require('./controllers/handmanager'),
+	cards = require('./controllers/cards'),
 	user = require('./controllers/users'),
     chatLog = require('./controllers/chat');
 
@@ -94,11 +96,11 @@ exports.initialize = function(server, sessionStore) {
 
 
 		socket.on("join_room", function(data) {
-			console.log(data);
+			//console.log(data);
 
 			socket.user = data;
 			console.log(socket.user.username + " connected");
-			console.log(socket.id);
+			//console.log(socket.id);
 
 
 
@@ -111,7 +113,7 @@ exports.initialize = function(server, sessionStore) {
 			}
 
 
-			console.log(data);
+			//console.log(data);
 
 			var d = {}
 			d.type = "serverMessage";
@@ -126,6 +128,11 @@ exports.initialize = function(server, sessionStore) {
 
 			gamesession.addPlayer(config.gameSessionId, data.username, function() {
 			});
+
+			handmanager.get(config.gameSessionId, data.userid, function(cards) {
+				gameInfa.socket(players[data.username].socket).emit("white_cards", cards);
+			});
+
 			gamesession.updatePlayerPingTime(config.gameSessionId,data.userid, function(doc) {
 				var playersCount = {};
 				gamesession.playersCount(config.gameSessionId, function(p) {
@@ -155,6 +162,20 @@ exports.initialize = function(server, sessionStore) {
 
 
 		});
+
+		socket.on('white_cards', function(data) {
+			//console.log(socket);
+		
+			if(socket.user)
+			{
+				console.log("++ " + socket.user.username + " requested white cards");	
+				
+				handmanager.get(config.gameSessionId, socket.user.userid, function(cards) {
+					gameInfa.socket(players[socket.user.username].socket).emit("white_cards", cards);
+				});	
+			}
+		});
+
 
 	//  Disconnected
 		socket.on('disconnect', function(){
@@ -190,7 +211,7 @@ exports.initialize = function(server, sessionStore) {
 				playersCount.all = (p.totalPlayers[0] ? p.totalPlayers[0].count : 0);
 				playersCount.connected = (p.totalConnected[0] ? p.totalConnected[0].count : 0);
 				playersCount.available = (p.totalAvailable[0] ? p.totalAvailable[0].count : 0);
-				console.log(playersCount);
+				//console.log(playersCount);
 
 			});  		
 
@@ -241,7 +262,7 @@ exports.initialize = function(server, sessionStore) {
 
 					if(playersUserId.equals(playerId))
 					{
-						console.log(players[name]);
+						//console.log(players[name]);
 
 						gameInfa.socket(players[name].socket).emit("server_notification", message);						
 					}

@@ -8,18 +8,6 @@ var chatInfa = io.connect('/chat_infa'),
     gameInfa = io.connect('/game_infa');
 
 
-gameInfa.on('connect', function() {
-    //console.log("Connecting and getting card data");
-    chatInfa.emit("get_cards", {});
-})
-
-gameInfa.on("cards_list", function(cards) {
-    //console.log("Received card list");
-    updateCards(cards);
-});
-
-
-
 
 chatInfa.on('connect', function() {
 
@@ -29,8 +17,6 @@ chatInfa.on('connect', function() {
 
   chatInfa.emit("get_players", {});
   chatInfa.emit("join_room", data);
-
-
 });
 
 chatInfa.on("players_list", function(players) {
@@ -51,6 +37,23 @@ chatInfa.on("player_disconnected", function(data) {
     removePlayer(data);
 });
 
+chatInfa.on('new_round', function() {
+    setNewRound();
+});
+
+////////////////////
+
+gameInfa.on('connect', function() {
+    //console.log("Connecting and getting card data");
+    chatInfa.emit("get_cards", {});
+})
+
+gameInfa.on("cards_list", function(cards) {
+    //console.log("Received card list");
+    updateCards(cards);
+});
+
+
 gameInfa.on('winner_notfication', function(data) {
     data = JSON.parse(data);
     writeChat(data);
@@ -60,14 +63,18 @@ gameInfa.on('new_round', function() {
     setNewRound();
 });
 
-chatInfa.on('new_round', function() {
-    setNewRound();
-});
-
 gameInfa.on('server_notification', function(message) {
     showServerNotfication(message.text, false);
 });
 
+gameInfa.on('white_cards', function(cards) {
+    console.log("White Cards: ");
+    console.log(cards);
+    updateHand(cards);
+
+});
+
+/////////////////////
 
 chatCom.on('chat_log', function(data) {
 
@@ -96,9 +103,15 @@ function setNewRound() {
 
     if(amount > 0) {
         getNewWhiteCards(amount);
+
     }
         
-    $("#playing-area").children(".whitecard-text").hide();
+    //$("#playing-area").children(".whitecard-text").hide();
+}
+
+function getNewWhiteCards(amount) {
+    console.log("Getting new white cards");
+    chatInfa.emit("white_cards", amount);
 }
 
 function sendWinningCard(data) {
@@ -278,6 +291,31 @@ function updateCards(cards) {
 
 }
 
+function updateHand(cards) {
+
+    var handCount = $( "#whitecards ul li" ).size();
+
+    console.log(handCount);
+    // If card is not in hand and length is not more than 8;
+    cards.forEach(function(c) {
+        console.log(c);
+        var found = false;
+
+        $("#whitecards li").each(function(index) {
+            if($(this).data('id') === c._id) {
+                found = true;
+            }
+        });
+
+        console.log(c._id + " => " + found);
+
+        if(!found && handCount <= 8) {
+            handCount++;
+            $("#whitecards ul").append("<li class='whitecard' data-id='" + c._id + 
+                    "'><span class='whitecard-text'>" + c.text + "</span></li>");
+        }
+    });
+}
 
 function updateCzar(czar) {
 

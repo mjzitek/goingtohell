@@ -545,6 +545,8 @@ function addWhiteCardsToPlayersDeck(playerId, cards, callback) {
 	});
 }
 
+
+
 function idInArray(array, id) {
 	array.some(function(e){ 
   		return e == id; 
