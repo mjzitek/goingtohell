@@ -137,12 +137,87 @@ function getRandomBlackCard(deck, callback) {
 		filter.deck = deck;
 	}
 
-	BlackCards.count(filter, function(err, cardCount) {
-		var randNum = (Math.floor(Math.random() * cardCount));
-		BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
-				callback(card);
-		});
+	// BlackCards.count(filter, function(err, cardCount) {
+	// 	var randNum = (Math.floor(Math.random() * cardCount));
+	// 	BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
+	// 			callback(card);
+	// 	});
 
+	// });
+
+	async.waterfall([
+		function(callback) {
+			var cardsPlayed = [];
+			GameSession.findOne({}, function(err, gs) {
+				gs.blackCardsPlayed.forEach(function(card) {
+					cardsPlayed.push(card);
+				});
+
+				callback(null, cardsPlayed);
+			});
+
+		},
+		function(cardsPlayed, callback) {
+			var filter = {};
+
+			filter['_id'] = { '$nin' : cardsPlayed }
+
+			BlackCards.count(filter, function(err, cardCount) {
+				console.log(cardCount);
+				callback(null, cardsPlayed, cardCount);
+			});
+		},
+		function(cardsPlayed, cardCount, callback) {
+			GameSession.aggregate( [
+        		{ $unwind: '$blackCardsPlayed' },
+        		{ $group : { _id : {  }, 
+        			count : { $sum : 1 }}}
+    		], function(err, blackCardsPlayed) {
+    			//console.log(cardsPlayedCount);
+    			var cardsPlayedCount = (blackCardsPlayed[0] ? blackCardsPlayed[0].count : 0);
+    			callback(null, cardsPlayed, cardCount, cardsPlayedCount);
+    		});	
+		},
+
+		function(cardsPlayed, cardCount, cardsPlayedCount, callback) {
+
+			var cards = [];
+			var filter = {};
+
+			filter['_id'] = { '$nin' : cardsPlayed }
+
+
+			if(deck != "") {
+				filter.deck = deck;
+			}
+
+			if(cardsPlayedCount > (cardCount * .9)) // if 90% of cards have been played then reset
+			{
+				 gamesession.resetPlayedBlackCards(function() { });
+			}
+	
+			var randNum = (Math.floor(Math.random() * cardCount));
+
+
+
+			BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
+				// console.log("Blackcard Found: ");
+				// console.log(randNum);
+				// console.log(card);
+				// console.log("+++++++++");
+				callback(null, card);
+			});
+
+
+		}
+	],
+	function(err, card) {
+		//console.log(cards);
+		if(err) {
+			callback(err);
+		} else {
+			callback(card);
+		}
 	});
 }
 

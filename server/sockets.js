@@ -26,8 +26,6 @@ var gamesession = require('./controllers/gamesession'),
     chatLog = require('./controllers/chat');
 
 
-
-
 var players = {};
 
 

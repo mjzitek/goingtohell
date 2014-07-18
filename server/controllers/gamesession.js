@@ -244,7 +244,7 @@ exports.updatePlayerPingTime = function(gameSessionId,playerId,callback) {
 			{upsert:false }, function(err, doc) { 
 				if(err) { console.log(err); callback(err);}
 				else { 
-					console.log("AFK Updated: " + doc);
+					//console.log("AFK Updated: " + doc);
 					callback(doc)
 				}
 
@@ -256,29 +256,31 @@ exports.newRound = newRound;
 function newRound(gameSessionId, callback) {
 	cards.getRandomBlackCard("", function(blackCard) {
 	//	console.log(blackCard);
-		getNextCardCzar(function(cardCzar) {
-			GameSession.update({ _id:  gameSessionId},
-				{
-					$inc : { 	roundsPlayed : 1 },
-					$set : { 
-								whiteCardsActive : [], 
-								blackCardActive : blackCard._id
-						   }  
-				},
-				{upsert:false }, function(err, doc) { 
-					if(err) { 
-						console.log(err); 
-						callback(err);
-					}
-					else { 
-						console.log("New Round: " + doc);
+		addPlayedBlackCard(gameSessionId, blackCard, function(doc) {
+			getNextCardCzar(function(cardCzar) {
+				GameSession.update({ _id:  gameSessionId},
+					{
+						$inc : { 	roundsPlayed : 1 },
+						$set : { 
+									whiteCardsActive : [], 
+									blackCardActive : blackCard._id
+							   }  
+					},
+					{upsert:false }, function(err, doc) { 
+						if(err) { 
+							console.log(err); 
+							callback(err);
+						}
+						else { 
+							//console.log("New Round: " + doc);
 
-							callback(doc);
-						
-						
+								callback(doc);
+							
+							
 
-					}
+						}
 
+				});
 			});
 		});
 	});
@@ -367,7 +369,7 @@ function setCzar(callback) {
 				callback(err);			
 			}
 			else { 
-				console.log("New Czar: " + doc);
+				//console.log("New Czar: " + doc);
 				callback('updated');
 			}
 
@@ -502,7 +504,7 @@ function playersCount(gameSessionId, callback) {
 }
 
 exports.resetPlayedWhiteCards = resetPlayedWhiteCards;
-function resetPlayedWhiteCards(callback) {
+function resetPlayedWhiteCards(gameSessionId, callback) {
 	console.log("Reseting played white cards");
 	GameSession.update({ _id:  gameSessionId},
 	{
@@ -520,6 +522,45 @@ function resetPlayedWhiteCards(callback) {
 		}
 
 	});
+}
+
+function resetPlayedBlackCards(gameSessionId, callback) {
+	console.log("Reseting played black cards");
+	GameSession.update({ _id:  gameSessionId},
+	{
+		$set : { 
+					blackCardsPlayed : [], 
+			   }  
+	},
+	{upsert:false }, function(err, doc) { 
+		if(err) { 
+			console.log(err); 
+			callback(err);
+		}
+		else { 
+				callback(doc);
+		}
+
+	});	
+}
+
+exports.addPlayedBlackCard = addPlayedBlackCard;
+function addPlayedBlackCard(gameSessionId, blackcard, callback) {
+	// console.log("Blackcard:");
+	// console.log(blackcard);
+
+	GameSession.update({ _id: gameSessionId}, 
+		{
+			 $push : { 
+			 				blackCardsPlayed :  blackcard._id
+			 		 }
+
+		},{upsert:true, multi: true }, function(err, doc) { 
+			if(err) { console.log(err); callback(err);}
+			else { 
+				callback("updated");
+			}
+	});	
 }
 
 exports.addWhiteCardsToPlayersDeck = addWhiteCardsToPlayersDeck;
