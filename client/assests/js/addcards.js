@@ -1,6 +1,24 @@
+
 $(function() {
 
-	$("#message").delay(1000).fadeOut(2000);
+	$.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }; 
+
+
 
 	$("#card_category")
 	     .append($("<option></option>")
@@ -32,6 +50,58 @@ $(function() {
 		}
 	});
 
+	$('#submit').click(function(event) {
+		submitData();
+		event.preventDefault();
+	});
 
 
 });
+
+
+function submitData() {
+
+	data = JSON.stringify($("#addcard-form").serializeObject())
+
+	console.log(data);
+
+	var url;
+
+	if($('#cardId').val() != 'undefined') {
+		url = '/cards/edit/' + $('#cardId').val();
+	} else {
+		url = '/cards/addcard/';
+	}
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: "application/json",
+        data: data,
+        success: function (data, textStatus, jqXHR) {
+            // do something with your data here.
+            console.log(data);
+            $('#message').html(data.message);
+            $('#message').addClass(data.msg_class);
+            $('#message').show();
+
+            $("#message").delay(1000).fadeOut(2000);
+
+            clearCard();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // likewise do something with your error here.
+        }
+    });
+
+
+}
+
+
+function clearCard() {
+	$('#card_text').val("");
+}
+
+
+

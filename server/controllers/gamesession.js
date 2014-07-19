@@ -430,7 +430,7 @@ function getNextCardCzar(callback) {
 				callback(err);
 			}
 			else { 
-				console.log("New Czar: " + doc);
+				//console.log("New Czar: " + doc);
 
 					callback('updated');
 
@@ -524,6 +524,7 @@ function resetPlayedWhiteCards(gameSessionId, callback) {
 	});
 }
 
+exports.resetPlayedBlackCards = resetPlayedBlackCards;
 function resetPlayedBlackCards(gameSessionId, callback) {
 	console.log("Reseting played black cards");
 	GameSession.update({ _id:  gameSessionId},

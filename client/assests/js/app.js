@@ -4,7 +4,7 @@ $(function() {
 
     var allowWinningSelection = true;
 
-    getNewWhiteCards(8);
+    //getNewWhiteCards(8);
 
     $('#played-cards ul li').each(function (index) {
         if($(this).data("playerid") === ($("#player-info #name").data("id")))

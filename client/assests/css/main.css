@@ -62,6 +62,9 @@ footer {
   /* IE6-9 */
   font-size: .8em; }
 
+h2 {
+  margin-left: 10px; }
+
 ul {
   list-style-type: none;
   padding: 0px;
@@ -260,12 +263,27 @@ ul {
   border: 2px solid #3593e6; }
 
 #cards-listing {
-  width: 800px;
+  width: 700px;
   height: 700px;
   overflow-y: scroll;
   margin: 10px;
   padding: 5px;
   background-color: #fff; }
+
+#cards-listing.black {
+  background-color: #000;
+  color: #fff; }
+
+#cards-listing.white {
+  background-color: #fff;
+  color: #000; }
+
+#cards-listing p {
+  padding: 6px 0; }
+
+#cards-listing.card-pairs {
+  width: 550px;
+  background-color: #d6d3d0; }
 
 #cards-listing #card-pair {
   clear: both; }

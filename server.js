@@ -70,6 +70,7 @@ require('./config/passport')(passport);
 	app.use(express.static(__dirname + '/client/assests'));
 	app.use(favicon(__dirname + '/client/assests/favicon.ico'));
 	app.use(bodyParser.urlencoded());
+	app.use(bodyParser.json())
 	//app.use(express.cookieParser());
     app.use(session({
         secret: config.sessionSecret,

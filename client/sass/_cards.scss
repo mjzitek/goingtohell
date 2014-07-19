@@ -114,7 +114,7 @@
 
 
 #cards-listing {
-	width: 800px;
+	width: 700px;
 	height: 700px;
 	overflow-y: scroll;
 
@@ -124,7 +124,25 @@
 	background-color: #fff;
 }
 
+#cards-listing.black {
+	background-color: #000;
+	color: #fff;
+}
+
+#cards-listing.white {
+	background-color: #fff;
+	color: #000;
+}
+
+#cards-listing p {
+	padding: 6px 0;
+}
+#cards-listing.card-pairs {
+	width: 550px;
+	background-color: $backgroundColor1;
+}
 
 #cards-listing #card-pair {
 	clear: both;
 }
+

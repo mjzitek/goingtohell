@@ -5,7 +5,8 @@ var winningpairs = require('../../server/controllers/winningpairs');
 exports.listCards = function(req, res) {
 	cards.listCards(req.params.color, function(cards) {
 		res.render("cards/cards", {
-			cards : cards
+			cards : cards,
+			color: req.params.color
 		});
 	});
 
@@ -28,6 +29,8 @@ exports.addCard = function(req, res) {
 
 exports.createCard = function(req, res) {
 
+	console.log(req.body);
+
 	if(req.user) {
 		username = req.user.username;
 		userid = req.user._id;
@@ -36,17 +39,31 @@ exports.createCard = function(req, res) {
 		userid = "";
 	}
 
+
 	cards.createCard(req.body, function(doc) {
-		res.render("cards/addcard", {
-			message: doc.message,
-			msg_class: doc.msg_class,
-			username: username,
-			userid: userid,
-			last_card_type: req.body.card_type
-		});
+		var msg = {};
+		msg.message = doc.message;
+		msg.msg_class = doc.msg_class;
+		msg.cardId = doc.cardId;
+
+		res.send(msg);
+
+		// res.render("cards/addcard", {
+		// 	message: doc.message,
+		// 	msg_class: doc.msg_class,
+		// 	username: username,
+		// 	userid: userid,
+		// 	last_card_type: req.body.card_type
+		// });
 	});
+}
 
+exports.editCard = function(req, res) {
+	return res.send('hello');
+}
 
+exports.getCard = function(req, res) {
+	return res.send('hello');
 }
 
 exports.getBlackCards = function(req, res) {

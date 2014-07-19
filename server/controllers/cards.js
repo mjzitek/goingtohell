@@ -30,33 +30,36 @@ function listCards(color, callback) {
 exports.create = createCard;
 exports.createCard = createCard;
 function createCard(cardInfo, callback) {
-	//console.log(cardInfo);
+	console.log(cardInfo);
 
 	var newCard = null;
+	var cardDeck;
+	
 	if(cardInfo.card_type === "black")
 	{
-		newCard = new BlackCards({
-			text: 		cardInfo.card_text,
-			deck: 		cardInfo.card_category,
-			createdate: new Date(),
-			createdby: 	cardInfo.userid,
-			active: 	true,
-		});
+		cardDeck = BlackCards;
 	}
 	else if(cardInfo.card_type === "white")
 	{
-		newCard = new WhiteCards({
+		cardDeck = WhiteCards;
+	}
+
+	if(cardDeck) {
+		newCard = new cardDeck({
 			text: 		cardInfo.card_text,
 			deck: 		cardInfo.card_category,
+			nsfw:       cardInfo.nsfw,			
 			createdate: new Date(),
 			createdby: 	cardInfo.userid,
-			active: 	true,
+			active: 	cardInfo.active,
 		});
 	}
 
 	if(newCard) {
 		newCard.save(function(err) {
 			var doc = {};
+
+			doc.cardId = newCard._id;
 			
 			if(err) {
 				if (11001 === err.code || 11000 === err.code) {
@@ -65,7 +68,6 @@ function createCard(cardInfo, callback) {
 					doc.message = "A error has occured";
 					console.log(err);
 				}
-
 				doc.msg_class = "alert alert-warning";
 				callback(doc);
 			} else {
@@ -73,15 +75,40 @@ function createCard(cardInfo, callback) {
 				doc.msg_class = "alert alert-success";
 				callback(doc);
 			}
-
-
-
 		});
 	} else {
 		callback("");
 	}
 }
 
+exports.edit = editCard;
+exports.editCard = editCard;
+function editCard(cardInfo, callback) {
+	var cardDeck;
+
+	if(cardInfo.card_type === "black")
+	{
+		cardDeck = BlackCards;
+	}
+	else if(cardInfo.card_type === "white")
+	{
+		cardDeck = WhiteCards;
+	}
+
+	if(cardDeck) {
+		cardDeck.update({ _id: cardInfo._id }, 
+		{
+			text: 	cardInfo.card_text,
+			deck: 	cardInfo.card_category,
+			active: cardInfo.active,
+			nsfw: 	cardInfo.nsfw,
+			editdate: new Date(),
+			editedby: cardInfo.user_info
+		});		
+	}
+
+
+}
 
 exports.play = function(sessionId, playerId, cardId, callback) {
 
@@ -193,7 +220,7 @@ function getRandomBlackCard(deck, callback) {
 
 			if(cardsPlayedCount > (cardCount * .9)) // if 90% of cards have been played then reset
 			{
-				 gamesession.resetPlayedBlackCards(function() { });
+				 gamesession.resetPlayedBlackCards(config.gameSessionId, function(doc) { });
 			}
 	
 			var randNum = (Math.floor(Math.random() * cardCount));
@@ -226,11 +253,26 @@ function getRandomWhiteCards(amount, deck, callback) {
 
 	async.waterfall([
 		function(callback) {
-			WhiteCards.count({}, function(err, cardCount) {
-				callback(null, cardCount);
+			var cardsPlayed = [];
+			GameSession.findOne({}, function(err, gs) {
+				gs.whiteCardsPlayed.forEach(function(card) {
+					cardsPlayed.push(card);
+				});
+
+				callback(null, cardsPlayed);
+			});
+
+		},
+		function(cardsPlayed, callback) {
+			var filter = {};
+
+			filter['_id'] = { '$nin' : cardsPlayed }
+
+			WhiteCards.count(filter, function(err, cardCount) {
+				callback(null, cardsPlayed, cardCount);
 			});
 		},
-		function(cardCount, callback) {
+		function(cardsPlayed, cardCount, callback) {
 			GameSession.aggregate( [
         		{ $unwind: '$whiteCardsPlayed' },
         		{ $group : { _id : {  }, 
@@ -239,21 +281,11 @@ function getRandomWhiteCards(amount, deck, callback) {
     			//console.log(cardsPlayedCount);
     			cardsPlayedCount = (cardsPlayedCount[0] ? cardsPlayedCount[0].count : 0)
 
-    			callback(null, cardCount, cardsPlayedCount);
+    			callback(null, cardsPlayed, cardCount, cardsPlayedCount);
     		});	
 		},
-		function(cardCount, cardsPlayedCount, callback) {
-			var cardsPlayed = [];
-			GameSession.findOne({}, function(err, gs) {
-				gs.whiteCardsPlayed.forEach(function(card) {
-					cardsPlayed.push(card);
-				});
 
-				callback(null, cardCount, cardsPlayedCount, cardsPlayed);
-			});
-
-		},
-		function(cardCount, cardsPlayedCount, cardsPlayed, callback) {
+		function(cardsPlayed, cardCount, cardsPlayedCount,  callback) {
 			console.log("Total White Cards: " + cardCount);
 			console.log("White Cards Played: " + cardsPlayedCount);
 			//console.log(cardsPlayed);
@@ -268,10 +300,10 @@ function getRandomWhiteCards(amount, deck, callback) {
 			if(deck != "") {
 				filter.deck = deck;
 			}
-
+									// 
 			if(cardsPlayedCount > (cardCount * .9)) // if 90% of cards have been played then reset
 			{
-				 gamesession.resetPlayedWhiteCards(function() { });
+				 gamesession.resetPlayedWhiteCards(config.gameSessionId, function() { });
 			}
 
 			for(var i = 0; i < amount; i++) {

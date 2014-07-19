@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-
-	div#cards-listing
+	h2 #{color} cards
+	div(id='cards-listing', class='#{color}')
 		each card, i in cards
 			p #{i}. #{card.text}
