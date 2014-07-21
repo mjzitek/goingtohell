@@ -10,13 +10,13 @@ block content
                 label(for='cardtype') Card Type:
                 span.inputs
                    span.radio-label Black
-                   input(type="radio", id='radio-black', name="card_type", value="black", ("#{card.card_type}" === "black" ? checked : undefined))
+                   input(type="radio", id='radio-black', name="card_type", value="black", checked="#{card.card_type}" == "black")
                    span.radio-label White
-                   input(type="radio", id='radio-white', name="card_type", value="white", ("#{card.card_type}" === "white" ? checked : undefined)))
+                   input(type="radio", id='radio-white', name="card_type", value="white", checked="#{card.card_type}" == "white")
                   
             div.form-input
                 label(for='cardtext') Text:
-                textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard', value="#{card.card_text}" )
+                textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard', value="" ) #{card.card_text}
             div.form-input
                 label(for='username') Decks: 
             
@@ -25,21 +25,20 @@ block content
                 label(for='nsfw') NSFW:
                 span.inputs
                     span.radio-label No
-                    input(type="radio", id='radio-nsfw', name="nsfw", value="false", checked)
+                    input(type="radio", id='radio-nsfw', name="nsfw", value="false", checked="#{card.nsfw}" == "false")
                     span.radio-label Yes
-                    input(type="radio", id='radio-nsfw', name="nsfw", value="true")               
+                    input(type="radio", id='radio-nsfw', name="nsfw", value="true", checked="#{card.nsfw}" == "true")               
             div.form-input
                 label(for='active') Active:
                 span.inputs
                     span.radio-label No
-                    input(type="radio", id='radio-active', name="active", value="false")
+                    input(type="radio", id='radio-active', name="active", value="false", checked="#{card.active}" == "false")
                     span.radio-label Yes
-                    input(type="radio", id='radio-active', name="active", value="true", checked)                                    
+                    input(type="radio", id='radio-active', name="active", value="true", checked="#{card.active}" == "true")                                    
             div.form-input
                 input(type='submit', value='Add Card', id='submit')
             div.form-input
-                input(type='hidden', value="#{last_card_type}" id='last-card-type')
-                input(type='hidden', value="#{cardId}" id='cardId')
+                input(type='hidden', value="#{card.cardId}" id='cardId')
         div(id='message' class="#{msg_class}") #{message}
 
         div(style='margin: 10px 0 5px 50px;')

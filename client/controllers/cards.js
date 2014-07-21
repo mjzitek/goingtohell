@@ -59,17 +59,28 @@ exports.createCard = function(req, res) {
 }
 
 exports.editCard = function(req, res) {
-	 
-	cards.get(card.body, function(card) {
-		res.render("cards/editcard", {
-	 		card : card
-	 	});
-	});
+
 
 }
 
 exports.getCard = function(req, res) {
-	return res.send('hello');
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+		userid = "";
+	}
+
+	cards.get(req.params.cardId, req.params.cardType, function(card) {
+		console.log(card);
+		res.render("cards/editcard", {
+			card : card,
+	 		card_text: card.card_text,
+	 		username: username,
+	 		userid : userid
+	 	});
+	});
 }
 
 exports.getBlackCards = function(req, res) {
@@ -107,6 +118,7 @@ exports.newHand = function(req, res) {
 
 exports.getWinningPairs = function(req, res) {
 	winningpairs.getWinningPairs(function(pairs) {
+		console.log(pairs)
 		res.render("cards/winning-pairs", {
 			pairs : pairs
 		});

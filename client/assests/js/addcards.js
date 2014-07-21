@@ -79,7 +79,7 @@ function submitData() {
 
     $.ajax({
         url: url,
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         data: data,
         success: function (data, textStatus, jqXHR) {
@@ -103,26 +103,7 @@ function submitData() {
 }
 
 function editCard(cardId, cardType) {
-	var card = {};
-	card.cardId = cardId;
-	card.cardType = cardType
-
-	console.log(card);
-
-    $.ajax({
-        url: 'cards/edit',
-        type: "GET",
-        contentType: "application/json",
-        data: JSON.stringify(card),
-        success: function (data, textStatus, jqXHR) {
-
-            console.log(data);
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            // likewise do something with your error here.
-        }
-    });
+	window.location.href = "/cards/edit/" + cardId + "/" + cardType
 }
 
 

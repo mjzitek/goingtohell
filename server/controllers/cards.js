@@ -14,10 +14,10 @@ var config = require('../../config/config');
 
 exports.get = getCard;
 exports.getCard = getCard;
-function getCard(card, callback) {
-	var cardDeck;
-	
+function getCard(cardId, cardType, callback) {
+	console.log(cardId + " " + cardType);
 
+	var cardDeck;
 
 	if(cardType === "black")
 	{
@@ -28,22 +28,28 @@ function getCard(card, callback) {
 		cardDeck = WhiteCards;
 	}	
 
+	if(cardDeck)
+	{
+		cardDeck.findOne( { _id : cardId}, function(err, card) {
 
-	cardType.findOne( { _id : cardId}, function(err, card) {
+			var cardInfo = {};
+			
+			if(card) 
+			{
+				cardInfo.cardId = card._id;
+				cardInfo.card_type = cardType;
+				cardInfo.card_text = card.text;
+				cardInfo.card_category = card.deck;
+				cardInfo.nsfw = card.nsfw;
+				cardInfo.active = card.active;			
+			}
 
-		var cardInfo = {};
-		
-		if(card) 
-		{
-			cardInfo.card_type = cardType;
-			cardInfo.card_text = card.text;
-			cardInfo.card_category = card.deck;
-			cardInfo.nsfw = card.nsfw;
-			cardInfo.active = card.active;			
-		}
+			callback(cardInfo);
+		});		
+	} else {
+		callback("error");
+	}
 
-		callback(cardInfo);
-	});
 
 }
 
