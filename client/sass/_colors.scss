@@ -1,7 +1,7 @@
 $backgroundColor1: #D6D3D0;
 $backgroundColor2: #000000;
 
-$darkBlue1: #081569;
+$darkBlue1: #000094;
 $darkGreen1: #15AD6E;
 
 $box-borderColor1: #ccc;
@@ -9,3 +9,25 @@ $box-borderColor1: #ccc;
 
 $highlightBlue: #3593E6;
 
+$_color-base-grey: rgb(229,231,234);
+
+$palettes: (
+
+    blue: (
+    	base:      #0000FF,
+    	x-light:   #AEC1EB,
+    	light:     #81A6F7,
+    	mid-light: #5C6FFF,
+    	dark:	   #000094,
+    	x-dark:    #010152
+    ),
+    grey: (
+        base:  $_color-base-grey,
+        light: lighten($_color-base-grey, 10%),
+        dark: darken($_color-base-grey, 10%)
+    )
+);
+
+@function palette($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}
