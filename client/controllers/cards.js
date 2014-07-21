@@ -28,7 +28,7 @@ exports.addCard = function(req, res) {
 }
 
 exports.createCard = function(req, res) {
-
+	console.log("Creating card");
 	console.log(req.body);
 
 	if(req.user) {
@@ -59,7 +59,25 @@ exports.createCard = function(req, res) {
 }
 
 exports.editCard = function(req, res) {
+	console.log("Updating card");
+	console.log(req.body);
 
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+		userid = "";
+	}
+
+
+	cards.editCard(req.body, function(doc) {
+		var msg = {};
+		msg.message = doc.message;
+		msg.msg_class = doc.msg_class;
+
+		res.send(msg);
+	});
 
 }
 

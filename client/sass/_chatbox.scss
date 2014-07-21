@@ -47,7 +47,7 @@
 #userlist .user .usertext .user-points {
 	padding-left: 6px;
 	font-size: .85em;
-	color: #18B52D;
+	color: palette(green, light);
 	float: left;
 	width: 100px;
 }
@@ -69,7 +69,7 @@
 #userlist .user .usertext .play-status {
 	float: right;
 	width: 80px;
-	color: $darkBlue1;
+	color: palette(blue, dark);
 	text-align: right;
 }
 
@@ -104,8 +104,15 @@
 #chatbox .message .username {
 	padding-right: 6px;
 	font-weight: bold;
-	color: $darkBlue1;
+	color: palette(blue, mid-light);
 }
+
+#chatbox .message .own-username {
+	padding-right: 6px;
+	font-weight: bold;
+	color: palette(blue, dark);
+}
+
 #chatbox .message .text {
 
 }
@@ -138,11 +145,12 @@
 
 
 .server-message {
-	font-weight: bold;
-	color: #d00;
+	font-weight: normal;
+	color: palette(grey, dark);
 }
 
 .message-error {
 	color: #d00;
 	font-style: italic;
 }
+

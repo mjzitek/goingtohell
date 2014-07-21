@@ -55,6 +55,11 @@ $(function() {
 		event.preventDefault();
 	});
 
+	$('#submit-edit').click(function(event) {
+		submitData();
+		event.preventDefault();
+	});
+
 	$('#cards-listing').children('.card').click(function() {
 		console.log($(this).data("id"));
 		editCard($(this).data("id"), $("#cardType").val());
@@ -77,9 +82,11 @@ function submitData() {
 		url = '/cards/addcard/';
 	}
 
+	console.log(url);
+
     $.ajax({
         url: url,
-        type: "GET",
+        type: "POST",
         contentType: "application/json",
         data: data,
         success: function (data, textStatus, jqXHR) {

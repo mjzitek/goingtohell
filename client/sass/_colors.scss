@@ -12,12 +12,16 @@ $highlightBlue: #3593E6;
 $_color-base-grey: rgb(229,231,234);
 
 $palettes: (
-
+	green: (
+		base:      #00FF00,
+		light: 	   #18B52D,
+		dark:	   #15AD6E  
+	),
     blue: (
     	base:      #0000FF,
     	x-light:   #AEC1EB,
     	light:     #81A6F7,
-    	mid-light: #5C6FFF,
+    	mid-light: #428bca,
     	dark:	   #000094,
     	x-dark:    #010152
     ),

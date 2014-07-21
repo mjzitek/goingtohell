@@ -1,4 +1,13 @@
 /*  Background Mixins */
+/*
+
+* { background-color: rgba(255,0,0,.2); }
+* * { background-color: rgba(0,255,0,.2); }
+* * * { background-color: rgba(0,0,255,.2); }
+* * * * { background-color: rgba(255,0,255,.2); }
+* * * * * { background-color: rgba(0,255,255,.2); }
+* * * * * * { background-color: rgba(255,255,0,.2); }
+*/
 body {
   color: #4c4c4c;
   background-color: #d6d3d0;
@@ -328,7 +337,7 @@ ul {
 #userlist .user .usertext .user-points {
   padding-left: 6px;
   font-size: .85em;
-  color: #18B52D;
+  color: #18b52d;
   float: left;
   width: 100px; }
 
@@ -346,7 +355,7 @@ ul {
 #userlist .user .usertext .play-status {
   float: right;
   width: 80px;
-  color: #081569;
+  color: #000094;
   text-align: right; }
 
 #chatbox {
@@ -375,7 +384,12 @@ ul {
 #chatbox .message .username {
   padding-right: 6px;
   font-weight: bold;
-  color: #081569; }
+  color: #428bca; }
+
+#chatbox .message .own-username {
+  padding-right: 6px;
+  font-weight: bold;
+  color: #000094; }
 
 #chatbox #chatbox-entry {
   height: 25px;
@@ -398,8 +412,8 @@ ul {
   font-size: .9em; }
 
 .server-message {
-  font-weight: bold;
-  color: #d00; }
+  font-weight: normal;
+  color: #c9cdd3; }
 
 .message-error {
   color: #d00;

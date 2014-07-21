@@ -3,4 +3,4 @@ config/settings.js
 client/assests/js/config.js
 logs/data.log
 logs/debug.log
-
+.sass-cache/

@@ -1,4 +1,4 @@
-var socket = io.connect(Config.hostserver + ':' + Config.port);
+ var socket = io.connect(Config.hostserver + ':' + Config.port);
 
 
 //socket.emit("set_chat", { id: "531e31aa897073c968e8afe7"});
@@ -335,10 +335,13 @@ function updateCzar(czar) {
 
 function writeChat(chatLine) {
     var messageType = "";
+    var usernameType = "";
 
-   // console.log(chatLine);
-
-
+    if($("#player-info #name").data("id") === chatLine.userid) {
+        usernameType = "own-username";
+    } else {
+        usernameType = "username";
+    }
 
     switch(chatLine.type) {
         case 'playerMessage':
@@ -350,7 +353,7 @@ function writeChat(chatLine) {
                   messageType = "player-status";
               }
 
-            $("#messages").append("<div class='message " + messageType +"'><span class='username'>" + 
+            $("#messages").append("<div class='message " + messageType +"'><span class='" + usernameType + "'>" + 
                 chatLine.username + 
                 "</span><span class='text'>" + chatLine.message + "</span><div>"); 
 

@@ -146,6 +146,19 @@ function editCard(cardInfo, callback) {
 			nsfw: 	cardInfo.nsfw,
 			editdate: new Date(),
 			editedby: cardInfo.user_info
+		}, function(doc) {
+			var data = {};
+			
+			if(doc === 1)
+			{
+				data.message = "Card Saved";
+				data.msg_class = "alert alert-success";
+			} else {
+				data.message = "Error updating card";
+				data.msg_class = "alert alert-warning";
+			}
+			callback(data);
+
 		});		
 	}
 
