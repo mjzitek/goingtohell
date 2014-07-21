@@ -4,4 +4,12 @@ block content
 	h2 #{color} cards
 	div(id='cards-listing', class='#{color}')
 		each card, i in cards
-			p #{i}. #{card.text}
+			div(class='card',data-id='#{card._id}') #{i}. #{card.text}
+
+
+	div
+		input(type='hidden', value="#{color}" id='cardType')
+
+
+block append scripts
+	script(src="/js/addcards.js")  

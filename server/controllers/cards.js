@@ -12,6 +12,42 @@ var gamesession = require('./gamesession');
 
 var config = require('../../config/config');
 
+exports.get = getCard;
+exports.getCard = getCard;
+function getCard(card, callback) {
+	var cardDeck;
+	
+
+
+	if(cardType === "black")
+	{
+		cardDeck = BlackCards;
+	}
+	else if(cardType === "white")
+	{
+		cardDeck = WhiteCards;
+	}	
+
+
+	cardType.findOne( { _id : cardId}, function(err, card) {
+
+		var cardInfo = {};
+		
+		if(card) 
+		{
+			cardInfo.card_type = cardType;
+			cardInfo.card_text = card.text;
+			cardInfo.card_category = card.deck;
+			cardInfo.nsfw = card.nsfw;
+			cardInfo.active = card.active;			
+		}
+
+		callback(cardInfo);
+	});
+
+}
+
+
 exports.listCards = listCards;
 function listCards(color, callback) {
 

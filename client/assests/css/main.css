@@ -278,7 +278,7 @@ ul {
   background-color: #fff;
   color: #000; }
 
-#cards-listing p {
+#cards-listing .card {
   padding: 6px 0; }
 
 #cards-listing.card-pairs {

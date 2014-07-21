@@ -55,6 +55,10 @@ $(function() {
 		event.preventDefault();
 	});
 
+	$('#cards-listing').children('.card').click(function() {
+		console.log($(this).data("id"));
+		editCard($(this).data("id"), $("#cardType").val());
+	});
 
 });
 
@@ -68,7 +72,7 @@ function submitData() {
 	var url;
 
 	if($('#cardId').val() != 'undefined') {
-		url = '/cards/edit/' + $('#cardId').val();
+		url = '/cards/edit/';
 	} else {
 		url = '/cards/addcard/';
 	}
@@ -96,6 +100,29 @@ function submitData() {
     });
 
 
+}
+
+function editCard(cardId, cardType) {
+	var card = {};
+	card.cardId = cardId;
+	card.cardType = cardType
+
+	console.log(card);
+
+    $.ajax({
+        url: 'cards/edit',
+        type: "GET",
+        contentType: "application/json",
+        data: JSON.stringify(card),
+        success: function (data, textStatus, jqXHR) {
+
+            console.log(data);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // likewise do something with your error here.
+        }
+    });
 }
 
 

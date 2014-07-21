@@ -10,13 +10,13 @@ block content
                 label(for='cardtype') Card Type:
                 span.inputs
                    span.radio-label Black
-                   input(type="radio", id='radio-black', name="card_type", value="black", checked)
+                   input(type="radio", id='radio-black', name="card_type", value="black", ("#{card.card_type}" === "black" ? checked : undefined))
                    span.radio-label White
-                   input(type="radio", id='radio-white', name="card_type", value="white")
+                   input(type="radio", id='radio-white', name="card_type", value="white", ("#{card.card_type}" === "white" ? checked : undefined)))
                   
             div.form-input
                 label(for='cardtext') Text:
-                textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard', value="" )
+                textarea(name='card_text', rows=4, columns=50, id='card_text', class='card_text-blackcard', value="#{card.card_text}" )
             div.form-input
                 label(for='username') Decks: 
             

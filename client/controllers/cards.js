@@ -59,7 +59,13 @@ exports.createCard = function(req, res) {
 }
 
 exports.editCard = function(req, res) {
-	return res.send('hello');
+	 
+	cards.get(card.body, function(card) {
+		res.render("cards/editcard", {
+	 		card : card
+	 	});
+	});
+
 }
 
 exports.getCard = function(req, res) {
