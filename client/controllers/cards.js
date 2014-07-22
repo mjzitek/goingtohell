@@ -29,54 +29,17 @@ exports.addCard = function(req, res) {
 
 exports.createCard = function(req, res) {
 	console.log("Creating card");
-	console.log(req.body);
-
-	if(req.user) {
-		username = req.user.username;
-		userid = req.user._id;
-	} else {
-		username = "Guest";
-		userid = "";
-	}
-
 
 	cards.createCard(req.body, function(doc) {
-		var msg = {};
-		msg.message = doc.message;
-		msg.msg_class = doc.msg_class;
-		msg.cardId = doc.cardId;
-
-		res.send(msg);
-
-		// res.render("cards/addcard", {
-		// 	message: doc.message,
-		// 	msg_class: doc.msg_class,
-		// 	username: username,
-		// 	userid: userid,
-		// 	last_card_type: req.body.card_type
-		// });
+		sendMessage(doc);
 	});
 }
 
 exports.editCard = function(req, res) {
 	console.log("Updating card");
-	console.log(req.body);
-
-	if(req.user) {
-		username = req.user.username;
-		userid = req.user._id;
-	} else {
-		username = "Guest";
-		userid = "";
-	}
-
 
 	cards.editCard(req.body, function(doc) {
-		var msg = {};
-		msg.message = doc.message;
-		msg.msg_class = doc.msg_class;
-
-		res.send(msg);
+		sendMessage(res, doc);
 	});
 
 }
@@ -141,4 +104,25 @@ exports.getWinningPairs = function(req, res) {
 			pairs : pairs
 		});
 	});
+}
+
+
+function sendMessage(res, data) {
+		var msg = {};
+
+		msg.message = data.message;	
+
+		switch(data.message_type) {
+			case "warning": 
+				msg.msg_class = "alert alert-warning";
+				break;
+			case "success":
+				msg.msg_class = "alert alert-success";
+				break;
+		}
+
+		console.log(data.message_type);
+		console.log(msg.msg_class);
+
+		res.send(msg);
 }

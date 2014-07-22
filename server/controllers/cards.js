@@ -105,14 +105,15 @@ function createCard(cardInfo, callback) {
 				if (11001 === err.code || 11000 === err.code) {
 					doc.message = "A card with this text has already been added."
 				} else {
-					doc.message = "A error has occured";
+					doc.message = "Error Saving Card";
 					console.log(err);
 				}
-				doc.msg_class = "alert alert-warning";  // need to move these CSS classes to /client/ code
+				
+				data.message_type = "warning";
 				callback(doc);
 			} else {
-				doc.message = "Card Saved";
-				doc.msg_class = "alert alert-success";
+				data.message = "Card Saved";
+				data.message_type = "success";
 				callback(doc);
 			}
 		});
@@ -148,27 +149,30 @@ function editCard(cardInfo, callback) {
 				}
 			}, { upsert: true}, function(err, doc) {
 
+			var data = {};
+
 			if(err) {
-				callback(err);
+
 				console.log(err);
+
+				data.message = "Error updating card";
+				data.message_type = "warning";
+
+				callback(err);
 			} else {
-				var data = {};
 				
 				if(doc === 1)
 				{
 					data.message = "Card Saved";
-					data.msg_class = "alert alert-success";  // need to move these CSS classes to /client/ code
+					data.message_type = "success";
 				} else {
 					data.message = "Error updating card";
-					data.msg_class = "alert alert-warning";
+					data.message_type = "warning";
 				}
 				callback(data);				
 			}
-
-
 		});		
 	}
-
 
 }
 
@@ -180,8 +184,6 @@ function play(sessionId, playerId, cardId, callback) {
 
 	var cardId = [cardId];
 	var whiteCardsActive = [{ whitecard: cardId, playerInfo: playerId }];
-
-	//console.log(whiteCardsActive);
 
 	GameSession.findOne({ _id: sessionId, "whiteCardsActive.playerInfo" : playerId}, function(err,doc) {
 		if(doc === null) {
@@ -226,14 +228,6 @@ function getRandomBlackCard(deck, callback) {
 	if(deck != "") {
 		filter.deck = deck;
 	}
-
-	// BlackCards.count(filter, function(err, cardCount) {
-	// 	var randNum = (Math.floor(Math.random() * cardCount));
-	// 	BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
-	// 			callback(card);
-	// 	});
-
-	// });
 
 	async.waterfall([
 		function(callback) {
@@ -291,10 +285,6 @@ function getRandomBlackCard(deck, callback) {
 
 
 			BlackCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
-				// console.log("Blackcard Found: ");
-				// console.log(randNum);
-				// console.log(card);
-				// console.log("+++++++++");
 				callback(null, card);
 			});
 
@@ -370,7 +360,6 @@ function getRandomWhiteCards(amount, deck, callback) {
 			}
 
 			for(var i = 0; i < amount; i++) {
-				//WhiteCards.count(filter, function(err, cardCount) {
 					var randNum = (Math.floor(Math.random() * cardCount));
 					
 					WhiteCards.findOne(filter).skip(randNum).limit(1).exec(function(err, card) {
@@ -384,9 +373,6 @@ function getRandomWhiteCards(amount, deck, callback) {
 							callback(null, cards);
 						}
 					});
-
-				//});
-
 			}
 
 
