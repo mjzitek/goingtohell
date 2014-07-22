@@ -630,6 +630,8 @@ function getLeaderboard(callback) {
 				s.name = session.sessionName;
 				s.players = [];
 
+				session.players.sort(comparePoints);
+
 				session.players.forEach(function(player) {
 					var p = {};
 					p.username = player.playerInfo.username;
@@ -648,7 +650,13 @@ function getLeaderboard(callback) {
 	});
 }
 
-
+function comparePoints(a,b) {
+  if (a.points > b.points)
+     return -1;
+  if (a.points < b.points)
+    return 1;
+  return 0;
+}
 
 function idInArray(array, id) {
 	array.some(function(e){ 
