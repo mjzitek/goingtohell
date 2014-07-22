@@ -15,8 +15,6 @@ var config = require('../../config/config');
 exports.get = getCard;
 exports.getCard = getCard;
 function getCard(cardId, cardType, callback) {
-	console.log(cardId + " " + cardType);
-
 	var cardDeck;
 
 	if(cardType === "black")
@@ -110,7 +108,7 @@ function createCard(cardInfo, callback) {
 					doc.message = "A error has occured";
 					console.log(err);
 				}
-				doc.msg_class = "alert alert-warning";
+				doc.msg_class = "alert alert-warning";  // need to move these CSS classes to /client/ code
 				callback(doc);
 			} else {
 				doc.message = "Card Saved";
@@ -138,26 +136,35 @@ function editCard(cardInfo, callback) {
 	}
 
 	if(cardDeck) {
-		cardDeck.update({ _id: cardInfo._id }, 
-		{
-			text: 	cardInfo.card_text,
-			deck: 	cardInfo.card_category,
-			active: cardInfo.active,
-			nsfw: 	cardInfo.nsfw,
-			editdate: new Date(),
-			editedby: cardInfo.user_info
-		}, function(doc) {
-			var data = {};
-			
-			if(doc === 1)
-			{
-				data.message = "Card Saved";
-				data.msg_class = "alert alert-success";
+		cardDeck.update({ _id: cardInfo.cardId }, 
+			{ 
+				$set: {
+					text: 	cardInfo.card_text,
+					deck: 	cardInfo.card_category,
+					active: cardInfo.active,
+					nsfw: 	cardInfo.nsfw,
+					editdate: new Date(),
+					editedby: cardInfo.userid
+				}
+			}, { upsert: true}, function(err, doc) {
+
+			if(err) {
+				callback(err);
+				console.log(err);
 			} else {
-				data.message = "Error updating card";
-				data.msg_class = "alert alert-warning";
+				var data = {};
+				
+				if(doc === 1)
+				{
+					data.message = "Card Saved";
+					data.msg_class = "alert alert-success";  // need to move these CSS classes to /client/ code
+				} else {
+					data.message = "Error updating card";
+					data.msg_class = "alert alert-warning";
+				}
+				callback(data);				
 			}
-			callback(data);
+
 
 		});		
 	}
@@ -165,7 +172,8 @@ function editCard(cardInfo, callback) {
 
 }
 
-exports.play = function(sessionId, playerId, cardId, callback) {
+exports.play = play;
+function play(sessionId, playerId, cardId, callback) {
 
 	console.log("Player " + playerId + 
                         " played card " + cardId + " on game " + sessionId );

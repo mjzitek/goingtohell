@@ -36,9 +36,9 @@ block content
                     span.radio-label Yes
                     input(type="radio", id='radio-active', name="active", value="true", checked="#{card.active}" == "true")                                    
             div.form-input
-                input(type='submit', value='Submit', id='submit-edit')
+                input(type='submit', value='Submit', id='submit-edit', class='submit')
             div.form-input
-                input(type='hidden', value="#{card.cardId}" id='cardId')
+                input(type='hidden', value="#{card.cardId}" id='cardId', name='cardId')
         div(id='message' class="#{msg_class}") #{message}
 
         div(style='margin: 10px 0 5px 50px;')
