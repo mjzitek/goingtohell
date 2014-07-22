@@ -1,26 +1,30 @@
-$backgroundColor1: #D6D3D0;
-$backgroundColor2: #000000;
+$backgroundColor1: #d6d3d0;
+$backgroundColor2: #000;
 
 $darkBlue1: #000094;
-$darkGreen1: #15AD6E;
+$darkGreen1: #15ad6e;
 
 $box-borderColor1: #ccc;
 
 
-$highlightBlue: #3593E6;
+$highlightBlue: #3593e6;
 
 $_color-base-grey: rgb(229,231,234);
 
 $palettes: (
+    background: (
+        base:      #d6d3d0,
+    ),
+
 	green: (
-		base:      #00FF00,
-		light: 	   #18B52D,
-		dark:	   #15AD6E  
+		base:      #0f0,
+		light: 	   #18b52d,
+		dark:	   #15ad6e  
 	),
     blue: (
-    	base:      #0000FF,
-    	x-light:   #AEC1EB,
-    	light:     #81A6F7,
+    	base:      #00f,
+    	x-light:   #aed1eb,
+    	light:     #81a6f7,
     	mid-light: #428bca,
     	dark:	   #000094,
     	x-dark:    #010152

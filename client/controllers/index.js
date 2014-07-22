@@ -28,3 +28,12 @@ exports.setCzar = function(req, res) {
 						
 
 }
+
+
+exports.getLeaderboard = function(req, res) {
+	gamesession.getLeaderboard(function(data) {
+		res.render('leaderboard', {
+			boards : data
+		});
+	});
+}

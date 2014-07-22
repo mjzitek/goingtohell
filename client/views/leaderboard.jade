@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	div
+		each board, i in boards
+			div.leaderboards-board
+				div.leaderboards-board-title #{board.name}
+				each player in board.players
+					div.leaderboards-board-player 
+						span.leaderboards-board-username #{player.username} 
+						span.leadboards-board-points #{player.points}

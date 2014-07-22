@@ -58,7 +58,7 @@
 	z-index: 1000;
 	position: absolute;
 	opacity: .8;
-	background-color: $backgroundColor1;	
+	background-color: palette(background);
 	display: none;
 }
 
@@ -107,10 +107,8 @@
 }
 
 .selected {
-	border: 2px solid $highlightBlue;	
+	border: 2px solid palette(blue, mid-light);	
 } 
-
-
 
 
 #cards-listing {
@@ -137,9 +135,14 @@
 #cards-listing .card {
 	padding: 6px 0;
 }
+
+#cards-listing .card:hover {
+	color: palette(blue, mid-light);
+}
+
 #cards-listing.card-pairs {
 	width: 550px;
-	background-color: $backgroundColor1;
+	background-color: palette(background);
 }
 
 #cards-listing #card-pair {

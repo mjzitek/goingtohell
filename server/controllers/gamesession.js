@@ -5,6 +5,7 @@ var moment = require("moment");
 var timeHelper = require("../helpers/time.js");
 var config = require('../../config/config');
 
+
 var mongoose = require('mongoose'),
 	Users = mongoose.model('users'),
 	BlackCards = mongoose.model('blackcards'),
@@ -584,6 +585,66 @@ function addWhiteCardsToPlayersDeck(playerId, cards, callback) {
 			else { 
 				callback(doc);
 			}
+	});
+}
+
+exports.getLeaderboard = getLeaderboard;
+function getLeaderboard(callback) {
+	// get each game session
+
+	// for each game session list players by points in desc order
+
+	/*
+
+		[
+			{ 
+				_id,
+				seesionName,
+				players [
+							playerInfo : { 
+											name,
+											avatarUrl 
+										 },
+							points
+							
+						]
+
+
+			}
+
+
+		]
+
+
+	*/
+
+	var gameSessions = [];
+
+	GameSession.find({},{ "players.playerInfo" : 1, "players.points" : 1, sessionName: 1})
+	 	.populate("players.playerInfo", "username avatarUrl")
+		.exec(function(err, sessions) {
+			sessions.forEach(function(session) {
+				var s = {};
+
+				s.id = session._id;
+				s.name = session.sessionName;
+				s.players = [];
+
+				session.players.forEach(function(player) {
+					var p = {};
+					p.username = player.playerInfo.username;
+					p.points = player.points;
+
+					s.players.push(p);
+				});
+
+				gameSessions.push(s);
+
+			});
+	
+		console.log(gameSessions);
+		callback(gameSessions);
+
 	});
 }
 

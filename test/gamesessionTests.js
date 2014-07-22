@@ -7,6 +7,7 @@ var config = require('../config/config');
 
 require('../server/models/GameSession');
 require('../server/models/Users');
+require('../server/models/WinningPairs');
 
 var mockgoose = require('mockgoose');
 mockgoose(mongoose);
@@ -24,7 +25,7 @@ var playerId = mongoose.Types.ObjectId();
 var newGameSessionId;
 var newPlayerId = mongoose.Types.ObjectId();
 
-describe("Game Session", function () {
+describe.only("Game Session", function () {
 
 	before(function(done) {
 		mockgoose.reset();
@@ -187,6 +188,15 @@ describe("Game Session", function () {
 	// 		gamesession.newRound(gameSessionId, playerId, function(doc) {
 	// 			expect(doc).to.equal(0);
 	// 			done();
+	// 		})
+	// 	});
+	// });
+
+
+	// describe("#getLeaderboard()", function() {
+	// 	it("should return something", function(done) {
+	// 		gamesession.getLeaderboard(function(data) {
+	// 			expect(data).to.not.be.empty;
 	// 		})
 	// 	});
 	// });

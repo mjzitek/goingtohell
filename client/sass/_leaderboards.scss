@@ -1,0 +1,34 @@
+* { background-color: rgba(255,0,0,.2); }
+* * { background-color: rgba(0,255,0,.2); }
+* * * { background-color: rgba(0,0,255,.2); }
+* * * * { background-color: rgba(255,0,255,.2); }
+* * * * * { background-color: rgba(0,255,255,.2); }
+* * * * * * { background-color: rgba(255,255,0,.2); }
+
+.leaderboards-board {
+	width: 200px;
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid palette(grey);
+	background-color: #fff;
+	float: left;
+}
+
+.leaderboards-board-title {
+	font-weight: bold;
+	font-size: 1.3em;
+	color: palette(grey, mid-dark);
+}
+
+.leaderboards-board-player {
+	padding-left: 4px;
+}
+
+.leaderboards-board-username {
+	width: 135px;
+	float: left;
+}
+
+.leaderboards-board-points {
+	float: right;
+}

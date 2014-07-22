@@ -269,7 +269,7 @@ ul {
   margin: 10px; }
 
 .selected {
-  border: 2px solid #3593e6; }
+  border: 2px solid #428bca; }
 
 #cards-listing {
   width: 700px;
@@ -289,6 +289,9 @@ ul {
 
 #cards-listing .card {
   padding: 6px 0; }
+
+#cards-listing .card:hover {
+  color: #428bca; }
 
 #cards-listing.card-pairs {
   width: 550px;
@@ -496,3 +499,43 @@ ul {
 
 .submit {
   margin-left: 120px; }
+
+* {
+  background-color: rgba(255, 0, 0, 0.2); }
+
+* * {
+  background-color: rgba(0, 255, 0, 0.2); }
+
+* * * {
+  background-color: rgba(0, 0, 255, 0.2); }
+
+* * * * {
+  background-color: rgba(255, 0, 255, 0.2); }
+
+* * * * * {
+  background-color: rgba(0, 255, 255, 0.2); }
+
+* * * * * * {
+  background-color: rgba(255, 255, 0, 0.2); }
+
+.leaderboards-board {
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #e5e7ea;
+  background-color: #fff;
+  float: left; }
+
+.leaderboards-board-title {
+  font-weight: bold;
+  font-size: 1.3em; }
+
+.leaderboards-board-player {
+  padding-left: 4px; }
+
+.leaderboards-board-username {
+  width: 135px;
+  float: left; }
+
+.leaderboards-board-points {
+  float: right; }
