@@ -636,6 +636,7 @@ function getLeaderboard(callback) {
 					var p = {};
 					p.username = player.playerInfo.username;
 					p.points = player.points;
+					p.avatarUrl = player.playerInfo.avatarUrl;
 
 					s.players.push(p);
 				});

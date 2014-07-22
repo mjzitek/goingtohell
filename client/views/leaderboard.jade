@@ -7,5 +7,7 @@ block content
 				div.leaderboards-board-title #{board.name}
 				each player in board.players
 					div.leaderboards-board-player 
-						span.leaderboards-board-username #{player.username} 
-						span.leadboards-board-points #{player.points}
+						span.photo
+							img(src=("#{player.avatarUrl}" != "undefined" ? "#{player.avatarUrl}" : "/img/avatars/default_user.png"))
+						span.username #{player.username} 
+						span.points #{player.points}
