@@ -34,6 +34,33 @@ header #title .header-icon {
 header #title .header-text {
   padding-left: 5px; }
 
+header #menu {
+  float: right;
+  width: 100px;
+  margin-top: 5px;
+  margin-right: 20px;
+  height: 20px;
+  font-size: .5em; }
+
+header #menu .caret {
+  float: right; }
+
+header #menu .navbar {
+  height: 34px;
+  min-height: 34px; }
+
+header #menu .dropdown {
+  height: 30px;
+  padding-left: 16px;
+  padding-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto; }
+
+header #menu .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 0;
+  background-color: transparent; }
+
 header #player-info {
   padding-top: 20px;
   padding-right: 5px;
@@ -501,7 +528,7 @@ ul {
   margin-left: 120px; }
 
 .leaderboards-board {
-  width: 200px;
+  width: 300px;
   margin: 10px;
   padding: 10px;
   border: 2px solid #e5e7ea;
@@ -515,7 +542,10 @@ ul {
 .leaderboards-board-player {
   height: 40px;
   padding-left: 4px;
-  clear: both; }
+  padding-top: 3px;
+  padding-bottom: 3px;
+  clear: both;
+  border-bottom: 1px solid #e5e7ea; }
 
 .leaderboards-board-player .photo {
   float: left;

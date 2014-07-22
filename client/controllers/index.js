@@ -31,9 +31,18 @@ exports.setCzar = function(req, res) {
 
 
 exports.getLeaderboard = function(req, res) {
+	if(req.user) {
+		username = req.user.username;
+		userid = req.user._id;
+	} else {
+		username = "Guest";
+	}
+
 	gamesession.getLeaderboard(function(data) {
 		res.render('leaderboard', {
-			boards : data
+			boards : data,
+			username: username,
+			userid: userid			
 		});
 	});
 }

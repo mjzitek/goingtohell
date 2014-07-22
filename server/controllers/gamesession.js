@@ -590,34 +590,6 @@ function addWhiteCardsToPlayersDeck(playerId, cards, callback) {
 
 exports.getLeaderboard = getLeaderboard;
 function getLeaderboard(callback) {
-	// get each game session
-
-	// for each game session list players by points in desc order
-
-	/*
-
-		[
-			{ 
-				_id,
-				seesionName,
-				players [
-							playerInfo : { 
-											name,
-											avatarUrl 
-										 },
-							points
-							
-						]
-
-
-			}
-
-
-		]
-
-
-	*/
-
 	var gameSessions = [];
 
 	GameSession.find({},{ "players.playerInfo" : 1, "players.points" : 1, sessionName: 1})
@@ -644,8 +616,7 @@ function getLeaderboard(callback) {
 				gameSessions.push(s);
 
 			});
-	
-		console.log(gameSessions);
+			
 		callback(gameSessions);
 
 	});
