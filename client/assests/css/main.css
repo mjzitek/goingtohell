@@ -500,24 +500,6 @@ ul {
 .submit {
   margin-left: 120px; }
 
-* {
-  background-color: rgba(255, 0, 0, 0.2); }
-
-* * {
-  background-color: rgba(0, 255, 0, 0.2); }
-
-* * * {
-  background-color: rgba(0, 0, 255, 0.2); }
-
-* * * * {
-  background-color: rgba(255, 0, 255, 0.2); }
-
-* * * * * {
-  background-color: rgba(0, 255, 255, 0.2); }
-
-* * * * * * {
-  background-color: rgba(255, 255, 0, 0.2); }
-
 .leaderboards-board {
   width: 200px;
   margin: 10px;
