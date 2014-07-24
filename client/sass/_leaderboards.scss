@@ -22,7 +22,7 @@
 	padding-top: 3px;
 	padding-bottom: 3px;
 	clear: both;
-	border-bottom: 1px solid palette(grey);
+	border-top: 1px solid palette(grey);
 }
 
 .leaderboards-board-player .photo {
@@ -45,38 +45,3 @@
 }
 
 
-
-/*
-#userlist .user .userphoto {
-	float: left;
-	height: 32px;
-	width: 32px;
-
-}
-
-#userlist .user  .faded {
-	opacity: .3;
-}
-
-#userlist .user .usertext {
-	font-size: .9em;
-	float: left;
-	padding-left: 4px;
-	padding-bottom: 0;
-	width: 210px;
-}
-
-#userlist .user .usertext .user-points {
-	padding-left: 6px;
-	font-size: .85em;
-	color: palette(green, light);
-	float: left;
-	width: 100px;
-}
-
-#userlist .user .usertext .username {
-
-	padding-left: 3px;
-	float: left;
-	width: 120px;
-}*/

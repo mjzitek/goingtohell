@@ -56,6 +56,9 @@ header #menu .dropdown {
   margin-left: auto;
   margin-right: auto; }
 
+header #menu .dropdown-menu {
+  margin-top: 3px; }
+
 header #menu .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 0;
@@ -545,7 +548,7 @@ ul {
   padding-top: 3px;
   padding-bottom: 3px;
   clear: both;
-  border-bottom: 1px solid #e5e7ea; }
+  border-top: 1px solid #e5e7ea; }
 
 .leaderboards-board-player .photo {
   float: left;
@@ -562,38 +565,3 @@ ul {
   color: #15ad6e;
   float: right;
   width: 40px; }
-
-/*
-#userlist .user .userphoto {
-	float: left;
-	height: 32px;
-	width: 32px;
-
-}
-
-#userlist .user  .faded {
-	opacity: .3;
-}
-
-#userlist .user .usertext {
-	font-size: .9em;
-	float: left;
-	padding-left: 4px;
-	padding-bottom: 0;
-	width: 210px;
-}
-
-#userlist .user .usertext .user-points {
-	padding-left: 6px;
-	font-size: .85em;
-	color: palette(green, light);
-	float: left;
-	width: 100px;
-}
-
-#userlist .user .usertext .username {
-
-	padding-left: 3px;
-	float: left;
-	width: 120px;
-}*/
