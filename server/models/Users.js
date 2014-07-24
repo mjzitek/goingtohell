@@ -17,7 +17,8 @@ var UserSchema = new mongoose.Schema({
 	twitter:      {},
 	google:       {},
 	groups:       [String],
-	accesscode:   String
+	accesscode:   String,
+	awards:       [ { type: Schema.Types.ObjectId, ref: 'awards' } ]
 });
 
 
