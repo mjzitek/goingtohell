@@ -12,10 +12,15 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
+var busboy = require('connect-busboy');
+var gm = require('gm');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.server      = http.createServer(app);
+
+
+config.baseFolder = __dirname;
 
 
 var fs = require('fs');
@@ -67,7 +72,10 @@ require('./config/passport')(passport);
 
 	app.set('views', __dirname + '/client/views');
 	app.set('view engine', 'jade');
+
+	app.use("/avatars", express.static(__dirname  + config.uploadFolder + '/avatars'));	
 	app.use(express.static(__dirname + '/client/assests'));
+
 	app.use(favicon(__dirname + '/client/assests/favicon.ico'));
 	app.use(bodyParser.urlencoded());
 	app.use(bodyParser.json())
@@ -80,6 +88,7 @@ require('./config/passport')(passport);
     }));
 	app.use(passport.initialize());
     app.use(passport.session());
+	app.use(busboy());
 
 /////////////////////////
 // Import the routes

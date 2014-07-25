@@ -1,6 +1,12 @@
 
+var mongoose = require('mongoose'),
+	User = mongoose.model('users');
 
+var fs = require('fs');
 
+var users = require('../../server/controllers/users');
+
+var config = require('../../config/config');
 
 exports.authCallback = function(req, res) {
 	res.redirect('/');
@@ -30,6 +36,7 @@ exports.profile = function(req, res) {
 
 	//console.log(req.user);
 
+	console.log(req.user);
 
 	res.render('users/profile', {
 		user : req.user,
@@ -41,50 +48,84 @@ exports.profile = function(req, res) {
 exports.create = function(req, res, next) {
 
 	var message = null;
-	var msg_class = null;
+	var msgClass = null;
+
+	var fstream;
 
 
+    var userInfo = {};
 
-	if(req.body.accesscode != config.accesscode)
-	{
+	req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
+		userInfo[fieldname] = val;
+		//console.log('Field [' + fieldname + ']: value: ' + val);
+	});
 
-		msg_class="alert alert-danger"
-		message = 'Invalid Access Code';
+    req.busboy.on('file', function (fieldname, file, filename) {
+    	file.on('data', function(data) {
+	    	try {
+		        console.log("Uploading: " + filename);
 
-		return res.render('users/signup', {
-			msg_class: msg_class,
-			message: message,
-		});
+		        userInfo.tempFilename = (new Date().getTime()).toString() + (Math.floor(Math.random() * 10000)).toString() + filename;
 
-	} else {
+		        // keep it from getting too long
+		        if(userInfo.tempFilename.length > 255) {
+		        	userInfo.tempFilename = userInfo.tempFilename.substring(1,255);
+		        }
 
-		var user = new User(req.body);
-		user.provider = 'local';
-		user.save(function(err) {
-			if (err) {
-				switch (err.code) {
-					case 11000:
-					case 11001:
-						msg_class="alert alert-danger"
-						message = 'Username already exists';
-						break;
-					default:
-						msg_class="alert alert-warning"
-						message = 'Please fill all the required fields';
+
+		        fstream = fs.createWriteStream( config.baseFolder + config.uploadFolder + '/temp/' + userInfo.tempFilename);
+		        file.pipe(fstream);
+		        fstream.on('close', function() {
+
+		        });
+	    	} catch (err) {
+	    		console.log(err);
+	    	}
+    	});
+
+    	file.on('end',function() {});
+
+
+    });
+
+    req.busboy.on('finish', function() {
+    	console.log(userInfo);
+
+    	if(userInfo.accesscode != config.accesscode)
+		{
+
+			msgClass="alert alert-danger"
+			message = 'Invalid Access Code';
+
+			return res.render('users/signup', {
+				msg_class: msgClass,
+				message: message,
+			});
+
+		} else {
+
+			users.create(userInfo, function(userCreated, user, msg) {
+				console.log("User Created: " + userCreated);
+				console.log(user);
+				console.log(msg);
+				if(!userCreated) {
+					return res.render('users/signup', {
+						msg_class : msg.msgClass,
+						message: msg.message,
+						user: user
+					});
+				} else {
+					req.logIn(user, function(err) {
+						if(err) return next(err);
+						return res.redirect('/');
+					});
 				}
+			});
 
-				return res.render('users/signup', {
-					msg_class : msg_class,
-					message: message,
-					user: user
-				});
-			}
-			req.logIn(user, function(err) {
-				if(err) return next(err);
-				return res.redirect('/');
-			});		
-		});
-	}	
+		}	
+    });
+
+    req.pipe(req.busboy);
 }
 
 

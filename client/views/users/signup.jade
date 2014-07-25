@@ -5,7 +5,7 @@ block content
     div#signup
         div(id='message' class="#{msg_class}") #{message}
 
-        form(action='/users', method='post')
+        form(action='/users', method='post', enctype='multipart/form-data')
             div
                 label(for='name') Name
                 input(id='name',type='text',value='',name='name')

@@ -16,7 +16,7 @@ block content
         span.profile-info
            - var avatar = user.avatarUrl
            if(!avatar)
-           -   avatar = '/img/avatars/default_user.png'
+              -   avatar = '/img/avatars/default_user.png'
            img(src='#{avatar}')
 
     div.profile-line
