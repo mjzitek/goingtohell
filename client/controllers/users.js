@@ -149,3 +149,11 @@ exports.getUsers = function(callback) {
 	});
 
 };
+
+
+exports.editProfile = function(req, res) {
+
+	users.editProfile(req.body, function(data) {
+		res.send(data);
+	});
+}

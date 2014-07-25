@@ -4,21 +4,20 @@ block content
   div(id="profile-box")
     div.profile-line
         label Username: 
-        span.profile-info #{user.username}
+        span(id='profile-username', class='profile-info') #{user.username}
     div.profile-line 
         label Name: 
-        span.profile-info #{user.name}
+        span(id='profile-name', class='profile-info') #{user.name}
     div.profile-line
         label Email: 
-        span.profile-info #{user.email}
+        span(id='profile-email', class='profile-info') #{user.email}
     div.profile-line 
         label Avatar: 
-        span.profile-info
+        span(id='profile-avatar', class='profile-info')
            - var avatar = user.avatarUrl
            if(!avatar)
               -   avatar = '/img/avatars/default_user.png'
            img(src='#{avatar}')
-
     div.profile-line
        span 
           label Groups:
@@ -26,3 +25,10 @@ block content
             ul
             each group in user.groups
               li #{group}           
+    div.profile-line
+        span.profile-edit
+             button(class='btn btn-primary',id='profile-edit', data-mode='edit') Edit Profile
+    div
+        input(type='hidden', id='profile-userid', value='#{user._id}')
+block append scripts
+    script(src="/js/profile.js")  

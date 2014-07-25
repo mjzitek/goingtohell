@@ -133,6 +133,24 @@ function saveAvatar(filename, userId) {
 
 }
 
+exports.editProfile = editProfile;
+function editProfile(userInfo, callback) {
+
+	User.update({ _id: userInfo.userid}, {
+		$set : {
+			username: userInfo.username,
+			name: 	  userInfo.name,
+			email:    userInfo.email
+		}
+	},{ upsert: false}, function(err, doc) {
+		if(doc === 1) {
+			callback('updated');
+		} else {
+			callback('error');
+		}
+	});
+}
+
 
 function ensureExists(path, mask, callback) {
     if (typeof mask == 'function') { // allow the `mask` parameter to be optional

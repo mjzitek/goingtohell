@@ -16,4 +16,5 @@ module.exports = function(app, passport) {
 		failureRedirect: '/signin',
 		successRedirect: '/'
 	}), users.session);
+	app.post('/users/profile/edit/', auth.isLoggedIn, users.editProfile);
 }
