@@ -1,0 +1,395 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'fs-extra',
+1 verbose cli   '--save' ]
+2 info using npm@1.2.25
+3 info using node@v0.11.3
+4 verbose read json /usr/share/code/goingtohell/package.json
+5 verbose read json /usr/share/code/goingtohell/node_modules/async/package.json
+6 verbose read json /usr/share/code/goingtohell/node_modules/body-parser/package.json
+7 verbose read json /usr/share/code/goingtohell/node_modules/bson/package.json
+8 verbose read json /usr/share/code/goingtohell/node_modules/busboy/package.json
+9 verbose read json /usr/share/code/goingtohell/node_modules/chai/package.json
+10 verbose read json /usr/share/code/goingtohell/node_modules/colors/package.json
+11 verbose read json /usr/share/code/goingtohell/node_modules/connect/package.json
+12 verbose read json /usr/share/code/goingtohell/node_modules/connect-busboy/package.json
+13 verbose read json /usr/share/code/goingtohell/node_modules/connect-flash/package.json
+14 verbose read json /usr/share/code/goingtohell/node_modules/connect-mongo/package.json
+15 verbose read json /usr/share/code/goingtohell/node_modules/cookie/package.json
+16 verbose read json /usr/share/code/goingtohell/node_modules/cookie-parser/package.json
+17 verbose read json /usr/share/code/goingtohell/node_modules/crypto/package.json
+18 verbose read json /usr/share/code/goingtohell/node_modules/express/package.json
+19 verbose read json /usr/share/code/goingtohell/node_modules/express-session/package.json
+20 verbose read json /usr/share/code/goingtohell/node_modules/gm/package.json
+21 verbose read json /usr/share/code/goingtohell/node_modules/google-caja/package.json
+22 verbose read json /usr/share/code/goingtohell/node_modules/grunt/package.json
+23 verbose read json /usr/share/code/goingtohell/node_modules/grunt-contrib-watch/package.json
+24 verbose read json /usr/share/code/goingtohell/node_modules/grunt-lib-phantomjs/package.json
+25 verbose read json /usr/share/code/goingtohell/node_modules/grunt-mocha/package.json
+26 verbose read json /usr/share/code/goingtohell/node_modules/jade/package.json
+27 verbose read json /usr/share/code/goingtohell/node_modules/lodash/package.json
+28 verbose read json /usr/share/code/goingtohell/node_modules/mocha/package.json
+29 verbose read json /usr/share/code/goingtohell/node_modules/mockgoose/package.json
+30 verbose read json /usr/share/code/goingtohell/node_modules/moment/package.json
+31 verbose read json /usr/share/code/goingtohell/node_modules/mongoose/package.json
+32 verbose read json /usr/share/code/goingtohell/node_modules/ncp/package.json
+33 verbose read json /usr/share/code/goingtohell/node_modules/passport/package.json
+34 verbose read json /usr/share/code/goingtohell/node_modules/passport-facebook/package.json
+35 verbose read json /usr/share/code/goingtohell/node_modules/passport-google-oauth/package.json
+36 verbose read json /usr/share/code/goingtohell/node_modules/passport-local/package.json
+37 verbose read json /usr/share/code/goingtohell/node_modules/passport-twitter/package.json
+38 verbose read json /usr/share/code/goingtohell/node_modules/passport.socketio/package.json
+39 verbose read json /usr/share/code/goingtohell/node_modules/path/package.json
+40 verbose read json /usr/share/code/goingtohell/node_modules/serve-favicon/package.json
+41 verbose read json /usr/share/code/goingtohell/node_modules/session/package.json
+42 verbose read json /usr/share/code/goingtohell/node_modules/session-mongoose/package.json
+43 verbose read json /usr/share/code/goingtohell/node_modules/should/package.json
+44 verbose read json /usr/share/code/goingtohell/node_modules/socket.io/package.json
+45 verbose read json /usr/share/code/goingtohell/node_modules/underscore/package.json
+46 verbose read json /usr/share/code/goingtohell/node_modules/winston/package.json
+47 verbose read json /usr/share/code/goingtohell/node_modules/winston-mongodb/package.json
+48 verbose from cache /usr/share/code/goingtohell/package.json
+49 verbose readDependencies using package.json deps
+50 verbose cache add [ 'fs-extra', null ]
+51 verbose cache add name=undefined spec="fs-extra" args=["fs-extra",null]
+52 verbose parsed url { protocol: null,
+52 verbose parsed url   slashes: null,
+52 verbose parsed url   auth: null,
+52 verbose parsed url   host: null,
+52 verbose parsed url   port: null,
+52 verbose parsed url   hostname: null,
+52 verbose parsed url   hash: null,
+52 verbose parsed url   search: null,
+52 verbose parsed url   query: null,
+52 verbose parsed url   pathname: 'fs-extra',
+52 verbose parsed url   path: 'fs-extra',
+52 verbose parsed url   href: 'fs-extra' }
+53 silly lockFile 448cb215-fs-extra fs-extra
+54 verbose lock fs-extra /home/mjzitek/.npm/448cb215-fs-extra.lock
+55 silly lockFile 448cb215-fs-extra fs-extra
+56 silly lockFile 448cb215-fs-extra fs-extra
+57 verbose addNamed [ 'fs-extra', '' ]
+58 verbose addNamed [ null, '' ]
+59 silly lockFile db291b81-fs-extra fs-extra@
+60 verbose lock fs-extra@ /home/mjzitek/.npm/db291b81-fs-extra.lock
+61 silly addNameRange { name: 'fs-extra', range: '', hasData: false }
+62 verbose url raw fs-extra
+63 verbose url resolving [ 'https://registry.npmjs.org/', './fs-extra' ]
+64 verbose url resolved https://registry.npmjs.org/fs-extra
+65 info trying registry request attempt 1 at 17:56:45
+66 verbose etag "C71JPN1ZXBR58U0U2HAKMHKZY"
+67 http GET https://registry.npmjs.org/fs-extra
+68 http 304 https://registry.npmjs.org/fs-extra
+69 silly registry.get cb [ 304,
+69 silly registry.get   { date: 'Sun, 27 Jul 2014 00:56:46 GMT',
+69 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+69 silly registry.get     etag: '"C71JPN1ZXBR58U0U2HAKMHKZY"',
+69 silly registry.get     'cache-control': 'max-age=60',
+69 silly registry.get     'accept-ranges': 'bytes',
+69 silly registry.get     via: '1.1 varnish',
+69 silly registry.get     'x-served-by': 'cache-sjc3131-SJC',
+69 silly registry.get     'x-cache': 'MISS',
+69 silly registry.get     'x-cache-hits': '0',
+69 silly registry.get     'x-timer': 'S1406422606.394786,VS0,VE145',
+69 silly registry.get     'content-length': '0',
+69 silly registry.get     'keep-alive': 'timeout=10, max=50',
+69 silly registry.get     connection: 'Keep-Alive' } ]
+70 verbose etag fs-extra from cache
+71 silly addNameRange number 2 { name: 'fs-extra', range: '', hasData: true }
+72 silly addNameRange versions [ 'fs-extra',
+72 silly addNameRange   [ '0.0.1',
+72 silly addNameRange     '0.0.11',
+72 silly addNameRange     '0.0.3',
+72 silly addNameRange     '0.0.4',
+72 silly addNameRange     '0.1.0',
+72 silly addNameRange     '0.1.1',
+72 silly addNameRange     '0.1.2',
+72 silly addNameRange     '0.1.3',
+72 silly addNameRange     '0.2.0',
+72 silly addNameRange     '0.2.1',
+72 silly addNameRange     '0.3.0',
+72 silly addNameRange     '0.3.1',
+72 silly addNameRange     '0.3.2',
+72 silly addNameRange     '0.4.0',
+72 silly addNameRange     '0.5.0',
+72 silly addNameRange     '0.6.0',
+72 silly addNameRange     '0.6.1',
+72 silly addNameRange     '0.6.2',
+72 silly addNameRange     '0.6.3',
+72 silly addNameRange     '0.6.4',
+72 silly addNameRange     '0.7.0',
+72 silly addNameRange     '0.7.1',
+72 silly addNameRange     '0.8.0',
+72 silly addNameRange     '0.8.1',
+72 silly addNameRange     '0.9.0',
+72 silly addNameRange     '0.9.1',
+72 silly addNameRange     '0.10.0' ] ]
+73 verbose addNamed [ 'fs-extra', '0.10.0' ]
+74 verbose addNamed [ '0.10.0', '0.10.0' ]
+75 silly lockFile 45e75c9d-fs-extra-0-10-0 fs-extra@0.10.0
+76 verbose lock fs-extra@0.10.0 /home/mjzitek/.npm/45e75c9d-fs-extra-0-10-0.lock
+77 verbose read json /home/mjzitek/.npm/fs-extra/0.10.0/package/package.json
+78 silly lockFile 45e75c9d-fs-extra-0-10-0 fs-extra@0.10.0
+79 silly lockFile 45e75c9d-fs-extra-0-10-0 fs-extra@0.10.0
+80 silly lockFile db291b81-fs-extra fs-extra@
+81 silly lockFile db291b81-fs-extra fs-extra@
+82 silly resolved [ { name: 'fs-extra',
+82 silly resolved     version: '0.10.0',
+82 silly resolved     description: 'fs-extra contains methods that aren\'t included in the vanilla Node.js fs package. Such as mkdir -p, cp -r, and rm -rf.',
+82 silly resolved     homepage: 'https://github.com/jprichardson/node-fs-extra',
+82 silly resolved     repository:
+82 silly resolved      { type: 'git',
+82 silly resolved        url: 'https://github.com/jprichardson/node-fs-extra' },
+82 silly resolved     keywords:
+82 silly resolved      [ 'fs',
+82 silly resolved        'file',
+82 silly resolved        'file system',
+82 silly resolved        'copy',
+82 silly resolved        'directory',
+82 silly resolved        'extra',
+82 silly resolved        'mkdirp',
+82 silly resolved        'mkdir',
+82 silly resolved        'mkdirs',
+82 silly resolved        'recursive',
+82 silly resolved        'json',
+82 silly resolved        'read',
+82 silly resolved        'write',
+82 silly resolved        'extra',
+82 silly resolved        'delete',
+82 silly resolved        'remove',
+82 silly resolved        'touch',
+82 silly resolved        'create',
+82 silly resolved        'text',
+82 silly resolved        'output',
+82 silly resolved        'move' ],
+82 silly resolved     author: { name: 'JP Richardson', email: 'jprichardson@gmail.com' },
+82 silly resolved     licenses: [ [Object] ],
+82 silly resolved     dependencies:
+82 silly resolved      { ncp: '^0.5.1',
+82 silly resolved        mkdirp: '^0.5.0',
+82 silly resolved        jsonfile: '^1.2.0',
+82 silly resolved        rimraf: '^2.2.8' },
+82 silly resolved     devDependencies:
+82 silly resolved      { mocha: '*',
+82 silly resolved        'path-extra': '0.0.x',
+82 silly resolved        testutil: '~0.5.0',
+82 silly resolved        userid: '~0.1.1' },
+82 silly resolved     main: './lib/index',
+82 silly resolved     scripts: { test: 'mocha test' },
+82 silly resolved     readme: 'Node.js: fs-extra\n=================\n\n[![build status](https://secure.travis-ci.org/jprichardson/node-fs-extra.png)](http://travis-ci.org/jprichardson/node-fs-extra)\n[![downloads per month](http://img.shields.io/npm/dm/fs-extra.svg)](https://www.npmjs.org/package/fs-extra)\n\nThis module adds a few extra file system methods that aren\'t included in the native `fs` module. It is a drop in replacement for `fs`.\n\n\n\nWhy?\n----\n\nI got tired of including `mkdirp`, `rimraf`, and `cp -r` in most of my projects. \n\n\n\n\nInstallation\n------------\n\n    npm install --save fs-extra\n\n\n\nUsage\n-----\n\n`fs-extra` is a drop in replacement for native `fs`. All methods in `fs` are unmodified and attached to `fs-extra`.\n\nYou don\'t ever need to include the original `fs` module again:\n\n```javascript\nvar fs = require(\'fs\') //this is no longer necessary\n```\n\nyou can now do this:\n\n```javascript\nvar fs = require(\'fs-extra\'); //var fs = require(\'fs\')\n```\n\nor if you prefer to make it clear that you\'re using `fs-extra` and not `fs`, you may want \nto do this:\n\n```javascript\n//var fs = require(\'fs\')\nvar fse = require(\'fs-extra\')\n```\n\nyou can also keep both, but it\'s redundant:\n\n```javascript\nvar fs = require(\'fs\')\nvar fse = require(\'fs-extra\')\n```\n\n\n\nMethods\n-------\n\n**NOTE:** You can still use the native Node.js methods. They are copied over to `fs-extra`.\n\n\n### copy(src, dest, [filter], callback)\n\nCopy a file or directory. The directory can have contents. Like `cp -r`.\n\nSync: `copySync()`\n\n\nExamples:\n\n```javascript\nvar fs = require(\'fs-extra\');\n\nfs.copy(\'/tmp/myfile\', \'/tmp/mynewfile\', function(err){\n  if (err) return console.error(err);\n  console.log("success!")\n}); //copies file\n\nfs.copy(\'/tmp/mydir\', \'/tmp/mynewdir\', function(err){\n  if (err) return console.error(err);\n  console.log("success!")\n}); //copies directory, even if it has subdirectories or files\n```\n\n\n### ensureFile(file, callback) \n\nEnsures that the file exists. If the file that is requested to be created is in directories that do not exist, these directories are created. If the file already exists, it is **NOT MODIFIED**.\n\nAlias: `createFile()`\n\nSync: `createFileSync()`,`ensureFileSync()`\n\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\')\n\nvar file = \'/tmp/this/path/does/not/exist/file.txt\'\nfs.ensureFile(file, function(err) {\n  console.log(err); //null\n  //file has now been created, including the directory it is to be placed in\n})\n```\n\n\n### ensureDir(dir, callback) \n\nEnsures that the directory exists. If the directory structure does not exist, it is created.\n\nSync: `ensureDirSync()`\n\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\')\n\nvar dir = \'/tmp/this/path/does/not/exist\'\nfs.ensureDir(dir, function(err) {\n  console.log(err); //null\n  //dir has now been created, including the directory it is to be placed in\n})\n```\n\n\n\n### mkdirs(dir, callback) \n\nCreates a directory. If the parent hierarchy doesn\'t exist, it\'s created. Like `mkdir -p`.\n\nAlias: `mkdirp()`\n\nSync: `mkdirsSync()` / `mkdirpSync()`\n\n\nExamples:\n\n```javascript\nvar fs = require(\'fs-extra\');\n\nfs.mkdirs(\'/tmp/some/long/path/that/prob/doesnt/exist\', function(err){\n  if (err) return console.error(err);\n  console.log("success!")\n});\n\nfs.mkdirsSync(\'/tmp/another/path\');\n```\n\n\n### move(src, dest, callback)\n\nMoves a file or directory, even across devices.\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\');\n\nfs.move(\'/tmp/somefile\', \'/tmp/does/not/exist/yet/somefile\', function(err){\n  if (err) return console.error(err);\n  console.log("success!")\n});\n```\n\n\n### outputFile(file, data, callback)\n\nAlmost the same as `writeFile` (i.e. it [overwrites](http://pages.citebite.com/v2o5n8l2f5reb)), except that if the parent directory does not exist, it\'s created.\n\nSync: `outputFileSync()`\n\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\')\nvar file = \'/tmp/this/path/does/not/exist/file.txt\'\n\nfs.outputFile(file, \'hello!\', function(err) {\n  console.log(err); //null\n\n  fs.readFile(file, \'utf8\', function(err, data) {\n    console.log(data); //hello!\n  })\n})\n```\n\n\n\n### outputJson(file, data, callback)\n\nAlmost the same as `writeJson`, except that if the directory does not exist, it\'s created.\n\nAlias: `outputJSON()\n\nSync: `outputJsonSync()`, `outputJSONSync()`\n\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\')\nvar file = \'/tmp/this/path/does/not/exist/file.txt\'\n\nfs.outputJson(file, {name: \'JP\'}, function(err) {\n  console.log(err); //null\n\n  fs.readJson(file, function(err, data) {\n    console.log(data.name); //\'JP\n  })\n})\n```\n\n\n\n### readJson(file, [options], callback) \n\nReads a JSON file and then parses it into an object. `options` are the same that you\'d pass to `fs.readFile`.\n\nAlias: `readJSON()`\n\nSync: `readJsonSync()`, `readJSONSync()`\n\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\');\n\nfs.readJson(\'./package.json\', function(err, packageObj) {\n  console.log(packageObj.version); //0.1.3\n});\n```\n\n\n### remove(dir, callback)\n\nRemoves a file or directory. The directory can have contents. Like `rm -rf`.\n\nAlias: `delete()`\n\nSync: `removeSync()` / `deleteSync()`\n\n\nExamples:\n\n```javascript\nvar fs = require(\'fs-extra\');\n\nfs.remove(\'/tmp/myfile\', function(err){\n  if (err) return console.error(err);\n  \n  console.log("success!")\n});\n\nfs.removeSync(\'/home/jprichardson\'); //I just deleted my entire HOME directory. \n```\n\n\n\n### writeJson(file, object, [options], callback) \n\nWrites an object to a JSON file. `options` are the same that you\'d pass to `fs.readFile`.\n\nAlias: `writeJSON()`\n\nSync: `writeJsonSync()`, `writeJSONSync()`\n\nExample:\n\n```javascript\nvar fs = require(\'fs-extra\');\nfs.writeJson(\'./package.json\', {name: \'fs-extra\'}, function(err){\n  console.log(err);\n});\n```\n\n\n\nRoadmap\n--------\n\nThis contains items that I\'m considering doing. I\'d love community feedback.\n\n* File system walker. I really like this one: https://github.com/daaku/nodejs-walker ... this might be adding too much. Thoughts?\n* File/directory tree watcher. There are quite a few. ... this also might be adding too much. I like this one: https://github.com/paulmillr/chokidar, thoughts?\n\n\n\n\nNaming\n------\n\nI put a lot of thought into the naming of these functions. Inspired by @coolaj86\'s request. So he deserves much of the credit for raising the issue. See discussion(s) here:\n\n* https://github.com/jprichardson/node-fs-extra/issues/2\n* https://github.com/flatiron/utile/issues/11\n* https://github.com/ryanmcgrath/wrench-js/issues/29\n* https://github.com/substack/node-mkdirp/issues/17\n\nFirst, I believe that in as many cases as possible, the [Node.js naming schemes](http://nodejs.org/api/fs.html) should be chosen. However, there are problems with the Node.js own naming schemes.\n\nFor example, `fs.readFile()` and `fs.readdir()`: the **F** is capitalized in *File* and the **d** is not capitalized in *dir*. Perhaps a bit pedantic, but they should still be consistent. Also, Node.js has chosen a lot of POSIX naming schemes, which I believe is great. See: `fs.mkdir()`, `fs.rmdir()`, `fs.chown()`, etc.\n\nWe have a dilemma though. How do you consistently name methods that perform the following POSIX commands: `cp`, `cp -r`, `mkdir -p`, and `rm -rf`?\n\nMy perspective: when in doubt, err on the side of simplicity. A directory is just a hierarchical grouping of directories and files. Consider that for a moment. So when you want to copy it or remove it, in most cases you\'ll want to copy or remove all of its contents. When you want to create a directory, if the directory that it\'s suppose to be contained in does not exist, then in most cases you\'ll want to create that too. \n\nSo, if you want to remove a file or a directory regardless of whether it has contents, just call `fs.remove(path)` or its alias `fs.delete(path)`. If you want to copy a file or a directory whether it has contents, just call `fs.copy(source, destination)`. If you want to create a directory regardless of whether its parent directories exist, just call `fs.mkdirs(path)` or `fs.mkdirp(path)`. \n\n\nCredit\n------\n\n`fs-extra` wouldn\'t be possible without using the modules from the following authors:\n\n- [Isaac Shlueter](https://github.com/isaacs)\n- [Charlie McConnel](https://github.com/avianflu)\n- [James Halliday](https://github.com/substack)\n- [Andrew Kelley](https://github.com/andrewrk)\n\n\nContributions\n-------------\n\nIf you want to contribute, please add a test. Also, don\'t change the version in `package.json`.\n\n\n### Contributors\n\n- [*] [JP Richardson](https://github.com/jprichardson)\n- [*] [Mike McNeil](https://github.com/mikermcneil)\n- [*] [Ian Crowther](https://github.com/iancrowther)\n- [*] [Stephen Mathieson](https://github.com/stephenmathieson)\n- [*] [Srirangan](https://github.com/Srirangan)\n- [*] [Uli Köhler](https://github.com/ulikoehler)\n- [1] [Jim Higson](https://github.com/jimhigson)\n- [1] [PatrickJS](https://github.com/gdi2290)\n- [1] [Michael Tiller](https://github.com/xogeny)\n- `<your name here>`\n\n\n\n\nLicense\n-------\n\n\nLicensed under MIT\n\nCopyright (c) 2011-2014 JP Richardson\n\n[1]: http://nodejs.org/docs/latest/api/fs.html \n\n\n[jsonfile]: https://github.com/jprichardson/node-jsonfile\n\n\n\n\n\n\n\n\n',
+82 silly resolved     readmeFilename: 'README.md',
+82 silly resolved     bugs: { url: 'https://github.com/jprichardson/node-fs-extra/issues' },
+82 silly resolved     _id: 'fs-extra@0.10.0',
+82 silly resolved     _from: 'fs-extra@' } ]
+83 info install fs-extra@0.10.0 into /usr/share/code/goingtohell
+84 info installOne fs-extra@0.10.0
+85 verbose from cache /home/mjzitek/.npm/fs-extra/0.10.0/package/package.json
+86 info /usr/share/code/goingtohell/node_modules/fs-extra unbuild
+87 verbose read json /usr/share/code/goingtohell/node_modules/fs-extra/package.json
+88 verbose tar unpack /home/mjzitek/.npm/fs-extra/0.10.0/package.tgz
+89 silly lockFile 0463c654-oingtohell-node-modules-fs-extra /usr/share/code/goingtohell/node_modules/fs-extra
+90 verbose lock /usr/share/code/goingtohell/node_modules/fs-extra /home/mjzitek/.npm/0463c654-oingtohell-node-modules-fs-extra.lock
+91 silly lockFile 819dfe24--npm-fs-extra-0-10-0-package-tgz /home/mjzitek/.npm/fs-extra/0.10.0/package.tgz
+92 verbose lock /home/mjzitek/.npm/fs-extra/0.10.0/package.tgz /home/mjzitek/.npm/819dfe24--npm-fs-extra-0-10-0-package-tgz.lock
+93 silly gunzTarPerm modes [ '755', '644' ]
+94 silly gunzTarPerm extractEntry package.json
+95 silly gunzTarPerm extractEntry .npmignore
+96 silly gunzTarPerm extractEntry README.md
+97 silly gunzTarPerm extractEntry LICENSE
+98 silly gunzTarPerm extractEntry CHANGELOG.md
+99 silly gunzTarPerm extractEntry lib/copy.js
+100 silly gunzTarPerm extractEntry lib/create.js
+101 silly gunzTarPerm extractEntry lib/ensure.js
+102 silly gunzTarPerm extractEntry lib/index.js
+103 silly gunzTarPerm extractEntry lib/json.js
+104 silly gunzTarPerm extractEntry lib/mkdir.js
+105 silly gunzTarPerm extractEntry lib/move.js
+106 silly gunzTarPerm extractEntry lib/output.js
+107 silly gunzTarPerm extractEntry lib/remove.js
+108 verbose read json /usr/share/code/goingtohell/node_modules/fs-extra/package.json
+109 silly lockFile 0463c654-oingtohell-node-modules-fs-extra /usr/share/code/goingtohell/node_modules/fs-extra
+110 silly lockFile 0463c654-oingtohell-node-modules-fs-extra /usr/share/code/goingtohell/node_modules/fs-extra
+111 silly lockFile 819dfe24--npm-fs-extra-0-10-0-package-tgz /home/mjzitek/.npm/fs-extra/0.10.0/package.tgz
+112 silly lockFile 819dfe24--npm-fs-extra-0-10-0-package-tgz /home/mjzitek/.npm/fs-extra/0.10.0/package.tgz
+113 info preinstall fs-extra@0.10.0
+114 verbose from cache /usr/share/code/goingtohell/node_modules/fs-extra/package.json
+115 verbose readDependencies using package.json deps
+116 verbose from cache /usr/share/code/goingtohell/node_modules/fs-extra/package.json
+117 verbose readDependencies using package.json deps
+118 verbose cache add [ 'jsonfile@^1.2.0', null ]
+119 verbose cache add name=undefined spec="jsonfile@^1.2.0" args=["jsonfile@^1.2.0",null]
+120 verbose parsed url { protocol: null,
+120 verbose parsed url   slashes: null,
+120 verbose parsed url   auth: null,
+120 verbose parsed url   host: null,
+120 verbose parsed url   port: null,
+120 verbose parsed url   hostname: null,
+120 verbose parsed url   hash: null,
+120 verbose parsed url   search: null,
+120 verbose parsed url   query: null,
+120 verbose parsed url   pathname: 'jsonfile@%5E1.2.0',
+120 verbose parsed url   path: 'jsonfile@%5E1.2.0',
+120 verbose parsed url   href: 'jsonfile@%5E1.2.0' }
+121 verbose cache add name="jsonfile" spec="^1.2.0" args=["jsonfile","^1.2.0"]
+122 verbose parsed url { protocol: null,
+122 verbose parsed url   slashes: null,
+122 verbose parsed url   auth: null,
+122 verbose parsed url   host: null,
+122 verbose parsed url   port: null,
+122 verbose parsed url   hostname: null,
+122 verbose parsed url   hash: null,
+122 verbose parsed url   search: null,
+122 verbose parsed url   query: null,
+122 verbose parsed url   pathname: '%5E1.2.0',
+122 verbose parsed url   path: '%5E1.2.0',
+122 verbose parsed url   href: '%5E1.2.0' }
+123 verbose addNamed [ 'jsonfile', '^1.2.0' ]
+124 verbose addNamed [ null, null ]
+125 silly lockFile 4daee588-jsonfile-1-2-0 jsonfile@^1.2.0
+126 verbose lock jsonfile@^1.2.0 /home/mjzitek/.npm/4daee588-jsonfile-1-2-0.lock
+127 verbose cache add [ 'rimraf@^2.2.8', null ]
+128 verbose cache add name=undefined spec="rimraf@^2.2.8" args=["rimraf@^2.2.8",null]
+129 verbose parsed url { protocol: null,
+129 verbose parsed url   slashes: null,
+129 verbose parsed url   auth: null,
+129 verbose parsed url   host: null,
+129 verbose parsed url   port: null,
+129 verbose parsed url   hostname: null,
+129 verbose parsed url   hash: null,
+129 verbose parsed url   search: null,
+129 verbose parsed url   query: null,
+129 verbose parsed url   pathname: 'rimraf@%5E2.2.8',
+129 verbose parsed url   path: 'rimraf@%5E2.2.8',
+129 verbose parsed url   href: 'rimraf@%5E2.2.8' }
+130 verbose cache add name="rimraf" spec="^2.2.8" args=["rimraf","^2.2.8"]
+131 verbose parsed url { protocol: null,
+131 verbose parsed url   slashes: null,
+131 verbose parsed url   auth: null,
+131 verbose parsed url   host: null,
+131 verbose parsed url   port: null,
+131 verbose parsed url   hostname: null,
+131 verbose parsed url   hash: null,
+131 verbose parsed url   search: null,
+131 verbose parsed url   query: null,
+131 verbose parsed url   pathname: '%5E2.2.8',
+131 verbose parsed url   path: '%5E2.2.8',
+131 verbose parsed url   href: '%5E2.2.8' }
+132 verbose addNamed [ 'rimraf', '^2.2.8' ]
+133 verbose addNamed [ null, null ]
+134 silly lockFile e7d3f915-rimraf-2-2-8 rimraf@^2.2.8
+135 verbose lock rimraf@^2.2.8 /home/mjzitek/.npm/e7d3f915-rimraf-2-2-8.lock
+136 info addNameTag [ 'jsonfile', '^1.2.0' ]
+137 verbose cache add [ 'ncp@^0.5.1', null ]
+138 verbose cache add name=undefined spec="ncp@^0.5.1" args=["ncp@^0.5.1",null]
+139 verbose parsed url { protocol: null,
+139 verbose parsed url   slashes: null,
+139 verbose parsed url   auth: null,
+139 verbose parsed url   host: null,
+139 verbose parsed url   port: null,
+139 verbose parsed url   hostname: null,
+139 verbose parsed url   hash: null,
+139 verbose parsed url   search: null,
+139 verbose parsed url   query: null,
+139 verbose parsed url   pathname: 'ncp@%5E0.5.1',
+139 verbose parsed url   path: 'ncp@%5E0.5.1',
+139 verbose parsed url   href: 'ncp@%5E0.5.1' }
+140 verbose cache add name="ncp" spec="^0.5.1" args=["ncp","^0.5.1"]
+141 verbose parsed url { protocol: null,
+141 verbose parsed url   slashes: null,
+141 verbose parsed url   auth: null,
+141 verbose parsed url   host: null,
+141 verbose parsed url   port: null,
+141 verbose parsed url   hostname: null,
+141 verbose parsed url   hash: null,
+141 verbose parsed url   search: null,
+141 verbose parsed url   query: null,
+141 verbose parsed url   pathname: '%5E0.5.1',
+141 verbose parsed url   path: '%5E0.5.1',
+141 verbose parsed url   href: '%5E0.5.1' }
+142 verbose addNamed [ 'ncp', '^0.5.1' ]
+143 verbose addNamed [ null, null ]
+144 silly lockFile 50515df2-ncp-0-5-1 ncp@^0.5.1
+145 verbose lock ncp@^0.5.1 /home/mjzitek/.npm/50515df2-ncp-0-5-1.lock
+146 verbose cache add [ 'mkdirp@^0.5.0', null ]
+147 verbose cache add name=undefined spec="mkdirp@^0.5.0" args=["mkdirp@^0.5.0",null]
+148 verbose parsed url { protocol: null,
+148 verbose parsed url   slashes: null,
+148 verbose parsed url   auth: null,
+148 verbose parsed url   host: null,
+148 verbose parsed url   port: null,
+148 verbose parsed url   hostname: null,
+148 verbose parsed url   hash: null,
+148 verbose parsed url   search: null,
+148 verbose parsed url   query: null,
+148 verbose parsed url   pathname: 'mkdirp@%5E0.5.0',
+148 verbose parsed url   path: 'mkdirp@%5E0.5.0',
+148 verbose parsed url   href: 'mkdirp@%5E0.5.0' }
+149 verbose cache add name="mkdirp" spec="^0.5.0" args=["mkdirp","^0.5.0"]
+150 verbose parsed url { protocol: null,
+150 verbose parsed url   slashes: null,
+150 verbose parsed url   auth: null,
+150 verbose parsed url   host: null,
+150 verbose parsed url   port: null,
+150 verbose parsed url   hostname: null,
+150 verbose parsed url   hash: null,
+150 verbose parsed url   search: null,
+150 verbose parsed url   query: null,
+150 verbose parsed url   pathname: '%5E0.5.0',
+150 verbose parsed url   path: '%5E0.5.0',
+150 verbose parsed url   href: '%5E0.5.0' }
+151 verbose addNamed [ 'mkdirp', '^0.5.0' ]
+152 verbose addNamed [ null, null ]
+153 silly lockFile 0879e7d7-mkdirp-0-5-0 mkdirp@^0.5.0
+154 verbose lock mkdirp@^0.5.0 /home/mjzitek/.npm/0879e7d7-mkdirp-0-5-0.lock
+155 info addNameTag [ 'rimraf', '^2.2.8' ]
+156 info addNameTag [ 'ncp', '^0.5.1' ]
+157 info addNameTag [ 'mkdirp', '^0.5.0' ]
+158 verbose url raw jsonfile
+159 verbose url resolving [ 'https://registry.npmjs.org/', './jsonfile' ]
+160 verbose url resolved https://registry.npmjs.org/jsonfile
+161 info trying registry request attempt 1 at 17:56:46
+162 verbose etag "EQE5JKQNJAWLN7AUKWQJRCJ3C"
+163 http GET https://registry.npmjs.org/jsonfile
+164 verbose url raw rimraf
+165 verbose url resolving [ 'https://registry.npmjs.org/', './rimraf' ]
+166 verbose url resolved https://registry.npmjs.org/rimraf
+167 info trying registry request attempt 1 at 17:56:46
+168 verbose etag "7CWNK4Y5HR1RO8W7MVZFJYVOJ"
+169 http GET https://registry.npmjs.org/rimraf
+170 verbose registry.get ncp not expired, no request
+171 silly lockFile 50515df2-ncp-0-5-1 ncp@^0.5.1
+172 silly lockFile 50515df2-ncp-0-5-1 ncp@^0.5.1
+173 verbose url raw mkdirp
+174 verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+175 verbose url resolved https://registry.npmjs.org/mkdirp
+176 info trying registry request attempt 1 at 17:56:46
+177 verbose etag "B42H4I7136PLQC7SMFJI1CIKX"
+178 http GET https://registry.npmjs.org/mkdirp
+179 verbose about to build /usr/share/code/goingtohell/node_modules/fs-extra
+180 info /usr/share/code/goingtohell/node_modules/fs-extra unbuild
+181 verbose from cache /usr/share/code/goingtohell/node_modules/fs-extra/package.json
+182 info preuninstall fs-extra@0.10.0
+183 info uninstall fs-extra@0.10.0
+184 verbose true,/usr/share/code/goingtohell/node_modules,/usr/share/code/goingtohell/node_modules unbuild fs-extra@0.10.0
+185 info postuninstall fs-extra@0.10.0
+186 error Error: No compatible version found: ncp@'^0.5.1'
+186 error Valid install targets:
+186 error ["0.0.0","0.0.1","0.0.2","0.1.0","0.1.1","0.1.2","0.2.0","0.2.1","0.2.2","0.2.3","0.2.4","0.2.5","0.2.6","0.3.0","0.4.0","0.2.7","0.4.1","0.4.2","0.5.0","0.5.1","0.6.0"]
+186 error     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache.js:709:10)
+186 error     at /usr/local/lib/node_modules/npm/lib/cache.js:631:10
+186 error     at RegClient.get_ (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:101:14)
+186 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:37:12)
+186 error     at fs.js:253:14
+186 error     at Object.oncomplete (fs.js:94:15)
+187 error If you need help, you may report this log at:
+187 error     <http://github.com/isaacs/npm/issues>
+187 error or email it to:
+187 error     <npm-@googlegroups.com>
+188 error System Linux 3.13.0-29-generic
+189 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "fs-extra" "--save"
+190 error cwd /usr/share/code/goingtohell
+191 error node -v v0.11.3
+192 error npm -v 1.2.25
+193 verbose exit [ 1, true ]

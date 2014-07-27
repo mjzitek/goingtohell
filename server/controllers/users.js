@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var gm = require('gm');
 var fs = require('fs');
+//var fse = require('fs-extra');
 
 var config = require('../../config/config');
 
@@ -95,29 +96,58 @@ function saveAvatar(filename, userId) {
 				var avatarPath = config.baseFolder + config.uploadFolder + "/avatars/" + userId + "/avatar.png";
 		  		var thumbPath = config.baseFolder + config.uploadFolder + "/avatars/" + userId + "/thumb.png";
 
-				var avatarSize = {width: 400, height: 400};
-				gm(newPath)
-				  .resize(avatarSize.width + ">", avatarSize.height, "^>")
-				  .gravity('Center')
-				  .crop(avatarSize.width + ">", avatarSize.height, "^>")
-				  .extent(avatarSize.width, avatarSize.height)
-				  .write(avatarPath, function (error) {
-				    if (error) console.log('Error - ', error);
-				    
-				  });
+		  		try {
+					var avatarSize = {width: 400, height: 400};
+					gm(newPath)
+					  .resize(avatarSize.width + ">", avatarSize.height, "^>")
+					  .gravity('Center')
+					  .crop(avatarSize.width + ">", avatarSize.height, "^>")
+					  .extent(avatarSize.width, avatarSize.height)
+					  .write(avatarPath, function (error) {
+					    if (error) {
+					    	console.log('Error - ', error);
+					    	// Need to move this and the lines in the catch into one place to get rid of duplication
+					    	fs.createReadStream(config.baseFolder + '/client/assests/img/avatars/default_user_md.png').pipe(fs.createWriteStream(avatarPath));
+					  	}
+					  });
 
-				var thumbSize = {width: 32, height: 32};
-				gm(newPath)
-				  .resize(thumbSize.width + ">", thumbSize.height, "^>")
-				  .gravity('Center')
-				  .crop(thumbSize.width + ">", thumbSize.height, "^>")
-				  .extent(thumbSize.width, thumbSize.height)
-				  .write(thumbPath, function (error) {
-				    if (error) console.log('Error - ', error);
-		        	console.log("Upload Finished of " + filename);              
-					
-							    
-				  });    			
+					var thumbSize = {width: 32, height: 32};
+					gm(newPath)
+					  .resize(thumbSize.width + ">", thumbSize.height, "^>")
+					  .gravity('Center')
+					  .crop(thumbSize.width + ">", thumbSize.height, "^>")
+					  .extent(thumbSize.width, thumbSize.height)
+					  .write(thumbPath, function (error) {
+					    if (error) {
+					    	console.log('Error - ', error);
+					    	fs.createReadStream(config.baseFolder + '/client/assests/img/avatars/default_user.png').pipe(fs.createWriteStream(thumbPath));
+					    } 
+
+			        	console.log("Upload Finished of " + filename);              
+							
+								    
+					  });  
+				} catch (err) {
+					console.log('Error creating avatar images');
+					console.log(err)
+
+
+					fs.createReadStream(config.baseFolder + '/client/assests/img/avatars/default_user_md.png').pipe(fs.createWriteStream(avatarPath));
+					fs.createReadStream(config.baseFolder + '/client/assests/img/avatars/default_user.png').pipe(fs.createWriteStream(thumbPath));
+
+					console.log('Using default images');
+					// 	// If there is a problem with conversion use the default user images
+					// 	fse.copy('../../client/assests/img/avatars/default_user_md.png', avatarPath, function(err){
+					// 	  if (err) return console.error(err);
+					// 	  console.log("success!")
+					// 	}); //copies file
+
+					// 	fs.ecopy('../../client/assests/img/avatars/default_user.png', thumbPath, function(err){
+					// 	  if (err) return console.error(err);
+					// 	  console.log("success!")
+					// 	}); //copies file					
+		
+				}
     		}
 		
 		});
