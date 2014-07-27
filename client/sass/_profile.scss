@@ -1,0 +1,61 @@
+
+#profile-box {
+
+
+    width: 400px;
+    height: 350px;
+
+    @include box1(6px);
+
+    margin: 10px auto 0 auto;
+    padding: 10px;
+    border: 1px solid #C2BBB4;
+
+    background-color: #fff;
+
+    -webkit-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 26px -6px rgba(0,0,0,0.75);
+}
+
+#profile-box label {
+    display: inline-block;
+    width: 90px;
+    text-align: right; 
+    margin-top: 4px;       
+}
+
+.profile-line {
+    margin-bottom: 10px;
+    height: 36px;
+}
+#profile-box .profile-info {
+    margin: 20px 0 0 30px;    
+}
+
+#profile-box li {
+    margin-left: 120px;
+}
+
+#profile-box .profile-edit-tag {
+    display: none;
+    margin-left: 20px;
+}
+
+.submit {
+    margin-left: 120px;
+}
+
+
+.profile-edit {
+    margin-left: 140px;
+}
+
+
+
+/* Overlay */
+#simplemodal-overlay {
+    background-color:#000;
+
+}
+

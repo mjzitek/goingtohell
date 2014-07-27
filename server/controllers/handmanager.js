@@ -162,7 +162,7 @@ function checkPlayersWhitecardsCount(gameSessionId, playerId, callback) {
 		{ "players.$.whitecards" : 1 }).populate("players.whitecards") 
 		.exec(function(err, gs) {
 
-			var cardCount = gs.players[0].whitecards.length;
+			var cardCount = (gs ? gs.players[0].whitecards.length : 0);
 			var cardInfo = {};
 
 			if(!cardCount) cardCount = 0;

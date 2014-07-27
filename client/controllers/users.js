@@ -157,3 +157,10 @@ exports.editProfile = function(req, res) {
 		res.send(data);
 	});
 }
+
+exports.editAvatar = function(req, res) {
+	res.send({
+		path: "image.jpg"
+	});
+
+}

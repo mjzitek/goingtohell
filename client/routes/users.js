@@ -17,4 +17,5 @@ module.exports = function(app, passport) {
 		successRedirect: '/'
 	}), users.session);
 	app.post('/users/profile/edit/', auth.isLoggedIn, users.editProfile);
+	app.post('/users/avatar/edit', auth.isLoggedIn, users.editAvatar);
 }

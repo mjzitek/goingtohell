@@ -122,8 +122,6 @@ function saveAvatar(filename, userId) {
 		
 		});
 
-
-
 	} catch (err) {
 		console.log(err);
 		return false;

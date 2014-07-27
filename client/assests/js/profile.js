@@ -10,6 +10,18 @@ $(function() {
 		}
 
 	});
+
+	$('#profile-avatar-edit').click(function() {
+		console.log('edit avatar');
+		$('#basic-modal-content').modal();
+	});
+
+	$('#avatarUpload').submit(function() {
+		editAvatar();
+		$.modal.close();
+	});
+
+
 });
 
 
@@ -20,7 +32,7 @@ function showEditProfile() {
 	$('#profile-name').html("<input id='profile-name-data' type='text' value='" + $('#profile-name').html() +"'>");
 	$('#profile-email').html("<input id='profile-email-data' type='text' value='" + $('#profile-email').html() +"'>");
 
-	//$('#profile-avatar').html($('#profile-avatar').html() + " <a href=''>Edit Photo</a>");
+	$('.profile-edit-tag').show();
 
 	$('#profile-edit').html('Save');
 	$('#profile-edit').data('mode', 'save');
@@ -52,7 +64,7 @@ function saveProfile() {
 			$('#profile-name').html($('#profile-name-data').val());
 			$('#profile-email').html($('#profile-email-data').val());
 
-
+			$('.profile-edit-tag').hide();
 
 			$('#profile-edit').html('Edit Profile');
 			$('#profile-edit').data('mode', 'edit');
@@ -63,4 +75,30 @@ function saveProfile() {
             // likewise do something with your error here.
         }
     });
+}
+
+function editAvatar() {
+        $('#avatarUpload').ajaxSubmit({                                                                                                                 
+ 
+            error: function(xhr) {
+            	console.log(xhr);
+				//status('Error: ' + xhr.status);
+            },
+ 
+            success: function(response) {
+		        if(response.error) {
+		            status('Opps, something bad happened');
+		            return;
+		        }
+		 
+		        var imageUrlOnServer = response.path;
+		 
+				status('Success, file uploaded to:' + imageUrlOnServer);
+				$('<img/>').attr('src', imageUrlOnServer).appendTo($('body'));				
+            }
+	});
+ 
+	// Have to stop the form from submitting and causing                                                                                                       
+	// a page refresh - don't forget this                                                                                                                      
+	return false;
 }

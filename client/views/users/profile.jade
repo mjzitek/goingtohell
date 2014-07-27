@@ -17,7 +17,9 @@ block content
            - var avatar = user.avatarUrl
            if(!avatar)
               -   avatar = '/img/avatars/default_user.png'
-           img(src='#{avatar}')
+           img(src='#{avatar}') 
+           span.profile-edit-tag 
+              span#profile-avatar-edit  Edit Avatar
     div.profile-line
        span 
           label Groups:
@@ -30,5 +32,16 @@ block content
              button(class='btn btn-primary',id='profile-edit', data-mode='edit') Edit Profile
     div
         input(type='hidden', id='profile-userid', value='#{user._id}')
+
+    div#basic-modal-content
+          h3 Pick your avatar
+          form(id="avatarUpload",method="post",action="/users/avatar/edit", enctype="multipart/form-data")
+              div.profile-line
+                  input(type='file', id='modal-avatar-edit-file', name='avatar-edit-file')
+              div.profile-line    
+                  input(type='submit', value='Save Avatar', id='save-avatar')
+
 block append scripts
+    script(src="/js/libs/jquery.simplemodal.js")
+    script(src="/js/libs/jquery.form.min.js")
     script(src="/js/profile.js")  
