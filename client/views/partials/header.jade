@@ -3,20 +3,22 @@ header
 		div#title
 			span(class='fa fa-road header-icon') 
 			span.header-text Road To Hell
-	div#player-info
-		span(id='name', data-id='#{userid}') 
-			a(href='/profile') 
-				span#username #{username}
+
 
 	div#menu
 		nav(class='navbar navbar-default' role='navigation')
 			ul(class='nav navbar-nav')
-				li(class='dropdown')
+				li(class='dropdown ')
 					a(href='#', class='dropdown-toggle', data-toggle='dropdown') Menu
 
-					ul(class='dropdown-menu' role='menu')
+					ul(class='dropdown-menu  pull-right' role='menu')
 						li(role='presentation')
 							a(role='menuitem', tabindex='-1', href='/') Home
 							a(role='menuitem', tabindex='-1', href='/leaderboard') Leaderboard
-							a(role='menuitem', tabindex='-1', href='/cards/winning-pairs') Winning Pairs							
+							a(role='menuitem', tabindex='-1', href='/cards/winning-pairs') Winning Pairs	
+							a(role='menuitem', tabindex='-1', href='/signout') Log Off							
 
+	div#player-info
+		span(id='name', data-id='#{userid}') 
+			a(href='/profile') 
+				span#username #{username}
